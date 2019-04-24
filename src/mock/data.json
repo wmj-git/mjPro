@@ -1,0 +1,14 @@
+{
+  "chartdata": {
+     "pie": [
+       {"name":"永川","value": 220},
+       {"name":"江津","value": 220},
+       {"name":"重庆","value": 220}
+     ],
+    "circle": [
+      {"name":"永川","value": 220},
+      {"name":"江津","value": 210},
+      {"name":"重庆","value": 230}
+    ]
+  }
+}

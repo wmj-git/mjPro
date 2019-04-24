@@ -1,0 +1,93 @@
+$r:32;
+.operation.el-row{
+  height: 45/$r+rem;
+  line-height: 45/$r+rem;
+}
+.#{table-classification}{
+  overflow: auto;
+  background: $background-table-classification;
+  color: #ccc;
+  text-align: left;
+  border-right: 1px solid rgba(255,255,255,0.5);
+  p{
+    color: #fff;
+    margin: 5px;
+    font-size: 16/$r+rem;
+    text-indent: 5px;
+  }
+  li{
+    padding: 4/$r+rem;
+    font-size: 14/$r+rem;
+    position: relative;
+    &:after{
+      content: "";
+      width: 0;
+      height: 2px;
+      background: rgba(255,255,255,0.6);
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transition: all .4s;
+    }
+    &:hover:after{
+      left: 0;
+      width: 100%;
+    }
+    &:hover{
+     color: $color-base;
+     cursor: pointer;
+    }
+  }
+}
+.#{table-container}{
+  background: $background-table-container;
+  padding-left: 5/$r+rem;
+}
+.pages{
+  margin-top: 3/$r+rem;
+}
+
+.el-table{
+  background: $background-linear-base;
+}
+.el-table th{
+  background: $background-table-thead;
+  color: rgba(255, 255, 255, 0.6);
+}
+.el-table tr{
+  background-color: $background-table-tbody;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.el-table__body tr:hover>td{
+  background-color:$background-hover-tbody;
+  color: rgba(255, 255, 255, 1);;
+}
+
+.el-table__body tr.current-row>td,.el-table__row--striped.current-row td{
+  background-color: darken($background-hover-tbody,20%);
+}
+
+.el-table th, .el-table td{
+  padding:5/$r+rem 0;
+  border-color: rgba(255,255,255,0.3) !important;
+  font-size: 14/$r+rem;
+}
+.el-table th.is-leaf, .el-table td{
+  border-color: rgba(255,255,255,0.5);
+}
+.el-table__body tr.hover-row>td,.el-table__body tr.hover-row.current-row>td,
+.el-table__body tr.hover-row.el-table__row--striped>td,.el-table__body tr.hover-row.el-table__row--striped .current-row>td{
+  background-color:$background-hover-tbody;
+}
+
+.el-table thead th{
+  border-right:1px dotted #fff;
+}
+
+.el-table .cell{
+  white-space: nowrap;//不换行，否则会把行高撑开
+}
+.el-table td div{
+  text-align: left; //td左对齐
+}

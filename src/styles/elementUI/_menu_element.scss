@@ -1,0 +1,11 @@
+@import "../../styles/index/_variable";
+.window .window-body{
+  border-width: 0;
+}
+.el-menu{
+  background: transparent;
+  border: none;
+}
+.el-menu.el-menu--horizontal{
+  border: none;
+}

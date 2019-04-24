@@ -1,0 +1,11 @@
+.scene {
+  & {
+    //
+  }
+  .el-row{
+    .el-col{
+      min-height: 32px;
+      background:#1e282c;
+    }
+  }
+}
