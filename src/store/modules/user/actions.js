@@ -13,7 +13,7 @@ export function LoginByUsername({ commit }, userInfo) {
   return new Promise((resolve, reject) => {
     loginByUsername(username, userInfo.password).then(response => {
       const data = response.data;
-      console.log("data");
+      console.log("data123");
       console.log(data);
       commit(SET_TOKEN, data[TokenName])
       setToken(response.data[TokenName])
