@@ -16,10 +16,12 @@ ul.el-menu-demo.em-nav-menu.el-menu--horizontal.el-menu /deep/ {
     background: url("../../../../assets/image/nav_border.png") no-repeat center;
     background-size: 100% 100%;
     margin-right: 20/$r+rem;
+    margin-top: 30/$r+rem;
     height: 40/$r+rem;
     line-height: 40/$r+rem;
     color: #fff;
     font-size: 15/$r+rem;
+    left: 12%;
     &.is-active {
       border-image-source: url("../../../../assets/image/nav_hover.png");
       border-bottom: 1px solid transparent;

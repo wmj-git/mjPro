@@ -42,9 +42,7 @@ $r:32;
 .#{table-container}{
   background: $background-table-container;
   padding-left: 5/$r+rem;
-}
-.pages{
-  margin-top: 3/$r+rem;
+  padding-right: 5/$r+rem;
 }
 
 .el-table{
@@ -80,7 +78,10 @@ $r:32;
 .el-table__body tr.hover-row.el-table__row--striped>td,.el-table__body tr.hover-row.el-table__row--striped .current-row>td{
   background-color:$background-hover-tbody;
 }
-
+/*行号*/
+td.el-table_1_column_1.is-center,th.el-table_1_column_1.is-center.is-leaf{
+background:darken(nth($background-base,3),5%);
+}
 .el-table thead th{
   border-right:1px dotted #fff;
 }
@@ -90,4 +91,24 @@ $r:32;
 }
 .el-table td div{
   text-align: left; //td左对齐
+}
+/*tbody行内复选框*/
+.el-checkbox__input.is-checked .el-checkbox__inner,.el-checkbox__input.is-indeterminate .el-checkbox__inner{
+  background-color:(nth($background-base,2));
+  border-color: $border-color-base;
+}
+.el-checkbox__inner:hover,.el-checkbox__input.is-focus .el-checkbox__inner{
+  border-color: darken($border-color-base,15%);
+}
+
+@media screen and (min-width:1921px) {
+  .el-table {
+    height: calc(100% - 100px) !important;
+  }
+}
+@media screen and (min-width:1281px) and (max-width:1440px){
+  .operation.el-row{
+    height: 60/$r+rem;
+    line-height: 60/$r+rem;
+  }
 }

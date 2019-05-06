@@ -6,7 +6,7 @@
     </video>-->
     <el-col>
       <div class="login_title">
-        <p>智慧龙华可视化管理平台</p>
+        <p>智慧龙华园林可视化管理平台</p>
       </div>
       <div class="login_content">
         <el-row>
@@ -18,7 +18,8 @@
             </el-form-item>
             <el-form-item label="密码：" class="login_label">
               <el-col :span="44">
-                <el-input v-model="form.pwd" type="password" placeholder="请输入密码" ref="input2" prefix-icon="el-icon-pwd"></el-input>
+                <el-input v-model="form.pwd" type="password" placeholder="请输入密码" ref="input2" prefix-icon="el-icon-pwd"
+                          @keyup.enter="enterSearchPwd"></el-input>
               </el-col>
             </el-form-item>
             <el-form-item>
@@ -45,6 +46,15 @@
         }
       }
     },
+    created() {
+      var lett = this;
+      document.onkeydown = function(e) {
+        var key = window.event.keyCode;
+        if (key == 13) {
+          lett.enterSearchPwd();
+        }
+       }
+    },
     methods: {
       reset(){
         this.$refs.input1.value = ""
@@ -59,10 +69,13 @@
           password: _password
         }).then((response) => {
           console.log(response);
-          if (response.statusCode === 200) {
-            this.$router.push("/home");
-          }
+            this.$router.push("/home/scene");
+
+
         });
+      },
+      enterSearchPwd(){
+        this.loginFn();
       }
     }
   }

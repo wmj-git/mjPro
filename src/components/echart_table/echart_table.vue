@@ -32,7 +32,7 @@
                             :value="item.value">
                           </el-option>
                         </el-select>
-                        <el-button>查询</el-button>
+                        <el-button class="em-btn-simple">查询</el-button>
                 </div>
             </el-col>
           </el-row>
@@ -84,7 +84,7 @@
       </el-col>
 
       <el-col :span="20" style="height: 100%;">
-           <ehcarts :id="id" :option="option" :data="data1" :series="series"></ehcarts>
+           <ehcarts :id="echart_id" :option="option" :data="data1" :series="series"></ehcarts>
       </el-col>
     </el-row>
   </div>
@@ -96,6 +96,7 @@
   import ehcarts from "@/components/echarts/echarts"
   import options from '@/echart_options/options'
   import {fetchChart} from "@/api/chart"
+  import  {fetchPie} from "@/api/chart";
   import XLSX from "xlsx";
 
   export default {
@@ -122,47 +123,47 @@
             name: '王小虎',
             address: '上海市普陀区金沙江路 1516 弄'
           }, {
-            date: '2016-05-03',
+            date: '2016-05-06',
             name: '王小虎',
             address: '上海市普陀区金沙江路 1516 弄'
           }, {
-            date: '2016-05-03',
+            date: '2016-05-07',
             name: '王小虎',
             address: '上海市普陀区金沙江路 1516 弄'
           }, {
-            date: '2016-05-03',
+            date: '2016-05-08',
             name: '王小虎',
             address: '上海市普陀区金沙江路 1516 弄'
           }, {
-            date: '2016-05-03',
+            date: '2016-05-09',
             name: '王小虎',
             address: '上海市普陀区金沙江路 1516 弄'
           }, {
-            date: '2016-05-03',
+            date: '2016-05-10',
             name: '王小虎',
             address: '上海市普陀区金沙江路 1516 弄'
           }, {
-            date: '2016-05-03',
+            date: '2016-05-11',
             name: '王小虎',
             address: '上海市普陀区金沙江路 1516 弄'
           }, {
-            date: '2016-05-03',
+            date: '2016-05-12',
             name: '王小虎',
             address: '上海市普陀区金沙江路 1516 弄'
           }, {
-            date: '2016-05-03',
+            date: '2016-05-13',
             name: '王小虎',
             address: '上海市普陀区金沙江路 1516 弄'
           }, {
-            date: '2016-05-03',
+            date: '2016-05-14',
             name: '王小虎',
             address: '上海市普陀区金沙江路 1516 弄'
           }, {
-            date: '2016-05-03',
+            date: '2016-05-15',
             name: '王小虎',
             address: '上海市普陀区金沙江路 1516 弄'
           }, {
-            date: '2016-05-03',
+            date: '2016-05-16',
             name: '王小虎',
             address: '上海市普陀区金沙江路 1516 弄'
           }
@@ -190,7 +191,7 @@
         }],
         value: '',
         option:"",
-        id:"pie",
+        echart_id:"pie1",
         data1:[],
         series:[],
         time1:'',               //对应时间选择器
@@ -228,8 +229,9 @@
     },
     props:["data"],
     created() {
+      // console.log(this.data.chart.type);
       this.option=options[this.data.chart.type];
-      this.id=this.data.chart.id;
+      this.echart_id=this.data.chart.id;
       // fetchPie().then(res=>{
       //   console.log(res.data.pie);
       //   this.data1=res.data.pie
@@ -241,11 +243,11 @@
       }).then(res=>{
            if(this.data.chart.type=="pie"){
              this.data1=res.data[this.data.chart.type];
-             console.log(this.data1)
+             // console.log(this.data1)
       }
            else{
                this.series=res.data[this.data.chart.type];
-               console.log(this.series)
+               // console.log(this.series)
            }
 
       })

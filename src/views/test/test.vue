@@ -1,15 +1,18 @@
 <template>
   <div class="test">
-    <div style="width: 200px;height:120px;background: #1e282c;color:#FFFFFF">
+    <div style="width: 200px;height:120px;background: #fff3f3;color:#ff0000">
       {{name}}
       {{$store.getters["user/token"]}}
+
     </div>
     <el-button type="text" @click="fn()">点击打开 Dialog</el-button>
     <el-button type="primary" @click="get()">同步数据</el-button>
     <el-button type="primary" @click="no_get()">异步数据</el-button>
     <el-button type="primary" @click="login">登录</el-button>
     <el-button type="primary" @click="data_fn">data</el-button>
-    <router-view name="ui"></router-view>
+    <!--<router-view name="ui"></router-view>-->
+
+    <!--<e_charts></e_charts>-->
   </div>
 </template>
 
@@ -17,12 +20,17 @@
   import {fetchCircle, test} from "@/api/layout"
   import {loginByUsername} from "@/api/login"
 
+  import e_charts from "./components/e_charts/e_charts"
+
   export default {
     data() {
       return {
         dialogVisible: false,
         name: '测试组件'
       }
+    },
+    components:{
+      e_charts
     },
     props: ['data'],
     methods: {
@@ -35,7 +43,7 @@
       fn() {
         this.$store.commit("win/dialog_open", {
           obj: {
-            id: "m1"
+            id: "add_operation"
           }
         });
       },

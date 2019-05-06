@@ -23,7 +23,6 @@
           this.class=this.data.class;
         }
         let _this = this;
-        console.log(_this.data);
         $("#" + _this.id).window({
           title: _this.data.title,
           width:_this.data.width,
@@ -33,7 +32,7 @@
           cls:_this.class,
           collapsible:false,
           minimizable:false,
-          maximizable:false,
+          maximizable:_this.data.maximizable,
           closable:true,
           modal: false,
           shadow: false,

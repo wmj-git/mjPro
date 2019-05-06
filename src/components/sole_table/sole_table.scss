@@ -1,26 +1,8 @@
+$r:32;
 .digital_table /deep/{
   width: 100%;
   height: 100%;
   .operation{
-    padding: 3px;
-    .el-input{
-      display: inline-block !important;
-      width: 100px !important;
+    padding: 3/$r+rem;
     }
-    .el-input /deep/{
-      .el-input__inner{
-        padding: 0 5px !important;
-        height: 30px;
-        width: 100px;
-        font-size: 12px;
-      }
-    }
-  }
-  .pages {
-    padding: 5px;
-  }
-  .el-dialog{
-    /*z-index: 10000;*/
-    width: 30%;
-  }
 }

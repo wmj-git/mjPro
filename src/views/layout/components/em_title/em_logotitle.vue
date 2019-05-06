@@ -30,7 +30,7 @@
                title: "",
                top: 0,
                left: 4,
-               width:"350px",
+               width:"365px",
                show: true,
                resizable:false,
                class:"em-title-window"

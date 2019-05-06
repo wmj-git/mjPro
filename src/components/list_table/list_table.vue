@@ -1,57 +1,20 @@
 <template>
   <div class="list_table" style="width: 100%;height: 100%">
     <el-row style="height: 100%">
-      <el-col :span="10" style="height: 100%;" class="table-classification">
+      <el-col :span="6" style="height: 100%;" class="table-classification">
           <p>{{list.title}}</p>
           <ul>
-            <li v-for="(item,index) in list.data" @click="get_tableData(item.id)"  :id="item.id">{{item.typeCname}}</li>
+            <!--<li v-for="(item,index) in list.data" @click="get_tableData(item.id)"  :id="item.id">{{item.typeCname}}</li>-->
+            <li v-for="(item,index) in list.data" :id="item.index">{{item}}</li>
           </ul>
+
       </el-col>
-      <el-col :span="38" style="height: 100%" class="table-container">
+      <el-col :span="42" style="height: 100%" class="table-container">
         <div class="table digital_table" style="height: 100%">
           <el-row class="operation">
-            <el-dialog title="收货地址" :visible.sync="dialogFormVisible1" :modal-append-to-body="false">
-              <el-form :model="form">
-                <el-form-item label="活动名称" :label-width="formLabelWidth">
-                  <el-input v-model="form.name" autocomplete="off"></el-input>
-                </el-form-item>
-                <el-form-item label="活动区域" :label-width="formLabelWidth">
-                  <el-select v-model="form.region" placeholder="请选择活动区域">
-                    <el-option label="区域一" value="shanghai"></el-option>
-                    <el-option label="区域二" value="beijing"></el-option>
-                  </el-select>
-                </el-form-item>
-              </el-form>
-              <div slot="footer" class="dialog-footer">
-                <el-button @click="dialogFormVisible1 = false">取 消</el-button>
-                <el-button type="primary" @click="dialogFormVisible1 = false">确 定</el-button>
-              </div>
-            </el-dialog>
-            <el-dialog title="收货地址" :visible.sync="dialogFormVisible2" width="30%" :modal-append-to-body="false">
-              <el-form :model="form">
-                <el-form-item label="活动名称" :label-width="formLabelWidth">
-                  <el-input v-model="form.name" autocomplete="off"></el-input>
-                </el-form-item>
-                <el-form-item label="活动区域" :label-width="formLabelWidth">
-                  <el-select v-model="form.region" placeholder="请选择活动区域">
-                    <el-option label="区域一" value="shanghai"></el-option>
-                    <el-option label="区域二" value="beijing"></el-option>
-                  </el-select>
-                </el-form-item>
-              </el-form>
-              <div slot="footer" class="dialog-footer">
-                <el-button @click="dialogFormVisible2 = false">取 消</el-button>
-                <el-button type="primary" @click="dialogFormVisible2 = false">确 定</el-button>
-              </div>
-            </el-dialog>
-            <el-input v-model="input" placeholder="类型名称"></el-input>
-            <el-button class="em-btn-gradient em-btn-uniform-gradient">查询</el-button>
-            <el-button class="em-btn-gradient em-btn-uniform-gradient" @click="dialogFormVisible1 = true">添加</el-button>
-            <el-button class="em-btn-gradient em-btn-uniform-gradient" @click="dialogFormVisible2 = true">修改</el-button>
-            <el-button class="em-btn-gradient em-btn-uniform-gradient">删除</el-button>
-            <el-button class="em-btn-gradient em-btn-uniform-gradient">导入excel</el-button>
-            <el-button class="em-btn-gradient em-btn-uniform-gradient" @click="exportExcel">导出excel</el-button>
-            <el-button class="em-btn-gradient em-btn-uniform-gradient">打印</el-button>
+            <template v-for="item in this.data.operation">
+              <component :is="item.type" :operation="item" ref="child"></component>
+            </template>
           </el-row>
           <el-table
             height="calc(100% - 82px)"
@@ -76,8 +39,8 @@
             </el-table-column>
             <el-table-column v-for="(item,index) in label"
                              :key="index"
-                             :prop="item.prop"
-                             :label="item.name"
+                             :prop="item.En"
+                             :label="item.Ch"
                              :min-width="item.width"
                              align="center"
             >
@@ -104,28 +67,108 @@
 </template>
 
 <script>
+  import {add, dele, edit, find} from "@/api/table_operate"
+  // import {list, table} from "@/api/list_table";
+  import em_button from "@/components/em_button/em_button"
+  import em_input from "@/components/em_input/em_input"
+  import em_select from "@/components/em_select/em_select"
+  import complex_em_input from "@/components/complex_em_input/complex_em_input"
   import FileSaver from "file-saver";
-  import {list, table} from "@/api/list_table";
 
   import XLSX from "xlsx";
 
   export default {
     name: "compone",
+    components: {
+      em_button,
+      em_input,
+      em_select,
+      complex_em_input
+    },
+    props: ["data"],
+    mounted(){
+      console.log(this.data);
+      this.bus.$on(this.data.table.id, obj => {
+        this.control(obj)
+      });
+    },
     data() {
       return {
-        id:"type_manage",
+       /* id:"type_manage",*/
         list: {
           id:"type_manage_list",
-          title: "",
-          data:[]
+          // title: "",
+          // data:[]
+          title:"分类",
+          data:["人员类型","特殊树种类型","特殊植物类型"]
         },
-        label: [],
+        // label: [],
+        label:[{Ch:"日期",En:"date",width:"180"},{Ch:"姓名",En:"name",width:"180"},{Ch:"地址",En:"address",width:"300"}],
         tableData: [
-
+          {
+            date: '2016-05-02',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1518 弄'
+          }, {
+            date: '2016-05-04',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1517 弄'
+          }, {
+            date: '2016-05-01',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1519 弄'
+          }, {
+            date: '2016-05-03',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1516 弄'
+          }, {
+            date: '2016-05-06',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1516 弄'
+          }, {
+            date: '2016-05-07',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1516 弄'
+          }, {
+            date: '2016-05-08',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1516 弄'
+          }, {
+            date: '2016-05-09',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1516 弄'
+          }, {
+            date: '2016-05-10',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1516 弄'
+          }, {
+            date: '2016-05-11',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1516 弄'
+          }, {
+            date: '2016-05-12',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1516 弄'
+          }, {
+            date: '2016-05-13',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1516 弄'
+          }, {
+            date: '2016-05-14',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1516 弄'
+          }, {
+            date: '2016-05-15',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1516 弄'
+          }, {
+            date: '2016-05-16',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1516 弄'
+          }
         ],
         currentRow: null,
         multipleSelection: [],
-        input: '',
         currentPage: 1,
         pageSize: 10,
         dialogFormVisible1: false,
@@ -144,26 +187,26 @@
       }
     },
     props:["data"],
-    created() {
-         this.list.title=this.data.list.title;
-         this.label=this.data.table.label;
-         list({
-           listUrl:this.data.list.list_url,
-           params: this.data.list.params
-
-         }).then(res=>{
-             this.list.data=res.data.data.filter(val=>{
-                 return val[this.data.list.keyObj.keyName]==this.data.list.keyObj.keyValue;
-             });
-             console.log(this.list.data);
-             this.tableData=res.data.data.filter(val=>{
-               return val[this.data.list.keyObj.keyName]!=this.data.list.keyObj.keyValue;
-
-             });
-             console.log(this.tableData);
-         })
-
-    },
+    // created() {
+    //      this.list.title=this.data.list.title;
+    //      this.label=this.data.table.label;
+    //      list({
+    //        listUrl:this.data.list.list_url,
+    //        params: this.data.list.params
+    //
+    //      }).then(res=>{
+    //          this.list.data=res.data.data.filter(val=>{
+    //              return val[this.data.list.keyObj.keyName]==this.data.list.keyObj.keyValue;
+    //          });
+    //          console.log(this.list.data);
+    //          this.tableData=res.data.data.filter(val=>{
+    //            return val[this.data.list.keyObj.keyName]!=this.data.list.keyObj.keyValue;
+    //
+    //          });
+    //          console.log(this.tableData);
+    //      })
+    //
+    // },
     methods: {
       handleSelectionChange(val) {
         console.log(val)
@@ -196,20 +239,51 @@
         }
         return wbout
       },
-      get_tableData(id){
-           console.log(id)
-          table({
-              table_url:this.data.table.table_url,
-              params: {
-                parentId:id,
-                pageNum:this.currentPage,
-                pageSize:this.pageSize
-              }
-          }).then(res=>{
-               console.log(res.data.data.data);
-               this.tableData=res.data.data.data;
-               // console.log(this.tableData)
-          })
+      // get_tableData(id){
+      //      console.log(id)
+      //     table({
+      //         table_url:this.data.table.table_url,
+      //         params: {
+      //           parentId:id,
+      //           pageNum:this.currentPage,
+      //           pageSize:this.pageSize
+      //         }
+      //     }).then(res=>{
+      //          console.log(res.data.data.data);
+      //          this.tableData=res.data.data.data;
+      //          // console.log(this.tableData)
+      //     })
+      // },
+      init() {
+        // this.bus.$on("em_complex_input",res=>{
+        //   console.log(res);
+        //
+        // });
+        let obj = {
+          pageNum: this.currentPage,
+          pageSize: this.pageSize
+        };
+
+      },
+      control(obj) {
+        this[obj.fn](obj);
+
+      },
+      add(obj) {
+        this.$store.commit("win/dialog_open", {
+          obj: {
+            id: "type_manage_add_operation"
+          }
+        });
+        console.log("add");
+      },
+      modify(){
+        this.$store.commit("win/dialog_open", {
+          obj: {
+            id: "edit_operation"
+          }
+        });
+        console.log("modify")
       }
     }
   }

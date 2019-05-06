@@ -31,11 +31,12 @@ video{
   margin: 15px;
   .el-form-item__label{
     color: #fff;
+    font-size: 14/$r+rem;
   }
 }
 .login_title p {
   font-size: 40/$r+rem;
-  color: $background-linear-base;
+  color: lighten($color-base,28%);
   position: fixed;
   top: 25%;
   left: 50%;
@@ -54,10 +55,11 @@ video{
   }
 }
 .el-form-item{
-  padding-top: 20px;
-  margin-top: 20px;
+  padding-top: 20/$r+rem;
+  margin-top: 20/$r+rem;
 }
 .forgetPwd a {
+  font-size: 14/$r+rem;
   float: right;
   margin-top: -35px;
   color: #fff;
@@ -67,9 +69,11 @@ video{
   }
 }
 .login_btn, .reset_btn {
+  font-size: 14/$r+rem;
   width: 100px;
-  margin-left: 50px;
-  height: 35px;
+  margin-left: 40/$r+rem;
+  margin-bottom: 20/$r+rem;
+  height: 35/$r+rem;
   line-height: 0.5em;
 }
 

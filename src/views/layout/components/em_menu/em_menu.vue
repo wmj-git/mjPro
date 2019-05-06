@@ -17,7 +17,7 @@
 </template>
 
 <script>
-  import VueEvent from "@/utils/VueEvent"
+  // import VueEvent from "@/utils/VueEvent"
   import win from "@/components/win/win"
 
   export default {
@@ -57,7 +57,7 @@
     created() {
 
       // 非父子信息通信
-      VueEvent.$on(this.id, function (obj) {
+      this.bus.$on(this.id, function (obj) {
         console.log(obj);
          $("#"+this.id).window("setTitle",obj.title);
          $("#"+this.id).window("resize",{

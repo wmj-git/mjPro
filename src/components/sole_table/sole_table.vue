@@ -1,50 +1,10 @@
 <template>
   <div class="sole_table table-container" style="width: 100%;height: 100%">
-
     <div class="table digital_table">
       <el-row class="operation">
-        <el-dialog title="收货地址" :visible.sync="dialogFormVisible1" :modal-append-to-body="false">
-          <el-form :model="form">
-            <el-form-item label="活动名称" :label-width="formLabelWidth">
-              <el-input v-model="form.name" autocomplete="off"></el-input>
-            </el-form-item>
-            <el-form-item label="活动区域" :label-width="formLabelWidth">
-              <el-select v-model="form.region" placeholder="请选择活动区域">
-                <el-option label="区域一" value="shanghai"></el-option>
-                <el-option label="区域二" value="beijing"></el-option>
-              </el-select>
-            </el-form-item>
-          </el-form>
-          <div slot="footer" class="dialog-footer">
-            <el-button @click="dialogFormVisible1 = false">取 消</el-button>
-            <el-button type="primary" @click="dialogFormVisible1 = false">确 定</el-button>
-          </div>
-        </el-dialog>
-        <el-dialog title="收货地址" :visible.sync="dialogFormVisible2" width="30%" :modal-append-to-body="false">
-          <el-form :model="form">
-            <el-form-item label="活动名称" :label-width="formLabelWidth">
-              <el-input v-model="form.name" autocomplete="off"></el-input>
-            </el-form-item>
-            <el-form-item label="活动区域" :label-width="formLabelWidth">
-              <el-select v-model="form.region" placeholder="请选择活动区域">
-                <el-option label="区域一" value="shanghai"></el-option>
-                <el-option label="区域二" value="beijing"></el-option>
-              </el-select>
-            </el-form-item>
-          </el-form>
-          <div slot="footer" class="dialog-footer">
-            <el-button @click="dialogFormVisible2 = false">取 消</el-button>
-            <el-button type="primary" @click="dialogFormVisible2 = false">确 定</el-button>
-          </div>
-        </el-dialog>
-        <el-input v-model="input" placeholder="类型名称"></el-input>
-        <el-button class="em-btn-gradient em-btn-uniform-gradient">查询</el-button>
-        <el-button class="em-btn-gradient em-btn-uniform-gradient" @click="dialogFormVisible1 = true">添加</el-button>
-        <el-button class="em-btn-gradient em-btn-uniform-gradient" @click="dialogFormVisible2 = true">修改</el-button>
-        <el-button class="em-btn-gradient em-btn-uniform-gradient">删除</el-button>
-        <el-button class="em-btn-gradient em-btn-uniform-gradient">导入excel</el-button>
-        <el-button class="em-btn-gradient em-btn-uniform-gradient">导出excel</el-button>
-        <el-button class="em-btn-gradient em-btn-uniform-gradient">打印</el-button>
+        <template v-for="item in this.data.operation">
+          <component :is="item.type" :operation="item" ref="child"></component>
+        </template>
       </el-row>
       <el-table
         height="calc(100% - 92px)"
@@ -52,7 +12,7 @@
         @current-change="handleCurrentChange"
         ref="multipleTable"
         tooltip-effect="dark"
-        :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
+        :data="tableData"
         @selection-change="handleSelectionChange">
         style="width: 100%"
         >
@@ -69,8 +29,8 @@
         </el-table-column>
         <el-table-column v-for="(item,index) in label"
                          :key="index"
-                         :prop="item.En"
-                         :label="item.Ch"
+                         :prop="item.prop"
+                         :label="item.name"
                          :min-width="item.width"
                          align="center"
         >
@@ -81,95 +41,48 @@
           @size-change="handleSizeChange"
           @current-change="handleCurrentChangepage"
           :current-page="currentPage"
-          :page-sizes="[5, 10, 15, 20]"
-          :page-size="5"
+          :page-sizes="[10, 20,30,40]"
+          :page-size="10"
           layout="total, sizes, prev, pager, next, jumper"
-          :total="tableData.length">
+          :total="totalSize">
         </el-pagination>
       </div>
 
     </div>
-
   </div>
 
 
 </template>
 
 <script>
-  import {sole_table} from "@/api/sole_table";
+  import {add, dele, modify, find} from "@/api/table_operate"
+  import em_button from "@/components/em_button/em_button"
+  import em_input from "@/components/em_input/em_input"
+  // import em_select from "@/components/em_select/em_select"
+  import complex_em_input from "@/components/complex_em_input/complex_em_input"
+  import em_date from "@/components/em_date/em_date"
+  import em_dialog from "@/components/em_dialog/em_dialog"
+
   export default {
     name: "sole_table",
+    components: {
+      em_button,
+      em_input,
+      complex_em_input,
+      em_date
+    },
     data() {
       return {
-        label:[{Ch:"日期",En:"date",width:"180"},{Ch:"姓名",En:"name",width:"180"},{Ch:"地址",En:"address",width:"300"}],
-        tableData: [
-          {
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1517 弄'
-        }, {
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1519 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }
-        ],
+        label: [],
+        tableData: [],
         currentRow: null,
         multipleSelection: [],
+        ids: [],
         input: '',
         currentPage: 1,
-        pageSize:5,
+        pageSize: 10,
+        totalSize: null,
+        table_list: [],
         dialogFormVisible1: false,
         dialogFormVisible2: false,
         form: {
@@ -182,48 +95,150 @@
           resource: '',
           desc: ''
         },
-        formLabelWidth: '120px'
+        formLabelWidth: '120px',
+        dialogVisible: false
       }
     },
-    props:["data"],
-    created(){
-       console.log(this.data.table.table_url);
-       sole_table({
-         table_url:this.data.table.table_url,
-         params:{
-           pageNum:this.currentPage,
-           pageSize:this.pageSize
-         }
-       }).then(res=>{
-           console.log(res)
-       })
+    props: ["data"],
+    mounted() {
+      this.label = this.data.table.label;
+      this.init(); //初始化表格数据
+
+      this.bus.$on(this.data.table.id, obj => {
+        this.control(obj)
+      });
 
     },
-    methods:{
+    methods: {
 
-      handleSelectionChange(val) {
-        console.log(val)
+      handleSelectionChange(val) {    //多选框（选中删除）
         this.multipleSelection = val;
-        console.log(this.multipleSelection)
-      },
-      handleCurrentChange(val) {
-        this.currentRow = val;
-        console.log(this.currentRow)
-      },
-      handleCurrentChangepage(val) {
-        console.log(`当前页: ${val}`);
-        this.currentPage=val;
-        console.log(this.currentPage)
-      },
-      handleSizeChange(val) {
-        console.log(`每页 ${val} 条`);
-        this.pageSize=val;
-      },
+        console.log(this.multipleSelection);
 
+      },
+      handleCurrentChange(val) {     //单选行 （选中修改）
+        this.currentRow = val;
+        // console.log(this.currentRow)
+      },
+      handleCurrentChangepage(val) {        //当前页
+        console.log(`当前页: ${val}`);
+        this.currentPage = val;
+        // console.log(this.currentPage);
+        this.init();
+      },
+      handleSizeChange(val) {                 //每页几条
+        console.log(`每页 ${val} 条`);
+        this.pageSize = val;
+        this.init();  //重新请求表格数据
+      },
+      init() {
+
+        let obj = {
+          pageNum: this.currentPage,
+          pageSize: this.pageSize
+        };
+        if (this.$refs.child[0].time1) {
+          let time1 = this.$refs.child[0].time1;    //时间范围查询参数
+          if (time1) {
+            obj.startTime = time1.getTime();
+
+          }
+        }
+        if (this.$refs.child[0].time2) {
+          let time2 = this.$refs.child[0].time2;
+          if (time2) {
+            obj.endTime = time2.getTime();
+          }
+        }
+        if (this.$refs.child[1].input && this.$refs.child[1].params) {
+          let input = this.$refs.child[1].input;        //input框是操作中第二个组件时
+          let params = this.$refs.child[1].params;
+          if (input && params) {
+            obj[params] = input;
+          }
+        }
+        if (this.$refs.child[0].complex_em_input_select && this.$refs.child[0].input) {   //选择参数进行查询
+          let comlex_input = this.$refs.child[0].complex_em_input_select;
+          let commo_input = this.$refs.child[0].input;
+          obj[comlex_input] = commo_input;
+        }
+        if (this.$refs.child[0].input && this.$refs.child[0].params) {                              //input框是操作中第二个组件时
+          let role_manage_input = this.$refs.child[0].input;
+          let params = this.$refs.child[0].params;
+          obj[params] = role_manage_input;
+        }
+
+        find({                      //页面渲染时拿表格数据
+          url: this.data.table.table_url,
+          params: obj
+        }).then(res => {
+          console.log(res);
+          this.tableData = res.data.list;
+          this.totalSize = res.data.total;
+        })
+      },
+      control(obj) {
+        this[obj.fn](obj);
+
+      },
+      add(obj) {
+        // this.$store.commit("win/dialog_open", {
+        //   obj: {
+        //     id: "people_manage_add_operation"
+        //   }
+        // });
+        console.log(this.label);
+      },
+      dele(obj) {
+        this.multipleSelection.forEach(val => {
+          console.log(val);
+          this.ids.push(val.id);   //提取出需要传给后台的参数ids
+        });
+        if (this.ids.length != 0) {
+          dele({
+            url: obj.url,
+            params: this.ids
+
+          }).then(res => {
+            console.log(res);
+            this.ids = [];
+            this.open3();
+            this.init();
+
+
+          })
+        }
+      },
+      search() {
+        this.init();
+      },
+      modify() {
+        this.$store.commit("win/dialog_open", {
+          obj: {
+            id: "edit_operation"
+          }
+        });
+        console.log("modify")
+      },
+      open3() {
+        const h = this.$createElement;
+        this.$notify({
+          title: '成功',
+          message: h('i', {style: 'color: teal'}, '删除成功啦'),
+          type: 'success'
+        });
+      },
+      handleClose(done) {
+        this.$confirm('确认关闭？')
+          .then(_ => {
+            done();
+          })
+          .catch(_ => {});
+      }
     }
   }
 </script>
 
 <style scoped lang="scss">
-@import "sole_table";
+  @import "sole_table";
 </style>

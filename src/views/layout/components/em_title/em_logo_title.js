@@ -1,5 +1,5 @@
 export function title(){
-    var txt = "智慧龙华可视化管理平台";
+    var txt = "智慧龙华园林可视化管理平台";
     var txtH = 20;
     var font = "sans-serif";
     var bg = "#000";

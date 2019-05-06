@@ -9,6 +9,7 @@ import button_group from "@/components/button_group/button_group"
 import test from '@/views/test/test'
 import login from '@/views/login/login'
 import admin from '@/views/admin/admin'
+import login_erro from "@/views/login_erro/login_erro"
 export default new Router({
   mode: "history",
   routes: [
@@ -32,7 +33,7 @@ export default new Router({
           path: 'btn',
           name: 'btn',
           components: {
-            ui:button_group
+            scene:button_group
           }
         }
       ]
@@ -41,6 +42,11 @@ export default new Router({
       path:'/login',
       name:'login',
       component:login
+    },
+    {
+      path:'/login_erro',
+      name:'login_erro',
+      component:login_erro
     },
     {
       path: '/test',

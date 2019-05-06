@@ -5,11 +5,14 @@ $r:32;
 }
 /*nav*/
 .panel.window.#{em-nav-window}.panel-htop {
-  background: transparent;
+  background:url("../../assets/image/footer_bg1.gif") no-repeat;
   border: none;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 53.8%;
+  transform: translateX(-46.2%);
   z-index: 1607 !important;
+  height: 110px;
+  width: 50%;
+  background-size: 85%;
 }
 
 
@@ -17,9 +20,8 @@ $r:32;
   .el-menu,.panel-body {
     background-color: transparent;
     border:none;
-    display: contents;
+    display: contents;//鼠标十字箭头
   }
-
 }
 
 
@@ -59,6 +61,7 @@ $r:32;
 .panel.window.#{em-menu-window}.panel-htop{
   background: transparent;
   border:none;
+  padding:0;
 }
 .panel.window.#{em-menu-window}.panel-htop /deep/{
   .menu,.el-menu,.panel-body{
@@ -71,18 +74,34 @@ $r:32;
 
 
 /*table-window*/
+.window-shadow{
+  border: none;
+  box-shadow: none;
+  background: transparent;
+}
 .panel.window.#{em-table-window}.panel-htop{
     background: $background-table-base;
-    border-image-source: url("../../../src/assets/image/table_border.png");
-    border-image-width: 800/$r+rem;
-    border-image-slice: 340;
-    border-image-outset: 320/$r;
-    border-image-repeat: round;
+    border: 15px solid transparent;
+    -webkit-border-image: url("../../../src/assets/image/table_border.png") 27 27 24 24 round;
+    -moz-border-image: url("../../../src/assets/image/table_border.png") 27 27 24 24 round;
+    border-image: url("../../../src/assets/image/table_border.png") 27 27 24 24 round;
+    width: 800px;
+    resize: both;
     overflow: visible;//table-dialog遮罩
 }
 /*bottom-window*/
 .panel.window.#{em-bottom-window}.panel-htop.easyui-fluid {
-  background: nth($background-base,2);
-  border: none;
+  background: rgba(20, 31, 55, 0.8);
+  border-left: 6px solid $border-color-base;
+  border-right: 6px solid $border-color-base;
+  border-top: 1px solid #d8bb37;
+  border-bottom: 1px solid #d8bb37;
   border-radius: unset;
 }
+
+/*toolList*/
+.panel.window.#{em-tool-window}.panel-htop {
+ background: transparent;
+ border:none;
+}
+

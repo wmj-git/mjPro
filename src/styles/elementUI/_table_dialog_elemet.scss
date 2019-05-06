@@ -1,8 +1,15 @@
-.el-dialog{
-  border-image-source: url("../../assets/image/tableDialog-border.png");
-  border-image-width: 500px;
-  border-image-slice: 340;
-  border-image-outset: 10;
-  border-image-repeat: round;
-  //background: transparent;
+.el-dialog,.el-message-box{
+  background: $background-table-base;
+  border: 15px solid transparent;
+  -webkit-border-image: url("../../assets/image/tableDialog-border.png") 27 27 24 24 round;
+  -moz-border-image: url("../../assets/image/tableDialog-border.png") 27 27 24 24 round;
+  border-image: url("../../assets/image/tableDialog-border.png") 27 27 24 24 round;
+  width: 500px;
+  resize: both;
+  .el-message-box__title{
+   color: white;
+  }
+  .el-message-box__content{
+    color: rgba(255,255,255,0.6);
+  }
 }

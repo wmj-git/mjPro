@@ -1,6 +1,7 @@
 $r:32;
 .panel-body{
   background-color: transparent;
+  overflow: hidden;
 }
 .panel-title{
   color: $color-base;
@@ -9,3 +10,4 @@ $r:32;
 .panel-header{
   border-bottom: 2px solid $border-color-base;
 }
+

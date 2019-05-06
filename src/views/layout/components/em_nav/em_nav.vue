@@ -19,7 +19,7 @@
 
 <script>
 
-  import VueEvent from "@/utils/VueEvent"
+  // import VueEvent from "@/utils/VueEvent"
   import win from "@/components/win/win"
 
 
@@ -29,7 +29,7 @@
         win: {
           id: "nav",
           title: "",
-          top: "93.5%",
+          top: "87.5%",
           left: "",
           show: true,
           resizable: false,
@@ -39,7 +39,7 @@
           {
             index: "detectdata",
             title: "监测数据",
-            width: 100,
+            width: 120,
             list: [
               {
                 "icon": "icon-real-time-monitoring",
@@ -72,7 +72,7 @@
           {
             index: "greenprotect",
             title: "绿化养护",
-            width: 110,
+            width: 145,
             list: [
               {
                 "icon": "icon-real-time-monitoring",
@@ -97,7 +97,7 @@
           {
             index: "querystatics",
             title: "查询统计",
-            width: 160,
+            width: 188,
             list: [
               {
                 "icon": "icon-real-time-monitoring",
@@ -134,7 +134,7 @@
           {
             index: "database",
             title: "基础数据",
-            width: 160,
+            width: 188,
             list: [
               {
                 "icon": "icon-system-manager",
@@ -207,18 +207,12 @@
           {
             index: "systemmanage",
             title: "系统管理",
-            width: 100,
+            width: 120,
             list: [
               {
                 "icon": "icon-real-time-monitoring",
                 "id": "type_manage",
                 "name": "类型管理",
-                "show": false
-              },
-              {
-                "icon": "icon-dispatching-command",
-                "id": "account_manage",
-                "name": "账户管理",
                 "show": false
               },
               {
@@ -271,7 +265,7 @@
           }
         });
         if (_show){
-          VueEvent.$emit(this.control_id, {
+          this.bus.$emit(this.control_id, {
             title: _title,
             list: _list,
             width: _width

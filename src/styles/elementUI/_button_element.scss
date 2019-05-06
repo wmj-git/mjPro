@@ -1,10 +1,12 @@
-.el-button:hover, .el-button:focus{
-  color: $color-base;
+.el-button{
+  padding:5px;
   background: transparent;
+  &:hover,&:focus{
+    color: $color-base;
+    background: transparent;
+  }
 }
 .el-button + .el-button{
   margin-left: 5px;
 }
-.el-button{
-  padding:5px;
-}
+

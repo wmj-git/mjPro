@@ -10,6 +10,7 @@ export default {
       height:400,
       show:false,
       resizable:false,
+      maximizable:false,
       class:"em-menu-window",
       component: "em_menu",
       component_data:{
@@ -21,7 +22,7 @@ export default {
       title: "类型管理",
       top:"20%",
       left:"20%",
-      width:700,
+      width:"45%",
       height:400,
       show: false,
       class:"em-table-window",
@@ -36,7 +37,54 @@ export default {
             keyValue:"0"
           },
         },
+        operation:[
+          {
+            type:"complex_em_input",
+            select:[
+              {
+                name:"类型名",
+                params:"accountNumber"
+              },
+              {
+                name:"英文名",
+                params:"userEname"
+              }
+            ]
+
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-search",
+            operate:"查询",
+            control_id:"type_manage_table",
+            fn:"search"
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-plus",
+            operate:"添加",
+            control_id:"type_manage_table",
+            fn:"add",
+            url:"/user/userext/addPeopleInfo"
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-edit",
+            operate:"修改",
+            control_id:"type_manage_table",
+            fn:"modify",
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-delete",
+            operate:"删除",
+            control_id:"type_manage_table",
+            fn:"dele",
+            url:""
+          }
+        ],
         table:{
+          id:"type_manage_table",
           table_url:"/rest/type/queryTypeByPages",
           label:[
             {
@@ -72,31 +120,85 @@ export default {
       }
     },
     {
-      id: "account_manage",
-      title: "账户管理",
-      top:80,
-      left:400,
-      width:510,
-      height:400,
-      class:"em-table-window",
-      show: false,
-      component: "sole_table",
-      component_data:{
-
-      }
-    },
-    {
       id:"role_manage",
       title: "角色管理",
       top:80,
       left:400,
-      width:510,
+      width:700,
       height:400,
       class:"em-table-window",
       show: false,
       component: "sole_table",
       component_data:{
-        name:""
+        operation:[
+          {
+            type:"em_input",
+            placeholder:"中文名",
+            params:"roleCname"
+
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-search",
+            operate:"查询",
+            fn:"search",
+            control_id:"role_manage_table",
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-plus",
+            operate:"添加",
+            control_id:"role_manage_table",
+            fn:"add",
+            url:"/user/userext/addPeopleInfo"
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-edit",
+            operate:"修改",
+            control_id:"role_manage_table",
+            fn:"modify",
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-delete",
+            operate:"删除",
+            control_id:"role_manage_table",
+            fn:"dele",
+            url:"/user/userext/deletePeopleInfo"
+          }
+        ],
+        table:{
+          id:"role_manage_table",
+          table_url:"/user/role/queryPage",
+          label:[
+            {
+              name:"英文名",
+              prop:"roleEname",
+              width:"100"
+            },
+            {
+              name:"中文名",
+              prop:"roleCname",
+              width:"100"
+            },
+
+            {
+              name:"角色编码",
+              prop:"roleCode",
+              width:"80"
+            },
+            {
+              name:"备注",
+              prop:"remark",
+              width:"80"
+            },
+
+
+
+
+          ]
+        }
       }
     },
     {
@@ -104,13 +206,70 @@ export default {
       title:  "系统日志",
       top:80,
       left:400,
-      width:510,
+      width:700,
       height:400,
       class:"em-table-window",
       show: false,
       component: "sole_table",
       component_data:{
-        name:""
+        operation:[
+          {
+            type:"em_date",
+
+          },
+          {
+             type:"em_input",
+             placeholder:"用户名",
+             params:"userCname"
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-search",
+            operate:"查询",
+            fn:"search",
+            url:"/logs/select",
+            control_id:"system_record_table",
+          }
+        ],
+        table:{
+          id:"system_record_table",
+          table_url:"/logs/select",
+          label:[
+            {
+              name:"用户名",
+              prop:"loginName",
+              width:"100"
+            },
+            {
+              name:"操作",
+              prop:"methodName",
+              width:"120"
+            },
+            {
+              name:"操作内容",
+              prop:"operateContent",
+              width:"200"
+            },
+            {
+              name:"请求IP",
+              prop:"requestIp",
+              width:"120"
+            },
+            {
+              name:"请求地址",
+              prop:"requestUrl"
+            },
+            {
+              name:"生成时间",
+              prop:"syslogTime",
+              width:"140"
+            },
+
+
+
+
+          ]
+        }
       }
     },
     {
@@ -179,10 +338,10 @@ export default {
       top:80,
       left:400,
       show: false,
+      width:800,
       class:"em-table-window",
       component: "test",
       component_data:{
-        name:""
       }
     },
     {
@@ -310,20 +469,131 @@ export default {
       title: "人员管理",
       top:80,
       left:400,
+      width:"50%",
+      height:400,
       show: false,
       class:"em-table-window",
       component: "sole_table",
       component_data:{
+          operation:[
+            {
+              type:"complex_em_input",
+              select:[
+                {
+                  name:"帐户",
+                  params:"accountNumber"
+                },
+                {
+                  name:"英文名",
+                  params:"userEname"
+                },
+                {
+                  name:"中文名",
+                  params:"userCname"
+                },
+              ]
+
+            },
+          {
+            type:"em_button",
+            icon:"el-icon-search",
+            operate:"查询",
+            control_id:"people_manage_table",
+            fn:"search"
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-plus",
+            operate:"添加",
+            control_id:"people_manage_table",
+            fn:"add",
+            url:"/user/userext/addPeopleInfo"
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-edit",
+            operate:"修改",
+            control_id:"people_manage_table",
+            fn:"modify",
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-delete",
+            operate:"删除",
+            control_id:"people_manage_table",
+            fn:"dele",
+            url:"/user/userext/deletePeopleInfo"
+          },
+            {
+              type:"em_button",
+              icon:"el-icon-excel_out",
+              operate:"导入excel",
+              fn:"import"
+            },
+          {
+            type:"em_button",
+            icon:"el-icon-excel_out",
+            operate:"导出excel",
+            fn:"export"
+          }
+        ],
           table:{
+            id:"people_manage_table",
               table_url:"/user/userext/queryUserExt",
                label:[{
-                 name:"id",
-                 prop:"id",
-                 width:"80"
+                 name:"账户",
+                 prop:"accountNumber",
+                 width:"100"
                },
+                 {
+                   name:"中文名",
+                   prop:"userCname",
+                   width:"100"
+                 },
+                 {
+                   name:"英文名",
+                   prop:"userEname",
+                   width:"100"
+                 },
+                 {
+                   name:"状态",
+                   prop:"userStateCvalue",
+                   width:"80"
+                 },
+                 {
+                   name:"性别",
+                   prop:"userSexCvalue",
+                   width:"80"
+                 },
+                 {
+                   name:"电话",
+                   prop:"phoneNumber",
+                   width:"140"
+                 },
+                 {
+                   name:"年龄",
+                   prop:"userAge",
+                   width:"80"
+                 },
+                 {
+                   name:"部门",
+                   prop:"deptFullName",
+                   width:"80"
+                 },
+                 {
+                   name:"人员类型",
+                   prop:"userTypeCvalue",
+                   width:"180"
+                 }
+
+
+
                 ]
           }
       }
+
+
+
     },
     {
       id:"protect_company_manage",
@@ -334,19 +604,169 @@ export default {
       class:"em-table-window",
       component: "sole_table",
       component_data:{
-        name:""
+        operation:[
+          {
+            type:"em_input",
+            placeholder:"简称",
+            params:"shortName"
+
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-search",
+            operate:"查询",
+            control_id:"protect_company_manage_table",
+            fn:"search"
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-plus",
+            operate:"添加",
+            control_id:"protect_company_manage_table",
+            fn:"add",
+            url:"/user/userext/addPeopleInfo"
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-edit",
+            operate:"修改",
+            control_id:"protect_company_manage_table",
+            fn:"modify",
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-delete",
+            operate:"删除",
+            control_id:"protect_company_manage_table",
+            fn:"dele",
+            url:"/user/userext/deletePeopleInfo"
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-excel_out",
+            operate:"导入excel",
+            control_id:"protect_company_manage_table",
+            fn:"import"
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-excel_out",
+            operate:"导出excel",
+            control_id:"protect_company_manage_table",
+            fn:"export"
+          }
+        ],
+        table:{
+          id:"protect_company_manage_table",
+          table_url:"/user/dept/queryAllUsableDeptInfo",
+          label:[{
+            name:"全称",
+            prop:"fullName",
+            width:"140"
+          },
+            {
+              name:"简称",
+              prop:"shortName",
+              width:"100"
+            },
+            {
+              name:"单位编码",
+              prop:"deptCode",
+              width:"80"
+            },
+            {
+              name:"电话",
+              prop:"phoneNumber",
+              width:"140"
+            },
+
+            {
+              name:"备注",
+              prop:"remark",
+              width:"100"
+            }
+
+
+
+          ]
+        }
+
       }
     },
     {
       id:"tree_type_manage",
-      title:"树种类管理",
+      title:"树种类型管理",
       top:80,
       left:400,
       show: false,
       class:"em-table-window",
       component: "sole_table",
       component_data:{
-        name:""
+        operation:[
+          {
+            type:"em_input",
+            placeholder:"简称",
+            params:"shortName"
+
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-search",
+            operate:"查询",
+            control_id:"tree_type_manage_table",
+            fn:"search"
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-plus",
+            operate:"添加",
+            control_id:"tree_type_manage_table",
+            fn:"add",
+            url:"/gardens/tree/add"
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-edit",
+            operate:"修改",
+            control_id:"tree_type_manage_table",
+            fn:"modify",
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-delete",
+            operate:"删除",
+            control_id:"tree_type_manage_table",
+            fn:"dele",
+            url:"/user/userext/deletePeopleInfo"
+          }
+        ],
+        table:{
+          id:"tree_type_manage_table",
+          table_url:"/gardens/treetype/queryAllByPage",
+          label:[
+            {
+            name:"类型编号",
+            prop:"treeTypeNo",
+            width:"140"
+          },
+            {
+              name:"树种类型名称",
+              prop:"treeTypeName",
+              width:"100"
+            },
+            {
+              name:"是否特殊树种",
+              prop:"isSpecial",
+              width:"200"
+            },
+            {
+              name:"注释",
+              prop:"memo",
+              width:"200"
+            }
+
+          ]
+        }
       }
     },
     {
@@ -358,7 +778,68 @@ export default {
       class:"em-table-window",
       component: "sole_table",
       component_data:{
-        name:""
+        operation:[
+          {
+            type:"em_input",
+            placeholder:"简称",
+            params:"shortName"
+
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-search",
+            operate:"查询",
+            control_id:"plant_type_manage_table",
+            fn:"search"
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-plus",
+            operate:"添加",
+            control_id:"plant_type_manage_table",
+            fn:"add",
+            url:"/user/userext/addPeopleInfo"
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-edit",
+            operate:"修改",
+            control_id:"plant_type_manage_table",
+            fn:"modify",
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-delete",
+            operate:"删除",
+            control_id:"plant_type_manage_table",
+            fn:"dele",
+            url:"/user/userext/deletePeopleInfo"
+          }
+        ],
+        table:{
+          id:"plant_type_manage_table",
+          table_url:"/gardens/planttype/queryAllByPage",
+          label:[
+            {
+            name:"植物类型编码",
+            prop:"plantTypeNo",
+            width:"140"
+          },
+            {
+              name:"植物类型",
+              prop:"plantTypeName",
+              width:"100"
+            },
+            {
+              name:"注释",
+              prop:"memo",
+              width:"120"
+            }
+
+
+
+          ]
+        }
       }
     },
     {
@@ -370,9 +851,133 @@ export default {
       class:"em-table-window",
       component: "sole_table",
       component_data:{
-        name:""
+        operation:[
+          {
+            type:"em_input",
+            placeholder:"名称",
+            params:"fullName"
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-search",
+            operate:"查询",
+            control_id:"tree_material_manage_table",
+            fn:"search"
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-plus",
+            operate:"添加",
+            control_id:"tree_material_manage_table",
+            fn:"add",
+            url:""
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-edit",
+            operate:"修改",
+            control_id:"tree_material_manage_table",
+            fn:"modify",
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-delete",
+            operate:"删除",
+            control_id:"tree_material_manage_table",
+            fn:"dele",
+            url:""
+          }
+        ],
+        table:{
+          id:"tree_material_manage_table",
+          table_url:"/gardens/tree/queryAllByPage",
+          label:[
+            {
+              name:"植物编号",
+              prop:"treeNo",
+              width:"140"
+            },
+            {
+              name:"植物名称",
+              prop:"treeName",
+              width:"100"
+            },
+            {
+              name:"植物种类型",
+              prop:"plantTypeId",
+              width:"120"
+            },
+            {
+              name:"树种类型",
+              prop:"treeTypeId",
+              width:"120"
+            },
+            {
+              name:"创建人ID",
+              prop:"creatorId",
+              width:"120"
+            },
+            {
+              name:"创建日期",
+              prop:"createDate",
+              width:"200"
+            },
+            {
+              name:"更新时间",
+              prop:"updateDate",
+              width:"200"
+            },
+            {
+              name:"等级",
+              prop:"rankValue",
+              width:"80"
+            },
+            {
+              name:"高度",
+              prop:"height",
+              width:"80"
+            },
+            {
+              name:"直径",
+              prop:"diameter",
+              width:"80"
+            },
+            {
+              name:"所属网格",
+              prop:"gridId",
+              width:"120"
+            },
+            {
+              name:"种植位置",
+              prop:"position",
+              width:"220"
+            },
+            {
+              name:"精度",
+              prop:"longitude",
+              width:"200"
+            },
+            {
+              name:"纬度",
+              prop:"latitude",
+              width:"200"
+            },
+            {
+              name:"责任人Id",
+              prop:"personId",
+              width:"140"
+            },
+            {
+              name:"特征描述",
+              prop:"memo",
+              width:"100"
+            }
+
+          ]
+        }
       }
-    },{
+    },
+    {
       id:"grid_manage",
       title:"网格管理",
       top:80,
@@ -381,9 +986,109 @@ export default {
       class:"em-table-window",
       component: "sole_table",
       component_data:{
-        name:""
+        operation:[
+          {
+            type:"complex_em_input",
+            select:[
+              {
+                name:"网格名称",
+                params:"accountNumber"
+              }
+            ]
+
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-search",
+            operate:"查询",
+            control_id:"grid_manage_table",
+            fn:"search"
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-plus",
+            operate:"添加",
+            control_id:"grid_manage_table",
+            fn:"add",
+            url:""
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-edit",
+            operate:"修改",
+            control_id:"grid_manage_table",
+            fn:"modify",
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-delete",
+            operate:"删除",
+            control_id:"grid_manage_table",
+            fn:"dele",
+            url:""
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-excel_out",
+            operate:"导入excel",
+            fn:"import"
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-excel_out",
+            operate:"导出excel",
+            fn:"export"
+          }
+        ],
+        table:{
+          id:"grid_manage_table",
+          table_url:"/gardens/grid/queryAllByPage",
+          label:[
+            {
+              name:"编号",
+              prop:"gridNo",
+              width:"100"
+            },
+            {
+              name:"名称",
+              prop:"gridName",
+              width:"100"
+            },
+            {
+              name:"面积",
+              prop:"gridArea",
+              width:"100"
+            },
+            {
+              name:"创建人姓名",
+              prop:"creatorName",
+              width:"140"
+            },
+            {
+              name:"创建人日期",
+              prop:"createDate",
+              width:"200"
+            },
+            {
+              name:"责任单位",
+              prop:"entId",
+              width:"120"
+            },
+            {
+              name:"责任人",
+              prop:"personId",
+              width:"100"
+            },
+            {
+              name:"所属行政区域",
+              prop:"areaCode",
+              width:"200"
+            },
+          ]
+        }
       }
-    },{
+    },
+    {
       id:"oil_tempature_manage",
       title:"土壤温度监测点管理",
       top:80,
@@ -392,9 +1097,69 @@ export default {
       class:"em-table-window",
       component: "sole_table",
       component_data:{
-        name:""
+        operation:[
+          {
+            type:"complex_em_input",
+            select:[
+              {
+                name:"监测点名称",
+                params:"accountNumber"
+              }
+            ]
+
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-search",
+            operate:"查询",
+            control_id:"oil_tempature_manage_table",
+            fn:"search"
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-plus",
+            operate:"添加",
+            control_id:"oil_tempature_manage_table",
+            fn:"add",
+            url:""
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-edit",
+            operate:"修改",
+            control_id:"oil_tempature_manage_table",
+            fn:"modify",
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-delete",
+            operate:"删除",
+            control_id:"oil_tempature_manage_table",
+            fn:"dele",
+            url:""
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-excel_out",
+            operate:"导入excel",
+            fn:"import"
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-excel_out",
+            operate:"导出excel",
+            fn:"export"
+          }
+        ],
+        table:{
+          id:"oil_tempature_manage_table",
+          table_url:"",
+          label:[
+          ]
+        }
       }
-    },{
+    },
+    {
       id:"population_manage",
       title:"人流量监测点管理",
       top:80,
@@ -403,9 +1168,69 @@ export default {
       class:"em-table-window",
       component: "sole_table",
       component_data:{
-        name:""
+        operation:[
+          {
+            type:"complex_em_input",
+            select:[
+              {
+                name:"监测点名称",
+                params:"accountNumber"
+              }
+            ]
+
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-search",
+            operate:"查询",
+            control_id:"population_manage_table",
+            fn:"search"
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-plus",
+            operate:"添加",
+            control_id:"population_manage_table",
+            fn:"add",
+            url:""
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-edit",
+            operate:"修改",
+            control_id:"population_manage_table",
+            fn:"modify",
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-delete",
+            operate:"删除",
+            control_id:"population_manage_table",
+            fn:"dele",
+            url:""
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-excel_out",
+            operate:"导入excel",
+            fn:"import"
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-excel_out",
+            operate:"导出excel",
+            fn:"export"
+          }
+        ],
+        table:{
+          id:"population_manage_table",
+          table_url:"",
+          label:[
+          ]
+        }
       }
-    },{
+    },
+    {
       id:"air_tempature_manage",
       title:"空气温度监测点管理",
       top:80,
@@ -414,9 +1239,69 @@ export default {
       class:"em-table-window",
       component: "sole_table",
       component_data:{
-        name:""
+        operation:[
+          {
+            type:"complex_em_input",
+            select:[
+              {
+                name:"监测点名称",
+                params:"accountNumber"
+              }
+            ]
+
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-search",
+            operate:"查询",
+            control_id:"air_tempature_manage_table",
+            fn:"search"
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-plus",
+            operate:"添加",
+            control_id:"air_tempature_manage_table",
+            fn:"add",
+            url:""
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-edit",
+            operate:"修改",
+            control_id:"air_tempature_manage_table",
+            fn:"modify",
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-delete",
+            operate:"删除",
+            control_id:"air_tempature_manage_table",
+            fn:"dele",
+            url:""
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-excel_out",
+            operate:"导入excel",
+            fn:"import"
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-excel_out",
+            operate:"导出excel",
+            fn:"export"
+          }
+        ],
+        table:{
+          id:"air_tempature_manage_table",
+          table_url:"",
+          label:[
+          ]
+        }
       }
-    },{
+    },
+    {
       id:"air_humidity_manage",
       title:"空气湿度监测点管理",
       top:80,
@@ -425,9 +1310,69 @@ export default {
       class:"em-table-window",
       component: "sole_able",
       component_data:{
-        name:""
+        operation:[
+          {
+            type:"complex_em_input",
+            select:[
+              {
+                name:"监测点名称",
+                params:"accountNumber"
+              }
+            ]
+
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-search",
+            operate:"查询",
+            control_id:"air_humidity_manage_table",
+            fn:"search"
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-plus",
+            operate:"添加",
+            control_id:"air_humidity_manage_table",
+            fn:"add",
+            url:""
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-edit",
+            operate:"修改",
+            control_id:"air_humidity_manage_table",
+            fn:"modify",
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-delete",
+            operate:"删除",
+            control_id:"air_humidity_manage_table",
+            fn:"dele",
+            url:""
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-excel_out",
+            operate:"导入excel",
+            fn:"import"
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-excel_out",
+            operate:"导出excel",
+            fn:"export"
+          }
+        ],
+        table:{
+          id:"air_humidity_manage_table",
+          table_url:"",
+          label:[
+          ]
+        }
       }
-    },{
+    },
+    {
       id:"fire_alert_manage",
       title:"火灾报警点管理",
       top:80,
@@ -436,28 +1381,177 @@ export default {
       class:"em-table-window",
       component: "sole_table",
       component_data:{
-        name:""
+        operation:[
+          {
+            type:"complex_em_input",
+            select:[
+              {
+                name:"监测点名称",
+                params:"accountNumber"
+              }
+            ]
+
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-search",
+            operate:"查询",
+            control_id:"fire_alert_manage_table",
+            fn:"search"
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-plus",
+            operate:"添加",
+            control_id:"fire_alert_manage_table",
+            fn:"add",
+            url:""
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-edit",
+            operate:"修改",
+            control_id:"fire_alert_manage_table",
+            fn:"modify",
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-delete",
+            operate:"删除",
+            control_id:"fire_alert_manage_table",
+            fn:"dele",
+            url:""
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-excel_out",
+            operate:"导入excel",
+            fn:"import"
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-excel_out",
+            operate:"导出excel",
+            fn:"export"
+          }
+        ],
+        table:{
+          id:"fire_alert_manage_table",
+          table_url:"",
+          label:[
+          ]
+        }
       }
     }
   ],
-  dialog: [
-    {
-      id: "m1",
-      title: "qeqe",
-      show: false,
-      type: "dome",
-      data:{
-        name:""
-      }
-    },
-    {
-      id: "m2",
-      title: "qeqe2",
-      show: false,
-      type: "dome",
-      data:{
-        name:""
-      }
-    }
-  ]
+  // dialog: [
+  //   {
+  //     id: "people_manage_add_operation",
+  //     title: "人员添加",
+  //     show: false,
+  //     type: "dome",
+  //     data:[ {
+  //       type:"em_input",
+  //       placeholder:"账户",
+  //       name:"账户",
+  //       params:""
+  //
+  //     },
+  //       {
+  //         type:"em_input",
+  //         placeholder:"中文名",
+  //         name:"中文名",
+  //         params:""
+  //
+  //       },
+  //       {
+  //         type:"em_input",
+  //         placeholder:"英文名",
+  //         name:"英文名",
+  //         params:""
+  //
+  //       },
+  //       {
+  //         type:"em_select",
+  //         name:"状态",
+  //         options:[{
+  //           value: '选项1',
+  //           label: '在职'
+  //         },
+  //           {
+  //             value: '选项2',
+  //             label: '离职'
+  //           }
+  //         ]
+  //
+  //       },
+  //       {
+  //         type:"em_input",
+  //         placeholder:"性别",
+  //         name:"性别",
+  //         params:""
+  //
+  //       },
+  //       {
+  //         type:"em_input",
+  //         placeholder:"年龄",
+  //         name:"年龄",
+  //         params:""
+  //
+  //       },
+  //       {
+  //         type:"em_input",
+  //         placeholder:"电话",
+  //         name:"电话",
+  //         params:""
+  //
+  //       },
+  //       {
+  //         type:"em_input",
+  //         placeholder:"部门",
+  //         name:"部门",
+  //         params:""
+  //
+  //       },]
+  //   },
+  //   {
+  //     id: "edit_operation",
+  //     title: "人员修改",
+  //     show: false,
+  //     type: "dome",
+  //     data:{
+  //       name:""
+  //     }
+  //   },
+  //   {
+  //     id: "type_manage_add_operation",
+  //     title: "添加",
+  //     show: false,
+  //     type: "dome",
+  //     data:[ {
+  //       type:"em_input",
+  //       placeholder:"账户",
+  //       name:"账户",
+  //       params:""
+  //
+  //     },
+  //       {
+  //         type:"em_input",
+  //         placeholder:"中文名",
+  //         name:"中文名",
+  //         params:""
+  //
+  //       },
+  //       {
+  //         type:"em_input",
+  //         placeholder:"英文名",
+  //         name:"英文名",
+  //         params:""
+  //
+  //       },
+  //     ]
+  //
+  //   },
+  //
+  // ]
 }

@@ -14,9 +14,9 @@ export function LoginByUsername({ commit }, userInfo) {
     loginByUsername(username, userInfo.password).then(response => {
       const data = response.data;
       console.log("data12123123");
-      console.log(data);
+      console.log(data[TokenName]);
       commit(SET_TOKEN, data[TokenName])
-      setToken(response.data[TokenName])
+      setToken(data[TokenName])
       resolve(response.data)
     }).catch(error => {
       reject(error)

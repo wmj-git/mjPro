@@ -1,5 +1,8 @@
 @import "../../../../styles/index/variable";
 $r:32;
+.menu{
+  width: 100%;
+}
 .el-menu.el-menu--horizontal{
   border: none;
 }
@@ -15,6 +18,7 @@ $r:32;
   padding-left: 10px !important;
   padding-right: 10px;
   font-size: 14/$r+rem;
+  text-align: center;
   &:hover {
     color: $color-base;
     opacity: 0.8;

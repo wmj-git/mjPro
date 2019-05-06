@@ -83,6 +83,8 @@ $em-tabs:em-tabs;
 $em-tabs-header:em-tabs-header;//标签列表项
 $em-tabs-content:em-tabs-content;//标签列表切换后显示的内容区域
 
+$em-tool-window:em-tool-window;//toolList小工具
+
 
 /*fontFamily fontSize*/
 $font-family-sans-serif: "Helvetica Neue", Helvetica, Arial, sans-serif !default;
@@ -97,19 +99,18 @@ $font-color-conventional: #606266; //常规文本颜色
 $font-color-secondary: #909399;//次要文本颜色
 
 /*base define*/
-$background-base:#d8bb37 #141f37;
+$background-base:rgba(216, 187, 55, 0.8), rgba(20, 31, 55, 0.6),rgba(20, 31, 55, 1);
 $background-linear-base:linear-gradient(nth($background-base,1),nth($background-base,2));
 $color-base:#d8bb37;
 $border-color-base:#d8bb37;
 
 /*table*/
-$background-table-base:rgba(20,31,55,0.5); /*table-window-background*/
-$background-table-classification:rgba(20,31,55,1);//分类列表左边背景
-$background-table-container:rgba(20,31,55,0.8);//分类列表左边背景
-$background-table-thead:linear-gradient(rgba(216, 187, 55, 0.6), rgba(20, 31, 55, 0.8));//表头背景
-$background-table-tbody:rgba(20,31,55,1);//tbody背景
+$background-table-base:rgba(20,31,55,0.8); /*table-window-background*/
+$background-table-classification:rgba(20,31,55,0.4);//分类列表左边背景
+$background-table-container:rgba(20,31,55,0.6);//分类列表右边背景
+$background-table-thead:linear-gradient(rgba(216, 187, 55, 0.4), rgba(20, 31, 55, 0.6));//表头背景
+$background-table-tbody:rgba(20,31,55,0.6);//tbody背景
 $background-hover-tbody:rgba(216,187,55,0.5);//tbody背景
-
 
 /*pagination*/
 $background-pagination--inner:rgba(20, 31, 55, 0.5);//页码选择输入框背景；

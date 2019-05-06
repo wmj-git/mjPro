@@ -91,22 +91,8 @@
     methods:{
        init(){
          this.chart=this.$echarts.init(document.getElementById(this.id));
+         console.log(this.option)
          this.chart.setOption(this.option,true);
-         if(this.id=="pie"||this.id=="circle"){
-             this.chart.setOption({
-               series: [{
-                 data:this.data
-               },true]
-             });
-         }
-         else{
-           console.log(this.series)
-           this.chart.setOption({
-               series:this.series
-           },true);
-         }
-
-
        }
     }
   }

@@ -8,6 +8,8 @@
     <em_venture></em_venture>
     <!--主菜单-->
     <em_nav></em_nav>
+    <!--工具栏-->
+    <em_tools></em_tools>
     <!--功能窗口-->
     <template v-for="win in wins" v-if="win.show">
       <win :id="win.id" :data="win">
@@ -15,10 +17,10 @@
       </win>
     </template>
     <!--对话框-->
-    <template v-for="dialog in dialogGroup" v-if="dialog.show">
-      <em_dialog :data="dialog"></em_dialog>
-    </template>
-    <em_chart_window></em_chart_window>
+    <!--<template v-for="dialog in dialogGroup" v-if="dialog.show">-->
+      <!--<em_dialog :data="dialog"></em_dialog>-->
+    <!--</template>-->
+    <!--<em_chart_window></em_chart_window>-->
     <!--场景-->
     <router-view name="scene"/>
     <!--底部-->
@@ -42,6 +44,7 @@
   import em_warn from "./components/em_warn/em_warn"
   import em_venture from "./components/em_venture/em_venture"
   import em_chart_window from "./components/em_chart_window/em_chart_window"
+  import  em_tools from "./components/em_tools/em_tools"
   export default {
     data() {
       return {
@@ -63,12 +66,14 @@
       sole_table,
       list_table,
       echart_table,
-      em_chart_window
+      em_chart_window,
+      em_tools
     },
     methods: {
       init() {
         this.wins = this.$store.state.win.win;
         this.dialogGroup = this.$store.state.win.dialog;
+
       },
       fn() {
 

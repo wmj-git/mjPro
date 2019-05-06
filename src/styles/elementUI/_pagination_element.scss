@@ -1,9 +1,12 @@
-.el-pagination__total{
-  color: #fff;
+$r:32;
+.el-pagination{
+  margin-top: 10/$r+rem;
 }
-.el-input__inner,.el-pagination__jump{
+.el-pagination__total,.el-input__inner,.el-pagination__jump,.el-pagination button:disabled,.el-pager li,.el-pagination .btn-prev, .el-pagination .btn-next{
   color: #fff;
+  font-size: 14/$r+rem !important;
 }
+
 .el-input__inner{
   background: $background-pagination--inner;
   border-color: rgba(255,255,255,0.5);
@@ -16,7 +19,6 @@
 }
 .el-pagination button:disabled,.el-pager li,.el-pagination .btn-prev, .el-pagination .btn-next{
   background: $background-pagination--inner;
-  color: #fff;
 }
 li.number.active{
   color: rgba(255,255,255,0.3);
@@ -29,4 +31,15 @@ li.number.active{
 }
 .el-pagination__sizes .el-input .el-input__inner:hover,.el-select .el-input.is-focus .el-input__inner,.el-select .el-input__inner:focus{
   border-color: $border-color-base;
+}
+
+@media screen and (min-width:1921px) {
+  .el-pagination{
+    margin-top: 5/$r+rem;
+  }
+}
+@media screen and (min-width:1281px) and (max-width:1440px){
+  .el-pagination{
+    margin-top: 20/$r+rem;
+  }
 }
