@@ -1,0 +1,41 @@
+{
+"db": {
+  "statusCode": 200,
+  "message": "请求成功",
+  "data": {
+    "list": [
+      {
+        "grid_name": "网格1",
+        "grid_id": "1",
+        "grid_position": "100",
+        "memo": "网格"
+      },
+      {
+        "grid_name": "网格2",
+        "grid_id": "2",
+        "grid_position": "125",
+        "memo": "网格"
+      },
+      {
+        "grid_name": "网格3",
+        "grid_id": "3",
+        "grid_position": "160",
+        "memo": "网格"
+      },
+      {
+        "grid_name": "网格4",
+        "grid_id": "4",
+        "grid_position": "1300",
+        "memo": "网格"
+      },
+      {
+        "grid_name": "网格5",
+        "grid_id": "5",
+        "grid_position": "600",
+        "memo": "网格"
+      }
+    ]
+
+  }
+}
+}

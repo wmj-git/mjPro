@@ -23,6 +23,8 @@
     <!--<em_chart_window></em_chart_window>-->
     <!--场景-->
     <router-view name="scene"/>
+    <!-- 控制透明度的滑动条-->
+    <em_slider></em_slider>
     <!--底部-->
     <em_bottom></em_bottom>
   </div>
@@ -45,6 +47,7 @@
   import em_venture from "./components/em_venture/em_venture"
   import em_chart_window from "./components/em_chart_window/em_chart_window"
   import  em_tools from "./components/em_tools/em_tools"
+  import  em_slider from "./components/em_slider/em_slider"
   export default {
     data() {
       return {
@@ -67,7 +70,8 @@
       list_table,
       echart_table,
       em_chart_window,
-      em_tools
+      em_tools,
+      em_slider
     },
     methods: {
       init() {

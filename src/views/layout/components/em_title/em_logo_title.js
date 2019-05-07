@@ -1,6 +1,6 @@
 export function title(){
     var txt = "智慧龙华园林可视化管理平台";
-    var txtH = 20;
+    var txtH = 19;
     var font = "sans-serif";
     var bg = "#000";
     var rayColor1 = "#e0f7fa";
@@ -12,7 +12,7 @@ export function title(){
     var cw = canvas.width = 260;
     var ch = canvas.height = 65;
     var w2 = cw / 10;
-    var h2 = ch / 1;
+    var h2 = ch / 10;
     var pi = Math.PI;
     var pi2 = pi * .5;
 

@@ -137,6 +137,36 @@ export default {
             params:"roleCname"
 
           },
+          {
+            type:"em_button",
+            icon:"el-icon-search",
+            operate:"查询",
+            control_id:"role_manage_table",
+            fn:"search"
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-plus",
+            operate:"添加",
+            control_id:"role_manage_table",
+            fn:"add",
+            url:"/user/userext/addPeopleInfo"
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-edit",
+            operate:"修改",
+            control_id:"role_manage_table",
+            fn:"modify",
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-delete",
+            operate:"删除",
+            control_id:"role_manage_table",
+            fn:"dele",
+            url:""
+          }
 
         ],
         table:{
@@ -1442,7 +1472,7 @@ export default {
             {
               name:"上限报警阀值",
               prop:"upperLimit",
-              width:"100"
+              width:"180"
             },
             {
               name:"下限报警阀值",

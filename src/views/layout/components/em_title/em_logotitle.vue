@@ -2,7 +2,7 @@
   <div class="">
      <win :id="win.id" :data="win">
        <div class="home_title" id="title">
-         <img src="/static/image/logo.gif" bindload="imageLoad"/>
+         <img src="../../../../assets/image/logo.png" bindload="imageLoad"/>
          <div class="title-container">
             <canvas id="canvas" ></canvas>
          </div>

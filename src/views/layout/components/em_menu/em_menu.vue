@@ -17,7 +17,6 @@
 </template>
 
 <script>
-  // import VueEvent from "@/utils/VueEvent"
   import win from "@/components/win/win"
 
   export default {
@@ -59,8 +58,8 @@
       // 非父子信息通信
       this.bus.$on(this.id, function (obj) {
         console.log(obj);
-         $("#"+this.id).window("setTitle",obj.title);
-         $("#"+this.id).window("resize",{
+         $("#"+this.id).window("setTitle",obj.title);     //二级菜单的title
+         $("#"+this.id).window("resize",{                 //二级菜单的宽度
              width:obj.width
          });
         this.group = obj.list;
