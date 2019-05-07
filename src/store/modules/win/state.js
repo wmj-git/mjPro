@@ -274,6 +274,139 @@ export default {
       }
     },
     {
+      id:"account_manage",
+      title: "账户管理",
+      top:80,
+      left:400,
+      width:"55%",
+      height:400,
+      show: false,
+      class:"em-table-window",
+      component: "sole_table",
+      component_data:{
+        operation:[
+          {
+            type:"complex_em_input",
+            select:[
+              {
+                name:"帐户",
+                params:"accountNumber"
+              },
+              {
+                name:"英文名",
+                params:"userEname"
+              },
+              {
+                name:"中文名",
+                params:"userCname"
+              },
+            ]
+
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-search",
+            operate:"查询",
+            control_id:"people_manage_table",
+            fn:"search"
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-plus",
+            operate:"添加",
+            control_id:"account_manage_table",
+            fn:"add",
+            url:"/user/userext/addPeopleInfo"
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-edit",
+            operate:"修改",
+            control_id:"account_manage_table",
+            fn:"modify",
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-delete",
+            operate:"删除",
+            control_id:"account_manage_table",
+            fn:"dele",
+            url:"/user/userext/deletePeopleInfo"
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-excel_out",
+            operate:"导入excel",
+            fn:"import",
+            control_id:"account_manage_table",
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-excel_out",
+            operate:"导出excel",
+            control_id:"account_manage_table",
+            fn:"export"
+          }
+        ],
+        table:{
+          id:"account_manage_table",
+          table_url:"/user/userext/queryUserExt",
+          label:[{
+            name:"账户",
+            prop:"accountNumber",
+            width:"100"
+          },
+            {
+              name:"中文名",
+              prop:"userCname",
+              width:"100"
+            },
+            {
+              name:"英文名",
+              prop:"userEname",
+              width:"100"
+            },
+            {
+              name:"状态",
+              prop:"userStateCvalue",
+              width:"80"
+            },
+            {
+              name:"性别",
+              prop:"userSexCvalue",
+              width:"80"
+            },
+            {
+              name:"电话",
+              prop:"phoneNumber",
+              width:"140"
+            },
+            {
+              name:"年龄",
+              prop:"userAge",
+              width:"80"
+            },
+            {
+              name:"部门",
+              prop:"deptFullName",
+              width:"80"
+            },
+            {
+              name:"人员类型",
+              prop:"userTypeCvalue",
+              width:"180"
+            }
+
+
+
+          ]
+        }
+      }
+
+
+
+    },
+    {
       id: "time_detective",
       title:  "实时监测",
       top:80,
@@ -684,49 +817,54 @@ export default {
         ],
           table:{
             id:"people_manage_table",
-              table_url:"/user/userext/queryUserExt",
+              table_url:"/gardens/person/queryAllByPage",
                label:[{
-                 name:"账户",
-                 prop:"accountNumber",
+                 name:"姓名",
+                 prop:"name",
                  width:"100"
                },
                  {
-                   name:"中文名",
-                   prop:"userCname",
+                   name:"性别",
+                   prop:"sex",
                    width:"100"
                  },
                  {
-                   name:"英文名",
-                   prop:"userEname",
+                   name:"职务",
+                   prop:"duty",
                    width:"100"
                  },
                  {
-                   name:"状态",
+                   name:"人员类型",
                    prop:"userStateCvalue",
                    width:"80"
                  },
                  {
-                   name:"性别",
+                   name:"电话",
                    prop:"userSexCvalue",
                    width:"80"
                  },
                  {
-                   name:"电话",
+                   name:"从事专业",
                    prop:"phoneNumber",
                    width:"140"
                  },
                  {
-                   name:"年龄",
+                   name:"工作单位",
                    prop:"userAge",
                    width:"80"
                  },
                  {
-                   name:"部门",
+                   name:"备注",
                    prop:"deptFullName",
                    width:"80"
                  },
                  {
-                   name:"人员类型",
+                   name:"创建日期",
+                   prop:"userTypeCvalue",
+                   width:"180"
+                 },
+                 {
+                   name:"排序号",
                    prop:"userTypeCvalue",
                    width:"180"
                  }
@@ -745,6 +883,7 @@ export default {
       title: "维护单位管理",
       top:80,
       left:400,
+      height:400,
       show: false,
       class:"em-table-window",
       component: "sole_table",
@@ -843,6 +982,7 @@ export default {
       title:"树种类型管理",
       top:80,
       left:400,
+      height:400,
       show: false,
       class:"em-table-window",
       component: "sole_table",
@@ -919,6 +1059,7 @@ export default {
       title:"植物类型管理",
       top:80,
       left:400,
+      height:400,
       show: false,
       class:"em-table-window",
       component: "sole_table",
@@ -992,6 +1133,7 @@ export default {
       title:"特殊树木资料管理",
       top:80,
       left:400,
+      height:400,
       show: false,
       class:"em-table-window",
       component: "sole_table",
@@ -1245,6 +1387,7 @@ export default {
       top:80,
       left:400,
       width:700,
+      height:400,
       show: false,
       class:"em-table-window",
       component: "sole_table",
@@ -1372,6 +1515,7 @@ export default {
       top:80,
       left:400,
       width:700,
+      height:400,
       show: false,
       class:"em-table-window",
       component: "sole_table",
@@ -1499,6 +1643,7 @@ export default {
       top:80,
       left:400,
       width:700,
+      height:400,
       show: false,
       class:"em-table-window",
       component: "sole_table",
@@ -1606,6 +1751,7 @@ export default {
       title:"空气温度监测点管理",
       top:80,
       left:400,
+      height:400,
       show: false,
       class:"em-table-window",
       component: "sole_table",
@@ -1733,6 +1879,7 @@ export default {
       top:80,
       left:400,
       width:700,
+      height:400,
       show: false,
       class:"em-table-window",
       component: "sole_table",
@@ -1859,6 +2006,7 @@ export default {
       title:"火灾报警点管理",
       top:80,
       left:400,
+      height:400,
       show: false,
       class:"em-table-window",
       component: "sole_table",

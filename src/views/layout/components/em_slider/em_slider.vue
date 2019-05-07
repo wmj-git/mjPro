@@ -26,7 +26,7 @@
                 show: true,
                 resizable:false,
                 width:400,
-                class:""
+                class:"em-slider-window"
               },
               value: 50,
             }
@@ -37,3 +37,6 @@
         }
     };
 </script>
+<style lang="scss" scoped>
+  @import "em_slider";
+</style>

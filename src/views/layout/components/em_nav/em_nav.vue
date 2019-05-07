@@ -37,6 +37,7 @@
         },
         buttongroup: [
           {
+            show:false,
             index: "detectdata",
             title: "监测数据",
             width: 160,
@@ -70,6 +71,7 @@
 
           },
           {
+            show:false,
             index: "greenprotect",
             title: "绿化养护",
             width: 155,
@@ -95,6 +97,7 @@
             ]
           },
           {
+            show:false,
             index: "querystatics",
             title: "查询统计",
             width: 200,
@@ -132,6 +135,7 @@
             ]
           },
           {
+            show:false,
             index: "database",
             title: "基础数据",
             width: 200,
@@ -211,6 +215,7 @@
             ]
           },
           {
+            show:false,
             index: "systemmanage",
             title: "系统管理",
             width: 130,
@@ -231,6 +236,12 @@
                 "icon": "icon-maintenance-management",
                 "id": "system_record",
                 "name": "系统日志",
+                "show": false
+              },
+              {
+                "icon": "icon-maintenance-management",
+                "id": "account_manage",
+                "name": "账户管理",
                 "show": false
               }
             ]
@@ -263,13 +274,22 @@
             _width = obj.width;
           }
         });
-
         let _show = null;
         this.$store.state.win.win.forEach(function (el) {
           if (el.id === _controlId) {
             _show=el.show;
           }
         });
+        // let _show = null;
+        // this.buttongroup.forEach(function (obj) {
+        //
+        //   if (obj.index === key) {
+        //     _title = obj.title;
+        //     _list = obj.list;
+        //     _width = obj.width;
+        //     _show=obj.show;
+        //   }
+        // });
         if (_show){
           this.bus.$emit(this.control_id, {
             title: _title,

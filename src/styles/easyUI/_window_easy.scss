@@ -111,3 +111,10 @@ $r:32;
   resize: both;
   overflow: visible;//table-dialog遮罩
 }
+
+/*slider*/
+.panel.window.#{em-slider-window}.panel-htop{
+  border: none;
+  background: transparent;
+}
+
