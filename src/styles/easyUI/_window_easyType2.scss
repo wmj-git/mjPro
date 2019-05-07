@@ -70,12 +70,6 @@ $r:32;
   .el-menu{
     border-right: 0;
   }
-  .panel-header{
-    border-bottom: none;
-    margin-bottom: 5/$r+rem;
-    padding: 6/$r+rem !important;
-  }
-
 }
 
 /*bottom-window*/
@@ -95,6 +89,7 @@ $r:32;
 }
 
 
+
 /*table-window*/
 .window-shadow{
   border: none;
@@ -102,12 +97,24 @@ $r:32;
   background: transparent;
 }
 .panel.window.#{em-table-window}.panel-htop{
-  background: $background-table-base;
-  border: 15px solid transparent;
-  -webkit-border-image: url("../../../src/assets/image/table_border.png") 27 27 24 24 round;
-  -moz-border-image: url("../../../src/assets/image/table_border.png") 27 27 24 24 round;
-  border-image: url("../../../src/assets/image/table_border.png") 27 27 24 24 round;
-  width: 800px;
-  resize: both;
+  background:transparent;
+  border: none;
   overflow: visible;//table-dialog遮罩
 }
+.panel.window.#{em-table-window}.panel-htop /deep/{
+  .window {
+    &.window-header{
+      background: nth($background-type2-base,2);
+    }
+    &.window-body{
+      box-shadow: 0 0 4px rgba(255,255,255,0.5);
+    }
+  }
+  .panel-body{
+    padding: 14/$r+rem !important;
+    background: nth($background-type2-base,3);
+    box-shadow: 0 0 2px rgba(255,255,255,0.5);
+  }
+}
+
+

@@ -41,8 +41,7 @@ $r:32;
 }
 .#{table-container}{
   background: $background-table-container;
-  padding-left: 5/$r+rem;
-  padding-right: 5/$r+rem;
+  box-shadow: 0 0 4px rgba(255,255,255,0.4);
 }
 
 .el-table{

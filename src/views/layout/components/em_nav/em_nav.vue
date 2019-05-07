@@ -39,7 +39,7 @@
           {
             index: "detectdata",
             title: "监测数据",
-            width: 120,
+            width: 160,
             list: [
               {
                 "icon": "icon-real-time-monitoring",
@@ -72,7 +72,7 @@
           {
             index: "greenprotect",
             title: "绿化养护",
-            width: 145,
+            width: 155,
             list: [
               {
                 "icon": "icon-real-time-monitoring",
@@ -97,7 +97,7 @@
           {
             index: "querystatics",
             title: "查询统计",
-            width: 188,
+            width: 200,
             list: [
               {
                 "icon": "icon-real-time-monitoring",
@@ -134,7 +134,7 @@
           {
             index: "database",
             title: "基础数据",
-            width: 188,
+            width: 200,
             list: [
               {
                 "icon": "icon-system-manager",
@@ -151,7 +151,7 @@
               {
                 "icon": "icon-dispatching-command",
                 "id": "tree_type_manage",
-                "name": "树种类管理",
+                "name": "树种类型管理",
                 "show": false
               },
               {
@@ -176,6 +176,12 @@
                 "icon": "icon-system-manager",
                 "id": "oil_tempature_manage",
                 "name": "土壤温度监测点管理",
+                "show": false
+              },
+              {
+                "icon": "icon-system-manager",
+                "id": "oil_humidity_manage",
+                "name": "土壤湿度监测点管理",
                 "show": false
               },
               {
@@ -207,7 +213,7 @@
           {
             index: "systemmanage",
             title: "系统管理",
-            width: 120,
+            width: 130,
             list: [
               {
                 "icon": "icon-real-time-monitoring",

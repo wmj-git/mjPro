@@ -5,7 +5,7 @@
     <!--报警器-->
     <em_warn></em_warn>
     <!--风险等级数据监测-->
-    <em_venture></em_venture>
+    <!--<em_venture></em_venture>-->
     <!--主菜单-->
     <em_nav></em_nav>
     <!--工具栏-->

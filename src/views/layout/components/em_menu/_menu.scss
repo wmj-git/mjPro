@@ -2,6 +2,11 @@
 $r:32;
 .menu{
   width: 100%;
+  border-image-source: linear-gradient(nth($background-base,2),nth($background-base,1), nth($background-base,2));
+  padding: 6/$r+rem 8/$r+rem;
+  border-style: solid;
+  border-width: 0 5px 0 5px;
+  border-image-slice: 20;
 }
 .el-menu.el-menu--horizontal{
   border: none;
@@ -13,7 +18,7 @@ $r:32;
   height: 30px;
   background-size: 100% 100%;
   line-height: 25px;
-  margin-top: 10px;
+  margin-top: 3/$r+rem;
   color: #e1e0e0;
   padding-left: 10px !important;
   padding-right: 10px;

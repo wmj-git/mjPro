@@ -10,14 +10,14 @@
                   v-model="time1"
                   type="date"
                   placeholder="开始日期"
-                  :picker-options="pickerOptions0" style="width: 120px">
+                  :picker-options="pickerOptions0" style="width: 135px">
                 </el-date-picker>
                 <span style="color: white">-</span>
                 <el-date-picker
                   v-model="time2"
                   type="date"
                   placeholder="结束日期"
-                  :picker-options="pickerOptions1" style="width: 120px">
+                  :picker-options="pickerOptions1" style="width: 135px">
                 </el-date-picker>
               </div>
             </el-col>
@@ -97,76 +97,49 @@
   import options from '@/echart_options/options'
   import {fetchChart} from "@/api/chart"
   import  {fetchPie} from "@/api/chart";
-  import XLSX from "xlsx";
 
   export default {
     name: "echart_table",
     data() {
       return {
         id:"type_manage",
-        label:[{Ch:"日期",En:"date",width:"180"},{Ch:"姓名",En:"name",width:"180"},{Ch:"地址",En:"address",width:"300"}],
+        label:[{Ch:"名称",En:"name",width:"180"},{Ch:"类型编码",En:"type_code",width:"180"},{Ch:"地址",En:"address",width:"300"}],
         tableData: [
           {
-            date: '2016-05-02',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1518 弄'
-          }, {
-            date: '2016-05-04',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1517 弄'
-          }, {
-            date: '2016-05-01',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1519 弄'
-          }, {
-            date: '2016-05-03',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1516 弄'
-          }, {
-            date: '2016-05-06',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1516 弄'
-          }, {
-            date: '2016-05-07',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1516 弄'
-          }, {
-            date: '2016-05-08',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1516 弄'
-          }, {
-            date: '2016-05-09',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1516 弄'
-          }, {
-            date: '2016-05-10',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1516 弄'
-          }, {
-            date: '2016-05-11',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1516 弄'
-          }, {
-            date: '2016-05-12',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1516 弄'
-          }, {
-            date: '2016-05-13',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1516 弄'
-          }, {
-            date: '2016-05-14',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1516 弄'
-          }, {
-            date: '2016-05-15',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1516 弄'
-          }, {
-            date: '2016-05-16',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1516 弄'
-          }
+            name: '监测点1',
+            type_code: 'pointsRLL',
+            address: '128.1245,125.123548'
+          },
+          {
+            name: '监测点2',
+            type_code: 'pointsRLL',
+            address: '128.1245,125.123548'
+          },
+          {
+            name: '监测点3',
+            type_code: 'pointsRLL',
+            address: '128.1245,125.123548'
+          },
+          {
+            name: '监测点4',
+            type_code: 'pointsRLL',
+            address: '128.1245,125.123548'
+          },
+          {
+            name: '监测点5',
+            type_code: 'pointsRLL',
+            address: '128.1245,125.123548'
+          },
+          {
+            name: '监测点6',
+            type_code: 'pointsRLL',
+            address: '128.1245,125.123548'
+          },
+          {
+            name: '监测点7',
+            type_code: 'pointsRLL',
+            address: '128.1245,125.123548'
+          },
         ],
         currentRow: null,
         multipleSelection: [],
@@ -229,28 +202,22 @@
     },
     props:["data"],
     created() {
-      // console.log(this.data.chart.type);
       this.option=options[this.data.chart.type];
       this.echart_id=this.data.chart.id;
-      // fetchPie().then(res=>{
-      //   console.log(res.data.pie);
-      //   this.data1=res.data.pie
+      // fetchChart({
+      //   option:this.data.chart.type,
+      //   chart_url:this.data.chart.chart_url
+      // }).then(res=>{
+      //      if(this.data.chart.type=="pie"){
+      //        this.data1=res.data[this.data.chart.type];
+      //        // console.log(this.data1)
+      // }
+      //      else{
+      //          this.series=res.data[this.data.chart.type];
+      //
+      //      }
       //
       // })
-      fetchChart({
-        option:this.data.chart.type,
-        chart_url:this.data.chart.chart_url
-      }).then(res=>{
-           if(this.data.chart.type=="pie"){
-             this.data1=res.data[this.data.chart.type];
-             // console.log(this.data1)
-      }
-           else{
-               this.series=res.data[this.data.chart.type];
-               // console.log(this.series)
-           }
-
-      })
 
     },
     methods: {

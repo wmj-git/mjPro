@@ -1,15 +1,21 @@
 $r:32;
 .panel-body{
-  background-color: transparent;
   overflow: hidden;
+  background: transparent;
 }
 .panel-title{
   color: $color-base;
   font-size: 15/$r+rem;
+
 }
 .panel-header{
-  border-bottom: 2px solid $border-color-base;
+  border-color: transparent;
   background: nth($background-type2-base,3) !important;
   box-shadow: 0 0 2px rgba(255, 255, 255,0.2);
+  margin-bottom: 5/$r+rem;
+  padding: 6/$r+rem !important;
+}
+.panel-tool{
+  right: 5/$r+rem !important;
 }
 

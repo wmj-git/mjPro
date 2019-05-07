@@ -139,42 +139,42 @@ export default {
       containLabel: true
   },
   series: [
-    // {
-    //   name:'永川',
-    //   data: [11, 20, 8,30,25],
-    //   type: 'line',
-    //   itemStyle: {       //线的样式
-    //     normal: {
-    //       lineStyle: {
-    //         width:1
-    //       }
-    //     }
-    //   },
-    //  },
-    //   {
-    //     name:'江津',
-    //     data: [21, 10,18,25,30],
-    //     type: 'line',
-    //     itemStyle: {
-    //       normal: {
-    //         lineStyle: {
-    //           width:1
-    //         }
-    //       }
-    //     },
-    //   },
-    //   {
-    //     name:'重庆',
-    //       data: [8, 25, 28,10,29],
-    //     type: 'line',
-    //     itemStyle: {
-    //       normal: {
-    //         lineStyle: {
-    //           width:1
-    //         }
-    //       }
-    //     },
-    //   }
+    {
+      name:'永川',
+      data: [11, 20, 8,30,25],
+      type: 'line',
+      itemStyle: {       //线的样式
+        normal: {
+          lineStyle: {
+            width:1
+          }
+        }
+      },
+     },
+      {
+        name:'江津',
+        data: [21, 10,18,25,30],
+        type: 'line',
+        itemStyle: {
+          normal: {
+            lineStyle: {
+              width:1
+            }
+          }
+        },
+      },
+      {
+        name:'重庆',
+          data: [8, 25, 28,10,29],
+        type: 'line',
+        itemStyle: {
+          normal: {
+            lineStyle: {
+              width:1
+            }
+          }
+        },
+      }
     ]
   },
   circle: {
@@ -294,7 +294,9 @@ export default {
           }
         },
         data:[
-
+            {"name":"永川","value": 220},
+            {"name":"江津","value": 220},
+            {"name":"重庆","value": 220}
         ],
         itemStyle: {
           emphasis: {

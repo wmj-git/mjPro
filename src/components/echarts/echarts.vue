@@ -99,14 +99,5 @@
 </script>
 
 <style scoped lang="scss">
-   .echart{
-      background: rgba(0,0,0,0.2);
-      width: 100%;
-      height: 100%;
-   }
-   #circle,#line,#pie,#bar,#pie1,#line1,#line2,#line3{
-     width:380px;
-     height:343px;
-
-   }
+@import "echarts";
 </style>

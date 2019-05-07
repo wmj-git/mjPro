@@ -5,9 +5,9 @@ export default {
       id: "menu",
       title: "系统管理",
       top: "20%",
-      left: 4,
+      left: 20,
       width:100,
-      height:400,
+      height:600,
       show:false,
       resizable:false,
       maximizable:false,
@@ -137,36 +137,7 @@ export default {
             params:"roleCname"
 
           },
-          {
-            type:"em_button",
-            icon:"el-icon-search",
-            operate:"查询",
-            fn:"search",
-            control_id:"role_manage_table",
-          },
-          {
-            type:"em_button",
-            icon:"el-icon-plus",
-            operate:"添加",
-            control_id:"role_manage_table",
-            fn:"add",
-            url:"/user/userext/addPeopleInfo"
-          },
-          {
-            type:"em_button",
-            icon:"el-icon-edit",
-            operate:"修改",
-            control_id:"role_manage_table",
-            fn:"modify",
-          },
-          {
-            type:"em_button",
-            icon:"el-icon-delete",
-            operate:"删除",
-            control_id:"role_manage_table",
-            fn:"dele",
-            url:"/user/userext/deletePeopleInfo"
-          }
+
         ],
         table:{
           id:"role_manage_table",
@@ -340,8 +311,57 @@ export default {
       show: false,
       width:800,
       class:"em-table-window",
-      component: "test",
+      component: "sole_table",
       component_data:{
+        operation:[
+          {
+            type:"em_date",
+
+          },
+          {
+            type:"em_input",
+            placeholder:"用户名",
+            params:"userCname"
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-search",
+            operate:"查询",
+            fn:"search",
+            url:"http://localhost:5000",
+            control_id:"grid_scope_table",
+          }
+        ],
+        table:{
+          id:"grid_scope_table",
+          table_url:"http://localhost:5000/db",
+          label:[
+            {
+              name:"名称",
+              prop:"grid_name",
+              width:"100"
+            },
+            {
+              name:"网格id",
+              prop:"grid_id",
+              width:"120"
+            },
+            {
+              name:"网格位置",
+              prop:"grid_position",
+              width:"200"
+            },
+            {
+              name:"备注",
+              prop:"memo",
+              width:"120"
+            }
+
+
+
+
+          ]
+        }
       }
     },
     {
@@ -351,9 +371,95 @@ export default {
       left:400,
       show: false,
       class:"em-table-window",
-      component: "test",
+      component:"sole_table",
       component_data:{
-        name:""
+        operation:[
+
+          {
+            type:"em_input",
+            placeholder:"用户名",
+            params:"userCname"
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-search",
+            operate:"查询",
+            control_id:"type_manage_table",
+            fn:"search"
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-plus",
+            operate:"添加",
+            control_id:"type_manage_table",
+            fn:"add",
+            url:"/user/userext/addPeopleInfo"
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-edit",
+            operate:"修改",
+            control_id:"type_manage_table",
+            fn:"modify",
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-delete",
+            operate:"删除",
+            control_id:"type_manage_table",
+            fn:"dele",
+            url:""
+          }
+
+        ],
+        table:{
+          id:"protect_company_table",
+          table_url:"/gardens/ent/queryAllByPage",
+          label:[
+            {
+              name:"名称",
+              prop:"entName",
+              width:"100"
+            },
+            {
+              name:"单位地址",
+              prop:"orgAddr",
+              width:"120"
+            },
+            {
+              name:"联系人",
+              prop:"contactMan",
+              width:"200"
+            },
+            {
+              name:"联系电话",
+              prop:"tel",
+              width:"120"
+            },
+            {
+              name:"所属行政区域",
+              prop:"areaCode"
+            },
+            {
+              name:"排序号",
+              prop:"orderNo",
+              width:"140"
+            },
+            {
+              name:"创建日期",
+              prop:"createDate",
+              width:"180"
+            },
+            {
+              name:"注释",
+              prop:"memo",
+              width:"140"
+            },
+
+
+
+          ]
+        }
       }
     },
     {
@@ -363,7 +469,7 @@ export default {
       left:400,
       show: false,
       class:"em-table-window",
-      component: "echart_table",
+      component: "",
       component_data:{
         name:""
       }
@@ -373,7 +479,7 @@ export default {
       title: "特殊树木统计分析",
       top:80,
       left:400,
-      width:880,
+      width:"50%",
       height:400,
       show: false,
       class:"em-table-window",
@@ -394,7 +500,7 @@ export default {
       title:  "土壤温湿度统计分析",
       top:80,
       left:400,
-      width:880,
+      width:"50%",
       height:400,
       show: false,
       class:"em-table-window",
@@ -415,7 +521,7 @@ export default {
       title: "人流量统计分析",
       top:80,
       left:400,
-      width:880,
+      width:"50%",
       height:400,
       show: false,
       class:"em-table-window",
@@ -437,7 +543,7 @@ export default {
       top:80,
       left:400,
       height:400,
-      width:880,
+      width:"50%",
       show: false,
       class:"em-table-window",
       component: "echart_table",
@@ -457,11 +563,20 @@ export default {
       title: "火险报警统计分析",
       top:80,
       left:400,
+      width:"50%",
+      height:400,
       show: false,
       class:"em-table-window",
-      component: "test",
+      component: "echart_table",
       component_data:{
-        name:""
+        table:{
+
+        },
+        chart:{
+          type:"bar",
+          id:"bar1",
+          chart_url:'http://localhost:4000/chartdata'
+        }
       }
     },
     {
@@ -469,7 +584,7 @@ export default {
       title: "人员管理",
       top:80,
       left:400,
-      width:"50%",
+      width:"55%",
       height:400,
       show: false,
       class:"em-table-window",
@@ -904,12 +1019,12 @@ export default {
             },
             {
               name:"植物种类型",
-              prop:"plantTypeId",
+              prop:"plantTypeName",
               width:"120"
             },
             {
               name:"树种类型",
-              prop:"treeTypeId",
+              prop:"treeTypeName",
               width:"120"
             },
             {
@@ -920,12 +1035,12 @@ export default {
             {
               name:"创建日期",
               prop:"createDate",
-              width:"200"
+              width:"250"
             },
             {
               name:"更新时间",
               prop:"updateDate",
-              width:"200"
+              width:"250"
             },
             {
               name:"等级",
@@ -945,6 +1060,11 @@ export default {
             {
               name:"所属网格",
               prop:"gridId",
+              width:"120"
+            },
+            {
+              name:"行政区划",
+              prop:"districtName",
               width:"120"
             },
             {
@@ -982,6 +1102,7 @@ export default {
       title:"网格管理",
       top:80,
       left:400,
+      width:700,
       show: false,
       class:"em-table-window",
       component: "sole_table",
@@ -1093,6 +1214,7 @@ export default {
       title:"土壤温度监测点管理",
       top:80,
       left:400,
+      width:700,
       show: false,
       class:"em-table-window",
       component: "sole_table",
@@ -1153,8 +1275,190 @@ export default {
         ],
         table:{
           id:"oil_tempature_manage_table",
-          table_url:"",
+          table_url:"/gardens/temhumpoints/queryAllByPage",
           label:[
+            {
+              name:"编号",
+              prop:"pointsNo",
+              width:"100"
+            },
+            {
+              name:"名称",
+              prop:"poiName",
+              width:"100"
+            },
+            {
+              name:"安装位置",
+              prop:"position",
+              width:"140"
+            },
+            {
+              name:"精度",
+              prop:"longitude",
+              width:"200"
+            },
+            {
+              name:"纬度",
+              prop:"latitude",
+              width:"160"
+            },
+            {
+              name:"责任单位",
+              prop:"entId",
+              width:"100"
+            },
+            {
+              name:"责任人",
+              prop:"gridId",
+              width:"100"
+            },
+            {
+              name:"上限报警阀值",
+              prop:"upperLimit",
+              width:"100"
+            },
+            {
+              name:"下限报警阀值",
+              prop:"lowerLimit",
+              width:"180"
+            },
+            {
+              name:"所在网格",
+              prop:"gridId",
+              width:"100"
+            },
+            {
+              name:"备注",
+              prop:"memo",
+              width:"100"
+            }
+          ]
+        }
+      }
+    },
+    {
+      id:"oil_humidity_manage",
+      title:"土壤湿度监测点管理",
+      top:80,
+      left:400,
+      width:700,
+      show: false,
+      class:"em-table-window",
+      component: "sole_table",
+      component_data:{
+        operation:[
+          {
+            type:"complex_em_input",
+            select:[
+              {
+                name:"监测点名称",
+                params:"accountNumber"
+              }
+            ]
+
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-search",
+            operate:"查询",
+            control_id:"oil_tempature_manage_table",
+            fn:"search"
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-plus",
+            operate:"添加",
+            control_id:"oil_tempature_manage_table",
+            fn:"add",
+            url:""
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-edit",
+            operate:"修改",
+            control_id:"oil_tempature_manage_table",
+            fn:"modify",
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-delete",
+            operate:"删除",
+            control_id:"oil_tempature_manage_table",
+            fn:"dele",
+            url:""
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-excel_out",
+            operate:"导入excel",
+            fn:"import"
+          },
+          {
+            type:"em_button",
+            icon:"el-icon-excel_out",
+            operate:"导出excel",
+            fn:"export"
+          }
+        ],
+        table:{
+          id:"oil_humidity_manage_table",
+          table_url:"/gardens/temhumpoints/queryAllByPage",
+          label:[
+            {
+              name:"编号",
+              prop:"pointsNo",
+              width:"100"
+            },
+            {
+              name:"名称",
+              prop:"poiName",
+              width:"100"
+            },
+            {
+              name:"安装位置",
+              prop:"position",
+              width:"140"
+            },
+            {
+              name:"精度",
+              prop:"longitude",
+              width:"200"
+            },
+            {
+              name:"纬度",
+              prop:"latitude",
+              width:"160"
+            },
+            {
+              name:"责任单位",
+              prop:"entId",
+              width:"100"
+            },
+            {
+              name:"责任人",
+              prop:"gridId",
+              width:"100"
+            },
+            {
+              name:"上限报警阀值",
+              prop:"upperLimit",
+              width:"100"
+            },
+            {
+              name:"下限报警阀值",
+              prop:"lowerLimit",
+              width:"180"
+            },
+            {
+              name:"所在网格",
+              prop:"gridId",
+              width:"100"
+            },
+            {
+              name:"备注",
+              prop:"memo",
+              width:"100"
+            }
           ]
         }
       }
@@ -1164,6 +1468,7 @@ export default {
       title:"人流量监测点管理",
       top:80,
       left:400,
+      width:700,
       show: false,
       class:"em-table-window",
       component: "sole_table",
@@ -1196,36 +1501,72 @@ export default {
           },
           {
             type:"em_button",
-            icon:"el-icon-edit",
-            operate:"修改",
-            control_id:"population_manage_table",
-            fn:"modify",
-          },
-          {
-            type:"em_button",
             icon:"el-icon-delete",
             operate:"删除",
             control_id:"population_manage_table",
             fn:"dele",
             url:""
-          },
-          {
-            type:"em_button",
-            icon:"el-icon-excel_out",
-            operate:"导入excel",
-            fn:"import"
-          },
-          {
-            type:"em_button",
-            icon:"el-icon-excel_out",
-            operate:"导出excel",
-            fn:"export"
           }
         ],
         table:{
           id:"population_manage_table",
-          table_url:"",
+          table_url:"/gardens/humantraffic/queryAllByPage",
           label:[
+            {
+              name:"编号",
+              prop:"pointsNo",
+              width:"100"
+            },
+            {
+              name:"名称",
+              prop:"monitorName",
+              width:"100"
+            },
+            {
+              name:"安装位置",
+              prop:"position",
+              width:"140"
+            },
+            {
+              name:"精度",
+              prop:"longitude",
+              width:"200"
+            },
+            {
+              name:"纬度",
+              prop:"latitude",
+              width:"160"
+            },
+            {
+              name:"责任单位",
+              prop:"entId",
+              width:"100"
+            },
+            {
+              name:"责任人",
+              prop:"gridId",
+              width:"100"
+            },
+            {
+              name:"橙色预警阀值",
+              prop:"orangeWarning",
+              width:"100"
+            },
+            {
+              name:"红色预警阀值",
+              prop:"redWarning",
+              width:"180"
+            },
+            {
+              name:"所在网格",
+              prop:"gridId",
+              width:"100"
+            },
+            {
+              name:"备注",
+              prop:"memo",
+              width:"100"
+            }
           ]
         }
       }
@@ -1295,8 +1636,63 @@ export default {
         ],
         table:{
           id:"air_tempature_manage_table",
-          table_url:"",
+          table_url:"/gardens/temhumpoints/queryAllByPage",
           label:[
+            {
+              name:"编号",
+              prop:"pointsNo",
+              width:"100"
+            },
+            {
+              name:"名称",
+              prop:"poiName",
+              width:"100"
+            },
+            {
+              name:"安装位置",
+              prop:"position",
+              width:"140"
+            },
+            {
+              name:"精度",
+              prop:"longitude",
+              width:"200"
+            },
+            {
+              name:"纬度",
+              prop:"latitude",
+              width:"160"
+            },
+            {
+              name:"责任单位",
+              prop:"entId",
+              width:"100"
+            },
+            {
+              name:"责任人",
+              prop:"gridId",
+              width:"100"
+            },
+            {
+              name:"上限报警阀值",
+              prop:"upperLimit",
+              width:"100"
+            },
+            {
+              name:"下限报警阀值",
+              prop:"lowerLimit",
+              width:"180"
+            },
+            {
+              name:"所在网格",
+              prop:"gridId",
+              width:"100"
+            },
+            {
+              name:"备注",
+              prop:"memo",
+              width:"100"
+            }
           ]
         }
       }
@@ -1306,9 +1702,10 @@ export default {
       title:"空气湿度监测点管理",
       top:80,
       left:400,
+      width:700,
       show: false,
       class:"em-table-window",
-      component: "sole_able",
+      component: "sole_table",
       component_data:{
         operation:[
           {
@@ -1325,14 +1722,14 @@ export default {
             type:"em_button",
             icon:"el-icon-search",
             operate:"查询",
-            control_id:"air_humidity_manage_table",
+            control_id:"air_tempature_manage_table",
             fn:"search"
           },
           {
             type:"em_button",
             icon:"el-icon-plus",
             operate:"添加",
-            control_id:"air_humidity_manage_table",
+            control_id:"air_tempature_manage_table",
             fn:"add",
             url:""
           },
@@ -1340,14 +1737,14 @@ export default {
             type:"em_button",
             icon:"el-icon-edit",
             operate:"修改",
-            control_id:"air_humidity_manage_table",
+            control_id:"air_tempature_manage_table",
             fn:"modify",
           },
           {
             type:"em_button",
             icon:"el-icon-delete",
             operate:"删除",
-            control_id:"air_humidity_manage_table",
+            control_id:"air_tempature_manage_table",
             fn:"dele",
             url:""
           },
@@ -1365,9 +1762,64 @@ export default {
           }
         ],
         table:{
-          id:"air_humidity_manage_table",
-          table_url:"",
+          id:"air_humidity_manage",
+          table_url:"/gardens/temhumpoints/queryAllByPage",
           label:[
+            {
+              name:"编号",
+              prop:"pointsNo",
+              width:"100"
+            },
+            {
+              name:"名称",
+              prop:"poiName",
+              width:"100"
+            },
+            {
+              name:"安装位置",
+              prop:"position",
+              width:"140"
+            },
+            {
+              name:"精度",
+              prop:"longitude",
+              width:"200"
+            },
+            {
+              name:"纬度",
+              prop:"latitude",
+              width:"160"
+            },
+            {
+              name:"责任单位",
+              prop:"entId",
+              width:"100"
+            },
+            {
+              name:"责任人",
+              prop:"gridId",
+              width:"100"
+            },
+            {
+              name:"上限报警阀值",
+              prop:"upperLimit",
+              width:"100"
+            },
+            {
+              name:"下限报警阀值",
+              prop:"lowerLimit",
+              width:"180"
+            },
+            {
+              name:"所在网格",
+              prop:"gridId",
+              width:"100"
+            },
+            {
+              name:"备注",
+              prop:"memo",
+              width:"100"
+            }
           ]
         }
       }
@@ -1437,8 +1889,53 @@ export default {
         ],
         table:{
           id:"fire_alert_manage_table",
-          table_url:"",
+          table_url:"/gardens/firealarm/queryAllByPage",
           label:[
+            {
+              name:"编号",
+              prop:"pointsNo",
+              width:"100"
+            },
+            {
+              name:"名称",
+              prop:"fireAlarmName",
+              width:"100"
+            },
+            {
+              name:"安装位置",
+              prop:"position",
+              width:"140"
+            },
+            {
+              name:"精度",
+              prop:"longitude",
+              width:"200"
+            },
+            {
+              name:"纬度",
+              prop:"latitude",
+              width:"160"
+            },
+            {
+              name:"责任单位",
+              prop:"entId",
+              width:"100"
+            },
+            {
+              name:"责任人",
+              prop:"gridId",
+              width:"100"
+            },
+            {
+              name:"所在网格",
+              prop:"gridId",
+              width:"100"
+            },
+            {
+              name:"备注",
+              prop:"memo",
+              width:"100"
+            }
           ]
         }
       }

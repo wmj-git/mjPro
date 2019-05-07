@@ -11,6 +11,7 @@ import qs from 'qs'
 import "./assets/jquery-easyui-1.6.7/themes/black/easyui.css"
 import "./assets/jquery-easyui-1.6.7/themes/icon.css"
 import "./assets/jquery-easyui-1.6.7/jquery.easyui.min.js"
+import "./assets/js/windowAdapter"
 import "@/styles/easyUI/_index.scss"
 
 

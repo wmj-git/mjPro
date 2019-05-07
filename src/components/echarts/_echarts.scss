@@ -1,0 +1,13 @@
+.echart{
+  background:rgba(20,31,55,0.6);
+  width: 100%;
+  height: 100%;
+  border-left: 2px solid rgba(255,255,255,0.4);
+
+}
+#circle,#line,#pie,#bar,#pie1,#line1,#line2,#line3,#bar1{
+  width:350px;
+  height:340px;
+  left: 50%;
+  transform: translate(-50%);
+}

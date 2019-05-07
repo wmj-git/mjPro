@@ -99,18 +99,18 @@ $font-color-conventional: #606266; //常规文本颜色
 $font-color-secondary: #909399;//次要文本颜色
 
 /*base define*/
-$background-base:rgba(216, 187, 55, 0.8), rgba(20, 31, 55, 0.6),rgba(20, 31, 55, 1);
+$background-base:rgba(216, 187, 55, 0.6), rgba(20, 31, 55, 0.5),rgba(20, 31, 55, 0.9),rgba(216, 187, 55, 0.9);
 $background-linear-base:linear-gradient(nth($background-base,1),nth($background-base,2));
 $color-base:#d8bb37;
 $border-color-base:#d8bb37;
 
 /*table*/
-$background-table-base:rgba(20,31,55,0.8); /*table-window-background*/
+$background-table-base:rgba(20,31,55,0.5); /*table-window-background*/
 $background-table-classification:rgba(20,31,55,0.4);//分类列表左边背景
 $background-table-container:rgba(20,31,55,0.6);//分类列表右边背景
 $background-table-thead:linear-gradient(rgba(216, 187, 55, 0.4), rgba(20, 31, 55, 0.6));//表头背景
-$background-table-tbody:rgba(20,31,55,0.6);//tbody背景
-$background-hover-tbody:rgba(216,187,55,0.5);//tbody背景
+$background-table-tbody:rgba(20,31,55,0.8);//tbody背景
+$background-hover-tbody:rgba(216,187,55,0.4);//tbody背景
 
 /*pagination*/
 $background-pagination--inner:rgba(20, 31, 55, 0.5);//页码选择输入框背景；
@@ -124,4 +124,6 @@ $btn-hover-bubbles: radial-gradient(circle at center, rgba(0, 0, 0, 0) 30%, #eee
 
 
 
+/*type2 variables*/
+$background-type2-base:rgba(255, 255, 255, 0.5), rgba(20, 31, 55, 0.5),rgba(20, 31, 55, 0.3);
 

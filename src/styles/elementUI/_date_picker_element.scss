@@ -1,6 +1,6 @@
 .el-picker-panel{
-  background: lighten(nth($background-base,2),5%);
-  border-image: linear-gradient(nth($background-base,2),nth($background-base,1));
+  background: lighten(nth($background-base,3),5%);
+  border-image: linear-gradient(nth($background-base,3),nth($background-base,4));
   border-image-slice: 20;
   color: rgba(255, 255, 255, 0.9);
   .el-date-table {
@@ -9,7 +9,7 @@
       border-color: lighten($border-color-base,10%);
     }
     & td.current:not(.disabled) span{
-      background: nth($background-base,1);
+      background: nth($background-base,4);
       color: #000;
     }
     & td.available:hover, & td.today span{
@@ -19,7 +19,7 @@
       font-weight: 900;
     }
     & td.disabled div {
-      background-color: lighten(nth($background-base,2),15%);
+      background-color: lighten(nth($background-base,3),15%);
       cursor: not-allowed;
       color: rgba(255,255,255,0.4);
     }
