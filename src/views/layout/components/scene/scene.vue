@@ -55,7 +55,6 @@
              maximumLevel: 18
          });
          viewer.imageryLayers.addImageryProvider(layer1);*/
-        // alert(process.env.SCENE_URL);
         this._scene = cm.openScene(this.viewer,process.env.SCENE_URL+"/zhlhscene/b3dm/tileset.json");
         cm.addModeFN(this.viewer);
         console.log(cm.db);
