@@ -29,7 +29,7 @@
         win: {
           id: "nav",
           title: "",
-          top: "87.5%",
+          top: "88.5%",
           left: "",
           show: true,
           resizable: false,

@@ -21,7 +21,7 @@ ul.el-menu-demo.em-nav-menu.el-menu--horizontal.el-menu /deep/ {
     line-height: 40/$r+rem;
     color: #fff;
     font-size: 15/$r+rem;
-    left: 12%;
+    left: 5%;
     &.is-active {
       border-image-source: url("../../../../assets/image/nav_hover.png");
       border-bottom: 1px solid transparent;
@@ -52,6 +52,9 @@ ul.el-menu-demo.em-nav-menu.el-menu--horizontal.el-menu /deep/ {
     border-image-outset:10 !important;
     border-bottom: 2px solid transparent !important;
   }
+  li.el-menu-item {
+    width: 80% !important;
+  }
 }
 @media screen and (min-width:1441px) and (max-width:1680px){
   li.el-menu-item.is-active{
@@ -68,5 +71,9 @@ ul.el-menu-demo.em-nav-menu.el-menu--horizontal.el-menu /deep/ {
 @media screen and (min-width:1921px){
   li.el-menu-item.is-active{
     border-bottom: 2px solid transparent !important;
+  }
+  li.el-menu-item {
+    margin-right: 25/$r+rem !important;
+    margin-top: 20/$r+rem !important;
   }
 }

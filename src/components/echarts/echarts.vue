@@ -1,12 +1,12 @@
 <template>
   <div class="echart">
-
-      <div  :id="id"></div>
-
+      <div  :id="id" style="height: 100%;width: 100%;"></div>
   </div>
 </template>
 
 <script>
+
+
   export default {
     name: "Chart",
     data(){
@@ -29,7 +29,9 @@
       }
     },
     mounted() {
-        this.init();
+       setTimeout(()=>{
+         this.init();
+       });
     },
     watch: {
       //观察option的变化
@@ -91,8 +93,10 @@
     methods:{
        init(){
          this.chart=this.$echarts.init(document.getElementById(this.id));
-         console.log(this.option)
+         console.log(this.option);
          this.chart.setOption(this.option,true);
+
+
        }
     }
   }

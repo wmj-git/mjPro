@@ -91,7 +91,6 @@
 </template>
 
 <script>
-  import FileSaver from "file-saver";
   import {list, table} from "@/api/list_table";
   import ehcarts from "@/components/echarts/echarts"
   import options from '@/echart_options/options'

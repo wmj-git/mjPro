@@ -42,6 +42,9 @@
               $(this).window('destroy');
             }
             _this.$store.commit("win/win_close", {win_id: _this.id});
+          },
+          onMaximize:function () {
+              
           }
         });
 
