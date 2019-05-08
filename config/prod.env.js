@@ -1,5 +1,6 @@
 'use strict'
 module.exports = {
   NODE_ENV: '"production"',
-  BASE_API: '"http://192.168.20.18:8080/api/v1"'
+  BASE_API: '"http://onelz.oicp.vip/api/v1"',
+  SCENE_URL:'"http://onelz.oicp.vip"'
 }

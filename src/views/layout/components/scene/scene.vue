@@ -30,8 +30,8 @@
           navigationHelpButton: false, //是否显示帮助信息控件
           infoBox: true, //是否显示点击要素之后显示的信息
           imageryProvider: new Cesium.UrlTemplateImageryProvider({
-            // url: "http://onelz.oicp.vip/zhlhscene/gis/{z}/{x}/{y}.png",
-            url: "http://192.168.20.18:800/zhlhscene/gis/{z}/{x}/{y}.png",
+            url: process.env.SCENE_URL+"/zhlhscene/gis/{z}/{x}/{y}.png",
+            // url: "http://192.168.20.18:800/zhlhscene/gis/{z}/{x}/{y}.png",
             layer: "tdtBasicLayer",
             style: "default"
           })
@@ -55,7 +55,8 @@
              maximumLevel: 18
          });
          viewer.imageryLayers.addImageryProvider(layer1);*/
-        this._scene = cm.openScene(this.viewer,"http://192.168.20.18:800/zhlhscene/b3dm/tileset.json");
+        // alert(process.env.SCENE_URL);
+        this._scene = cm.openScene(this.viewer,process.env.SCENE_URL+"/zhlhscene/b3dm/tileset.json");
         cm.addModeFN(this.viewer);
         console.log(cm.db);
         cm.addPolygonFN(this.viewer);
