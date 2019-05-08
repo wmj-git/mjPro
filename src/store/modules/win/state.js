@@ -835,38 +835,38 @@ export default {
                  },
                  {
                    name:"人员类型",
-                   prop:"userStateCvalue",
+                   prop:"personTypeName",
                    width:"80"
                  },
                  {
                    name:"电话",
-                   prop:"userSexCvalue",
-                   width:"80"
+                   prop:"telephone",
+                   width:"140"
                  },
                  {
                    name:"从事专业",
-                   prop:"phoneNumber",
+                   prop:"professional",
                    width:"140"
                  },
                  {
                    name:"工作单位",
-                   prop:"userAge",
-                   width:"80"
+                   prop:"entId",
+                   width:"100"
                  },
                  {
                    name:"备注",
-                   prop:"deptFullName",
+                   prop:"memo",
                    width:"80"
                  },
                  {
                    name:"创建日期",
-                   prop:"userTypeCvalue",
+                   prop:"createDate",
                    width:"180"
                  },
                  {
                    name:"排序号",
-                   prop:"userTypeCvalue",
-                   width:"180"
+                   prop:"orderNo",
+                   width:"100"
                  }
 
 

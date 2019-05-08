@@ -1,8 +1,6 @@
 <template>
   <div class="menu">
     <el-menu :default-active="activeIndex" class=""
-             @open="handleOpen"
-             @close="handleClose"
              @select="handleSelect"
              :collapse="isCollapse">
       <template v-for="item in group">
@@ -17,8 +15,6 @@
 </template>
 
 <script>
-  import win from "@/components/win/win"
-
   export default {
     name:"em_menu",
     data() {
@@ -30,21 +26,9 @@
       }
     },
     props: ["data"],
-    components: {
-      win
-    },
     methods: {
-      init() {
-
-      },
-      handleOpen(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleClose(key, keyPath) {
-        console.log(key, keyPath);
-      },
       handleSelect(key, keyPath) {
-        console.log(key, keyPath);
+        console.log(key);
         this.$store.commit('win/win_open', {
           win_obj: {
             id: key
@@ -64,9 +48,6 @@
          });
         this.group = obj.list;
       }.bind(this));
-
-    },
-    mounted() {
 
     }
   };

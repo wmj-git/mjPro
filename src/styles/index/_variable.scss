@@ -99,7 +99,7 @@ $font-color-conventional: #606266; //常规文本颜色
 $font-color-secondary: #909399;//次要文本颜色
 
 /*base define*/
-$background-base:rgba(216, 187, 55, 0.6), rgba(20, 31, 55, 0.5),rgba(20, 31, 55, 0.9),rgba(216, 187, 55, 0.9);
+$background-base:rgba(216, 187, 55, 0.6), rgba(20, 31, 55, 0.5),rgba(20, 31, 55, 0.9),rgba(216, 187, 55, 0.9),rgba(20, 31, 55, 0.6);
 $background-linear-base:linear-gradient(nth($background-base,1),nth($background-base,2));
 $color-base:#d8bb37;
 $border-color-base:#d8bb37;

@@ -1,6 +1,6 @@
 <template>
   <div class="win">
-    <div ref="win" :id="id" v-if="this.data.show">
+    <div ref="win" :id="id">
       <slot></slot>
     </div>
   </div>
@@ -12,7 +12,6 @@
     name: 'win',
     data() {
       return {
-        show: true,
         class:""
       }
     },

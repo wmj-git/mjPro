@@ -280,35 +280,21 @@
             _show=el.show;
           }
         });
-        // let _show = null;
-        // this.buttongroup.forEach(function (obj) {
-        //
-        //   if (obj.index === key) {
-        //     _title = obj.title;
-        //     _list = obj.list;
-        //     _width = obj.width;
-        //     _show=obj.show;
-        //   }
-        // });
+
         if (_show){
           this.bus.$emit(this.control_id, {
             title: _title,
             list: _list,
             width: _width
           });
-
         } else {
           this.$store.commit('win/win_open', {
             win_obj: {
-              id: _controlId,
-              data:{
-                title: _title,
-                list: _list,
-                width: _width
-              }
+              id: _controlId
             }
           });
         }
+        console.log(_show)
       }
     },
     created() {

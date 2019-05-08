@@ -28,7 +28,7 @@
         win: {
           id: "em_tool",
           title: "",
-          top: 0,
+          top: "86%",
           show: true,
           width:450,
           resizable:false,
@@ -43,7 +43,7 @@
       var bodyheight=Number(document.body.clientHeight);
       console.log(bodywidth);
       this.win.left=bodywidth-450;
-      this.win.top=bodyheight-130;
+     /* this.win.top=bodyheight-130;*/
     }
   }
 </script>
