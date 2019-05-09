@@ -57,7 +57,7 @@
          viewer.imageryLayers.addImageryProvider(layer1);*/
 
 
-        // 加载地形
+        // 加载地形1
         this._scene = cm.openScene(this.viewer,process.env.SCENE_URL+"/zhlhscene/b3dm/tileset.json");
         cm.addModeFN(this.viewer);
         cm.addPolygonFN(this.viewer);
