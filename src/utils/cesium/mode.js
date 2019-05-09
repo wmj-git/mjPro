@@ -47,19 +47,25 @@ export function addModeFN(viewer) {
   let Entities = [
     {
       id: 123,
-      name:"监测器1",
-      mode: "../../static/Apps/SampleData/models/CesiumMilkTruck/CesiumMilkTruck.glb",
+      name:"管道",
+      mode: "../../static/mode_3d/gd.gltf",
       position: [106.29057012618736,
         30.023299599766734,
-        35.811888516199645]
+        10]
     },
     {
       id: 12,
-      name:"监测器2",
-      mode: "../../static/Apps/SampleData/models/CesiumMilkTruck/CesiumMilkTruck.glb",
+      name:"路灯",
+      mode: "../../static/mode_3d/light.gltf",
       position: [106.29100714056409,
         30.024022718641977,
         34.93395027507901]
+    },
+    {
+      id: 112,
+      name:"监测器",
+      mode: "../../static/mode_3d/monitor.gltf",
+      position: [106.29079752585808 ,30.02358039824531 ,34.93395027507901]
     }
   ];
   addMode(Entities, viewer);
