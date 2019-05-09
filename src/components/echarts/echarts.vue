@@ -3,10 +3,7 @@
       <div  :id="id" style="height: 100%;width: 100%;"></div>
   </div>
 </template>
-
 <script>
-
-
   export default {
     name: "Chart",
     data(){
@@ -32,6 +29,9 @@
        setTimeout(()=>{
          this.init();
        });
+      this.bus.$on("echart",()=>{
+        this.init();
+      })
     },
     watch: {
       //观察option的变化
@@ -92,11 +92,15 @@
     },
     methods:{
        init(){
+         let _width=$("#"+this.id).width();
+         let _height=$("#"+this.id).height();
          this.chart=this.$echarts.init(document.getElementById(this.id));
          console.log(this.option);
+        this.chart.resize({
+           width:_width,
+           height:_height
+         });
          this.chart.setOption(this.option,true);
-
-
        }
     }
   }

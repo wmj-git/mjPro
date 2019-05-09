@@ -1,5 +1,5 @@
 <template>
-  <div class="list_table" style="width: 100%;height: 100%">
+  <div class="echart_table" style="width: 100%;height: 100%">
     <el-row style="height: 100%">
       <el-col :span="28" style="height: 100%" class="table-container">
         <div class="table digital_table" style="height: 100%">
@@ -101,7 +101,7 @@
     name: "echart_table",
     data() {
       return {
-        id:"type_manage",
+        id:"",
         label:[{Ch:"名称",En:"name",width:"180"},{Ch:"类型编码",En:"type_code",width:"180"},{Ch:"地址",En:"address",width:"300"}],
         tableData: [
           {
@@ -201,6 +201,7 @@
     },
     props:["data"],
     created() {
+      console.log(this.data);
       this.option=options[this.data.chart.type];
       this.echart_id=this.data.chart.id;
       // fetchChart({

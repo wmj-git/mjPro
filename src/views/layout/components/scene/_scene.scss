@@ -1,6 +1,8 @@
 .scene {
-  & {
-    //
+  .cesium-infoBox-defaultTable{
+    & tr{
+      background: #f0f !important;
+    }
   }
   .el-row{
     .el-col{
