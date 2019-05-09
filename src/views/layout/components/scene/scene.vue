@@ -57,7 +57,6 @@
          viewer.imageryLayers.addImageryProvider(layer1);*/
         this._scene = cm.openScene(this.viewer,process.env.SCENE_URL+"/zhlhscene/b3dm/tileset.json");
         cm.addModeFN(this.viewer);
-        console.log(cm.db);
         cm.addPolygonFN(this.viewer);
         cm.addMarkerFN(cm.db.posts, "../../static/image/marker_2.png", this.viewer);
         cm.addMarkerFN(cm.db.posts2, "../../static/image/marker_3.png", this.viewer);
