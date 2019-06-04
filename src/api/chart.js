@@ -29,7 +29,8 @@ export function fetchCircle() {
 export function fetchChart(obj) {
   return request({
     url:obj.chart_url,
-    method: 'get'
+    method: 'get',
+    params:obj.params
 
 
   })

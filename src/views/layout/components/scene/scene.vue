@@ -11,15 +11,14 @@
   export default {
     data() {
       return {
-        id:"scene",
-        viewer: "",
-        _scene: ""
+        id: "scene",
+        height: ''
       }
     },
     props: {},
     methods: {
       init() {
-        this.viewer = new Cesium.Viewer('cesiumContainer', {
+        window.viewer = new Cesium.Viewer('cesiumContainer', {
           scene3DOnly: true,
           animation: false, //是否显示动画控件
           baseLayerPicker: false, //是否显示图层选择控件
@@ -30,8 +29,8 @@
           navigationHelpButton: false, //是否显示帮助信息控件
           infoBox: true, //是否显示点击要素之后显示的信息
           imageryProvider: new Cesium.UrlTemplateImageryProvider({
-            url: process.env.SCENE_URL+"/zhlhscene/gis/{z}/{x}/{y}.png",
-            // url: "http://192.168.20.18:800/zhlhscene/gis/{z}/{x}/{y}.png",
+            url: process.env.SCENE_URL + "/zhlhscene/gis/{z}/{x}/{y}.png",
+            // url: "../../static/mode_3d/gis/{z}/{x}/{y}.png",
             layer: "tdtBasicLayer",
             style: "default"
           })
@@ -58,26 +57,45 @@
 
 
         // 加载地形1
-        this._scene = cm.openScene(this.viewer,process.env.SCENE_URL+"/zhlhscene/b3dm/tileset.json");
-        cm.addModeFN(this.viewer);
-        cm.addPolygonFN(this.viewer);
-        cm.addMarkerFN(cm.db.posts, "../../static/image/marker_2.png", this.viewer);
-        cm.addMarkerFN(cm.db.posts2, "../../static/image/marker_3.png", this.viewer);
+        window._scene = cm.openScene(window.viewer, process.env.SCENE_URL + "/zhlhscene/b3dm/tileset.json");
       },
       alpha(obj) {
-        cm.alphaFN(obj, this.viewer, this._scene.scene);
+        cm.alphaFN(obj.value, window.viewer, window._scene.scene);
       },
-      fn() {
-
+      xyz(obj) {
+        cm.xyzFN(obj.trigger, window.viewer, window._scene.scene);
+      },
+      measure_drawPloy(obj) {
+        cm.SetMeasure("drawPloy", window.viewer, window._scene.scene);
+      },
+      measure_drawLine(obj) {
+        cm.SetMeasure("drawLine", window.viewer, window._scene.scene);
+      },
+      measure_clear(obj) {
+        cm.clearDrawingBoard(window.viewer);
+      },
+      toScene() {
+        cm.toScene(window.viewer, window._scene.tileset);
+      },
+      scene_data(obj) {
+        if (obj.trigger) {
+          cm.addModeFN(window.viewer);
+          cm.addPolygonFN(window.viewer);
+          cm.addMarkerFN(cm.db.posts, "../../static/image/marker_2.png", window.viewer);
+          cm.addMarkerFN(cm.db.posts2, "../../static/image/marker_3.png", window.viewer);
+        } else {
+          cm.markerClear();
+          cm.modeClear();
+          cm.entitiesClear("grid_",window.viewer);
+        }
       }
     },
     created() {
-
     },
     mounted() {
       this.init();
       this.bus.$on(this.id, obj => {
-        this[obj.fn](obj.value);
+        this[obj.fn](obj);
       });
     }
   };

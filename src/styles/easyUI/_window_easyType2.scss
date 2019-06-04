@@ -7,12 +7,12 @@ $r:32;
 .panel.window.#{em-nav-window}.panel-htop {
   background:url("../../assets/image/footer.png") no-repeat;
   border: none;
-  left: 55.8%;
+  left: 50%;
   transform: translateX(-44.2%);
   z-index: 1607 !important;
   height: 100px;
-  width: 50%;
-  background-size: 70% 100%;
+  background-size:100%;
+  padding: 3/$r+rem 20/$r+rem 0 20/$r+rem;
 }
 
 
@@ -23,7 +23,16 @@ $r:32;
     display: contents;//鼠标十字箭头
   }
 }
-
+@media screen and (max-width:1024px) {
+  .panel.window.em-nav-window.panel-htop {
+    background: none;
+  }
+}
+@media screen and (min-width:1025px) and (max-width:1280px) {
+  .panel.window.em-nav-window.panel-htop {
+    background: none;
+  }
+}
 
 /*title*/
 .panel.window.#{em-title-window}.panel-htop {
@@ -71,6 +80,17 @@ $r:32;
     border-right: 0;
   }
 }
+@media screen and (min-width:1281px) and (max-width:1440px) {
+  .panel.window.#{em-menu-window}.panel-htop{
+    height: 430px;
+  }
+}
+@media screen and (min-width:1921px) {
+  .panel.window.#{em-menu-window}.panel-htop{
+    height: 460px;
+  }
+}
+
 
 /*bottom-window*/
 .panel.window.#{em-bottom-window}.panel-htop.easyui-fluid {
@@ -88,6 +108,11 @@ $r:32;
  border:none;
 }
 
+@media screen and (min-width:1025px) and (max-width:1440px) {
+  .panel.window.em-tool-window.panel-htop {
+    top: 83% !important;
+  }
+}
 
 
 /*table-window*/

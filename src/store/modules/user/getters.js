@@ -1,6 +1,11 @@
-
 export function token(state){
   return state.token
+}
+export function tokenTime(state){
+  return state.tokenTime
+}
+export function refreshToken(state){
+  return state.refreshToken
 }
 export function avatar(state){
   return state.avatar
@@ -10,6 +15,9 @@ export function name(state){
 }
 export function introduction(state){
   return state.introduction
+}
+export function permissions(state){
+  return state.permissions
 }
 export function status(state){
   return state.status

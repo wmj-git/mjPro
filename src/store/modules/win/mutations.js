@@ -1,11 +1,10 @@
-
-import {WIN_OPEN, WIN_CLOSE,DIALOG_OPEN,DIALOG_CLOSE,WIN_GET} from "../../mutation-types";
+import {WIN_OPEN, WIN_CLOSE, DIALOG_OPEN, DIALOG_CLOSE, SET_WIN} from "../../mutation-types";
 
 export default {
 
-  [WIN_GET](state, {win_obj}) {
 
-
+  [SET_WIN](state, {win}) {
+    state.win = win;
   },
   [WIN_OPEN](state, {win_obj}) {
     state.win.forEach(function (el) {

@@ -6,25 +6,11 @@ import {addModeFN, modeClear} from "./mode"
 import {addPolygonFN} from "./grid"
 import {addMarkerFN, markerClear} from "./marker"
 import {alphaFN} from "./alpha"
-/*
-import "./xyz.js"
-import "./measure.js"
-*/
+import {xyzFN} from "./xyz"
+import {SetMeasure, clearDrawingBoard} from "./measure"
 
 
-/*$('#alpha').slider({
-  mode: 'h',
-  tipFormatter: function (value) {
-    return value + '%';
-  },
-  onChange: function (newValue, oldValue) {
-    console.log(newValue);
-    globeAlphaFn(newValue / 100);
-  }
-});*/
-
-
-export function openScene(viewer,tileset_url) {
+export function openScene(viewer, tileset_url) {
   let scene = viewer.scene;
   scene.invertClassification = true;
   scene.invertClassificationColor = new Cesium.Color(1.0, 1.0, 1.0, 1.0);
@@ -104,10 +90,13 @@ export default {
   openScene: openScene,
   toScene: toScene,
   alphaFN: alphaFN,
+  xyzFN: xyzFN,
   addModeFN: addModeFN,
   modeClear: modeClear,
   addPolygonFN: addPolygonFN,
   addMarkerFN: addMarkerFN,
   markerClear: markerClear,
-  entitiesClear: entitiesClear
+  entitiesClear: entitiesClear,
+  SetMeasure: SetMeasure,
+  clearDrawingBoard: clearDrawingBoard
 }

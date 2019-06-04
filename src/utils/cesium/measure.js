@@ -7,6 +7,9 @@ var tempPinEntities = [];
 var tempPinLon, tempPinLat;
 
 var handler = null;
+let viewer=null;
+
+
 
 function clearEffects() {
     if (handler != null) {
@@ -15,7 +18,9 @@ function clearEffects() {
 }
 
 //设置各种操作模式
-function SetMode(mode) {
+export function SetMeasure(mode,_viewer,scene) {
+
+     viewer=_viewer;
     if (mode == "drawPloy") {
         tempPoints = [];
         handler = new Cesium.ScreenSpaceEventHandler(scene.canvas);
@@ -249,10 +254,10 @@ function Bearing(from, to) {
 /**
  * 清除地图痕迹
  */
-function clearDrawingBoard() {
+export function clearDrawingBoard(viewer) {
   // viewer.entities.removeAll();
     var primitives = viewer.entities;
-    for (i = 0; i < tempEntities.length; i++) {
+    for (let i = 0; i < tempEntities.length; i++) {
         primitives.remove(tempEntities[i]);
     }
     tempEntities = [];

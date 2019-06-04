@@ -1,58 +1,158 @@
 <template>
-    <div class="em_dialogs">
-      <el-dialog title="设置窗口" :visible.sync="dialogFormVisible">
-        <el-form :model="form">
-          <el-form-item label="活动名称" :label-width="formLabelWidth">
-            <el-input v-model="form.name" autocomplete="off"></el-input>
-          </el-form-item>
-          <el-form-item label="活动区域" :label-width="formLabelWidth">
-            <el-select v-model="form.region" placeholder="请选择活动区域">
-              <el-option label="区域一" value="shanghai"></el-option>
-              <el-option label="区域二" value="beijing"></el-option>
-            </el-select>
-          </el-form-item>
-        </el-form>
+    <div class="em_dialogs"  v-dialogDrag="true">
+      <el-dialog title="设置窗口" :visible.sync="dialogFormVisible" :modal-append-to-body="false" :show-close="true">
+        <el-row>
+          <el-form>
+              <template v-for="(item,index) in this.label">
+                <el-col :span="24"  v-if="fn=='add'">
+                  <el-form-item :label="item.name" :label-width="formLabelWidth" v-show="item.add_show" >
+                    <component :is="item.type" :operation="item" ref="form_data" :key="index" :readonly="item.add_readonly"></component>
+                  </el-form-item>
+                </el-col>
+                <el-col :span="24"  v-if="fn=='modify'">
+                  <el-form-item :label="item.name" :label-width="formLabelWidth" >
+                    <component :is="item.type"   :operation="item" ref="form_data" :key="index" :readonly="item.alter_readonly"></component>
+                  </el-form-item>
+                </el-col>
+              </template>
+          </el-form>
+        </el-row>
         <div slot="footer" class="dialog-footer">
-          <el-button @click="dialogFormVisible = false">取 消</el-button>
-          <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+          <el-button @click="cancel" class="em-btn_shadow">取 消</el-button>
+          <el-button type="primary" @click="confirm" class="em-btn_shadow">确 定</el-button>
         </div>
       </el-dialog>
     </div>
 </template>
 
 <script>
+  import em_input from "@/components/em_input/em_input"
+  import em_select from "@/components/em_select/em_select"
+  import em_selectUrl from "@/components/em_selectUrl/em_selectUrl"
     export default {
         props: {
           label:{
              type:Array
           }
         },
-      create(){
-
-      },
+       components:{
+         em_input,
+         em_select,
+         em_selectUrl
+       },
         data(){
            return{
              dialogFormVisible:false,
              form: {
-               name: '',
-               region: '',
-               date1: '',
-               date2: '',
-               delivery: false,
-               type: [],
-               resource: '',
-               desc: ''
              },
-             formLabelWidth: '120px'
+             formLabelWidth: '100px',
+             alter_obj:"",
+             fn:""
            }
 
         },
+      created(){
+          this.bus.$on("alter",res=>{
+             this.alter_obj=res;         //将要修改的对象从sole_table传到此组件的alter_obj
+
+
+          });
+      },
       methods:{
-          showdialog(){
-            this.dialogFormVisible = true;
-            console.log(11)
-          }
+          showdialog(obj){
+            let _this=this;
+              this.fn=obj.fn;                  //判断点击的是添加还是修改按钮，复制给fn；
+              if(this.fn=="add"){
+                this.dialogFormVisible = true;
+                setTimeout(() => {
+                  console.log(this.$refs.form_data);
+                  if(this.$refs.form_data){
+                    this.$refs.form_data.forEach((_obj)=>{
+                      console.log(_obj);
+                      if(_obj.value){
+                        _obj.value="";
+                      }
+                      if(_obj.input){
+                        _obj.input="";
+                      }
+
+                    });
+                  }
+
+                }, 0);
+                this.label.forEach((val)=>{
+                  this.form[val.params]=""
+                });
+
+              }
+              else{
+                if(this.alter_obj!=""){
+                  this.dialogFormVisible = true;
+                  this.label.forEach((val)=>{
+                    console.log("val");
+                    this.form[val.params]=this.alter_obj[val.params];
+                    console.log(val);
+                  });
+                  setTimeout(() => {
+                    console.log(this.$refs.form_data);
+                    if(this.$refs.form_data){
+                      this.$refs.form_data.forEach((_obj)=>{
+                        let _value=_this.alter_obj;
+                        for(let k in _value){
+                          if(_obj.operation.params===k){
+                            console.log(_value[k]);
+                            if(_obj.operation.type==="em_selectUrl"||_obj.operation.type==="em_select"){
+                              _obj.value=_value[k];
+                            }else if(_obj.operation.type==="em_input"){
+                              _obj.input=_value[k];
+                            }
+                          }
+                        }
+                      });
+                    }
+
+                  }, 0)
+                }
+              }
+              console.log(this.form);
+
+          },
+         confirm(){
+           this.dialogFormVisible = false;
+           console.log(this.label);
+           this.label.forEach((val)=>{
+                 if (this.$refs.form_data) {
+                   this.$refs.form_data.forEach((obj)=>{
+                      if(obj.operation.params==val.params){
+                        if(obj.operation.type==="em_selectUrl"||obj.operation.type==="em_select"){
+                          this.form[val.params]=obj.value;
+                        }
+                        if(obj.operation.type==="em_input"){
+                          this.form[val.params]=obj.input;
+                        }
+                      }
+                   });
+
+                 }
+
+
+
+           });
+           console.log(this.fn);
+           if(this.fn=="modify"){
+             console.log(this.alter_obj.id);
+             this.form.id=this.alter_obj.id;
+           }
+           console.log(this.form);
+           this.$emit("eventFromDialog",{form:this.form,fn:this.fn});
+         },
+         cancel(){
+           this.dialogFormVisible =false;
+         }
 
       }
     };
 </script>
+<style lang="scss" scoped>
+@import "em_dialogs";
+</style>

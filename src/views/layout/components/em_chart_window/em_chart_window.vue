@@ -4,16 +4,16 @@
           <ehcarts :id="id" :option="option" :data="data" :series="series"></ehcarts>
         <el-row>
           <el-col :span="12" style="text-align: center">
-            <el-button size="mini" @click="pie" class="btn_border">饼图</el-button>
+            <el-button size="mini" @click="pie" class="em-btn-border">饼图</el-button>
           </el-col>
           <el-col :span="12"  style="text-align: center">
-            <el-button size="mini" @click="circle"  class="btn_border">环状图</el-button>
+            <el-button size="mini" @click="circle"  class="em-btn-border">环状图</el-button>
           </el-col>
           <el-col :span="12" style="text-align: center">
-            <el-button size="mini" @click="line"  class="btn_border">折线图</el-button>
+            <el-button size="mini" @click="line"  class="em-btn-border">折线图</el-button>
           </el-col>
           <el-col :span="12" style="text-align: center">
-            <el-button size="mini" @click="bar"  class="btn_border">柱状图</el-button>
+            <el-button size="mini" @click="bar"  class="em-btn-border">柱状图</el-button>
           </el-col>
        </el-row>
       </win>

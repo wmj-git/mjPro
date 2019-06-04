@@ -26,7 +26,7 @@ $r:32;
   }
 }
 .el-select-dropdown{
-  background: nth($background-base,2);
+  background: nth($background-base,3);
   border-image: linear-gradient(nth($background-base,2),nth($background-base,1));
   border-image-slice: 20;
 }

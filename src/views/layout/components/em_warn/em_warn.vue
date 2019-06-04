@@ -1,7 +1,7 @@
 <template>
     <div class="em_warn">
         <win :id="win.id" :data="win">
-            <el-button  class="btn-warn">
+            <el-button  class="em-btn-warn">
               <span>69</span>
             </el-button>
         </win>

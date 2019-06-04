@@ -1,8 +1,9 @@
-$r:32;
-.digital_table /deep/{
+$r: 32;
+.digital_table /deep/ {
   width: 100%;
   height: 100%;
-  .operation{
+
+  .operation {
     padding: 3/$r+rem;
-    }
+  }
 }

@@ -11,7 +11,7 @@ function addMode(Entities, viewer) {
   _ModeDataSource.entities.removeAll();
   for (var i = 0; i < Entities.length; i++) {
     var position = Cesium.Cartesian3.fromDegrees(Entities[i].position[0], Entities[i].position[1], Entities[i].position[2]);
-    var heading = Cesium.Math.toRadians(135);
+    var heading = Cesium.Math.toRadians(10);
     var pitch = 0;
     var roll = 0;
     var hpr = new Cesium.HeadingPitchRoll(heading, pitch, roll);
@@ -23,9 +23,10 @@ function addMode(Entities, viewer) {
       orientation: orientation,
       model: {
         uri: Entities[i].mode,
-        minimumPixelSize: 6,
-        maximumScale: 10
-      },
+        minimumPixelSize: 1,
+        maximumScale: 1
+      }
+      /*,
       label: {
         text: 'Philadelphia',
         font: '12px Helvetica',
@@ -34,7 +35,7 @@ function addMode(Entities, viewer) {
         outlineColor: Cesium.Color.BLACK,
         outlineWidth: 1,
         style: Cesium.LabelStyle.FILL_AND_OUTLINE
-      }
+      }*/
     });
   }
   var dataSourcePromise = viewer.dataSources.add(_ModeDataSource);

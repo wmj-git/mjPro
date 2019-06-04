@@ -23,12 +23,18 @@
       },
       series:{
          type:Array
+      },
+      xAxis_data:{
+        type:Array
       }
+
     },
     mounted() {
+      console.log(this.series);
+      console.log(this.xAxis_data);
        setTimeout(()=>{
          this.init();
-       });
+       },2000);
       this.bus.$on("echart",()=>{
         this.init();
       })
@@ -88,6 +94,46 @@
           }
         },
         deep: true //对象内部属性的监听，关键。
+      },
+      xAxis_data:{
+        handler(newVal, oldVal) {
+          if (this.chart) {
+            if (newVal) {
+              this.chart.setOption({
+                xAxis:{
+                  type: 'category',
+                  data: newVal,
+                  axisLine: {
+                    lineStyle: {
+                      color: '#fff'
+                    },
+                  },
+                  axisTick:{   //取消刻度线
+                    show:false
+                  },
+                }
+              });
+            } else {
+              this.chart.setOption({
+                xAxis:{
+                  type: 'category',
+                  data: oldVal,
+                  axisLine: {
+                    lineStyle: {
+                      color: '#fff'
+                    },
+                  },
+                  axisTick:{   //取消刻度线
+                    show:false
+                  },
+                }
+              });
+            }
+          } else {
+            this.init();
+          }
+        },
+        deep: true //对象内部属性的监听，关键。
       }
     },
     methods:{
@@ -100,7 +146,7 @@
            width:_width,
            height:_height
          });
-         this.chart.setOption(this.option,true);
+         this.chart.setOption(this.option);
        }
     }
   }

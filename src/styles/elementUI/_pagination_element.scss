@@ -23,6 +23,9 @@ li.number.active{
 .el-pager li{
   min-width: 20.5px;
 }
+.el-icon-more:before {
+  color: rgba(255,255,255,0.6);
+}
 .el-pager li:hover,.el-select-dropdown__item.selected,.el-pagination button:hover{
   color: $color-base;
 }

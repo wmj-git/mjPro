@@ -18,6 +18,9 @@ $em-btn-uniform-gradient:em-btn-uniform-gradient;//悬停时都变色
 $em-btn_shadow:em-btn_shadow; //立体感按钮
 $em-btn_shadow2:em-btn_shadow2; //立体感按钮重叠类名
 
+
+$em-btn-special:em-btn-special;//tree 內部按鈕
+
 /*弹框 dialog*/
 $em-dialog:em-dialog;
 $em-dialog-header:em-dialog-header;
@@ -104,13 +107,17 @@ $background-linear-base:linear-gradient(nth($background-base,1),nth($background-
 $color-base:#d8bb37;
 $border-color-base:#d8bb37;
 
+$menu-background:rgba(216, 187, 55, 0.4), rgba(20, 31, 55, 0.5),rgba(216, 187, 55, 0.6);//menu样式背景2
 /*table*/
 $background-table-base:rgba(20,31,55,0.5); /*table-window-background*/
 $background-table-classification:rgba(20,31,55,0.4);//分类列表左边背景
 $background-table-container:rgba(20,31,55,0.6);//分类列表右边背景
 $background-table-thead:linear-gradient(rgba(216, 187, 55, 0.4), rgba(20, 31, 55, 0.6));//表头背景
 $background-table-tbody:rgba(20,31,55,0.8);//tbody背景
-$background-hover-tbody:rgba(216,187,55,0.4);//tbody背景
+$background-hover-tbody:rgba(216,187,55,0.2);//tbody-hover背景
+
+/*dialog*/
+$background-dialog-base:rgba(20,31,55,0.8); /*table-dialog-background*/
 
 /*pagination*/
 $background-pagination--inner:rgba(20, 31, 55, 0.5);//页码选择输入框背景；
@@ -127,3 +134,5 @@ $btn-hover-bubbles: radial-gradient(circle at center, rgba(0, 0, 0, 0) 30%, #eee
 /*type2 variables*/
 $background-type2-base:rgba(255, 255, 255, 0.5), rgba(20, 31, 55, 0.5),rgba(20, 31, 55, 0.3);
 
+/*toolTip*/
+$toolTip-background:darken(rgba(20, 31, 55, 0.5),5%);

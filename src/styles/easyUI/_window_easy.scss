@@ -7,12 +7,12 @@ $r:32;
 .panel.window.#{em-nav-window}.panel-htop {
   background:url("../../assets/image/footer.png") no-repeat;
   border: none;
-  left: 55.8%;
+  left: 50%;
   transform: translateX(-44.2%);
   z-index: 1607 !important;
   height: 100px;
-  width: 50%;
-  background-size: 70% 100%;
+  background-size:100%;
+  padding: 3/$r+rem 20/$r+rem 0 20/$r+rem;
 }
 
 
@@ -36,6 +36,18 @@ $r:32;
     background: transparent;
   }
 }
+@media screen and (max-width:1024px) {
+  .panel.window.em-nav-window.panel-htop {
+    background: none;
+  }
+}
+@media screen and (min-width:1025px) and (max-width:1280px) {
+  .panel.window.em-nav-window.panel-htop {
+    background: none;
+  }
+}
+
+
 
 /*warn-button*/
 .panel.window.#{em-warn-window}.panel-htop {
@@ -78,6 +90,18 @@ $r:32;
 
 }
 
+@media screen and (min-width:1281px) and (max-width:1440px) {
+  .panel.window.#{em-menu-window}.panel-htop{
+    height: 430px;
+  }
+}
+@media screen and (min-width:1921px) {
+  .panel.window.#{em-menu-window}.panel-htop{
+    height: 460px;
+  }
+}
+
+
 /*bottom-window*/
 .panel.window.#{em-bottom-window}.panel-htop.easyui-fluid {
   background: rgba(20, 31, 55, 0.8);
@@ -93,6 +117,11 @@ $r:32;
  background: transparent;
  border:none;
 }
+@media screen and (min-width:1025px) and (max-width:1440px) {
+  .panel.window.em-tool-window.panel-htop {
+    top: 83% !important;
+  }
+}
 
 
 /*table-window*/
@@ -103,13 +132,17 @@ $r:32;
 }
 .panel.window.#{em-table-window}.panel-htop{
   background: $background-table-base;
-  border: 15px solid transparent;
-  -webkit-border-image: url("../../../src/assets/image/table_border.png") 27 27 24 24 round;
-  -moz-border-image: url("../../../src/assets/image/table_border.png") 27 27 24 24 round;
-  border-image: url("../../../src/assets/image/table_border.png") 27 27 24 24 round;
+  border: 18px solid transparent;
+  -webkit-border-image: url("../../../src/assets/image/table_border.png") 20 26 20 26 round;
+  -moz-border-image: url("../../../src/assets/image/table_border.png") 20 26 20 26 round;
+  border-image: url("../../../src/assets/image/table_border.png") 20 26 20 26 round;
   width: 800px;
   resize: both;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
   overflow: visible;//table-dialog遮罩
+
 }
 
 /*slider*/

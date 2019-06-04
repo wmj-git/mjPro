@@ -4,6 +4,7 @@
   &:hover,&:focus{
     color: $color-base;
     background: transparent;
+    border-color: $border-color-base;//tree
   }
 }
 .el-button + .el-button{

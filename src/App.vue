@@ -41,6 +41,7 @@
    font-family: "Avenir", Helvetica, Arial, sans-serif;
    width: 100%;
    height: 100%;
+   position: fixed;
    overflow: hidden;/*场景滚动条*/
  }
 </style>

@@ -1,9 +1,9 @@
 <template>
   <div class="">
      <win :id="win.id" :data="win">
-       <div class="home_title" id="title">
+       <div class="em-home-title" id="title">
          <img src="../../../../assets/image/logo.png" bindload="imageLoad"/>
-         <div class="title-container">
+         <div class="em-title-container">
             <canvas id="canvas" ></canvas>
          </div>
        </div>

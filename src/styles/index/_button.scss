@@ -371,8 +371,8 @@ $r: 32;
 
 .em-btn-uniform-gradient {
   background-color: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  color: #B8B8B8;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.8);
 
   &:before {
     width: 0;
@@ -420,15 +420,15 @@ $r: 32;
 }
 
 .em-btn-gradient, .em-btn-uniform-gradient:before, .em-btn-uniform-gradient:after {
-  -webkit-transition: 0.3s ease all;
-  transition: 0.3s ease all;
+  -webkit-transition: 0.5s ease all;
+  transition: 0.5s ease all;
 }
 
 
 /*阴影按钮*/
-.#{em-btn_shadow} {
-  font: 18px/1em 'Droid Sans', sans-serif;
-  font-weight: bold;
+.#{em-btn-shadow} {
+  font: 14px/1em 'Droid Sans', sans-serif;
+  //font-weight: bold;
   border: none;
   text-shadow: rgba(255, 255, 255, .5) 0 1px 0;
   -webkit-user-select: none;
@@ -439,20 +439,18 @@ $r: 32;
   position: relative;
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
-  border-radius: 8px;
+  border-radius: 5px;
   border-top: 1px solid rgba(255, 255, 255, 0.8);
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   -webkit-transition: background .2s ease-in-out;
   -moz-transition: background .2s ease-in-out;
   transition: background .2s ease-in-out;
-  color: hsl(0, 0%, 40%) !important;
+  color: hsla(0, 0%, 100%,0.8) !important;
   background-color: hsl(0, 0%, 75%);
-
   &:hover {
-    background-color: hsl(0, 0%, 83%);
+    background-color: #64600d;
   }
-
-  &.#{em-btn_shadow2} {
+  &.#{em-btn-shadow2} {
     color: hsl(49, 67%, 23%) !important;
     background-color: hsl(49, 67%, 53%);
     box-shadow: inset rgba(255, 254, 255, 0.6) 0 0.3em .3em,
@@ -460,16 +458,17 @@ $r: 32;
     hsl(49, 67%, 40%) 0 .1em 3px, hsl(49, 67%, 25%) 0 .3em 1px,
       /* color border */
     rgba(0, 0, 0, 0.2) 0 .5em 5px;
-
+    border-color: transparent;
+    text-shadow: 0 0 4px #b3b7be;
     &:hover {
       background-color: hsl(49, 67%, 68%);
+      color: black;
     }
   }
 }
 
-
 /*box-shadow*/
-.offset {
+.em-btn-offset {
   --color-offset: rgba(21, 189, 244, 0.8);
   --hover-offset: rgba(50, 219, 223, 0.8);
   -webkit-box-shadow: 0.3em 0.3em 0 0 var(--color-offset), inset 0.3em 0.3em 0 0 var(--color-offset);
@@ -485,7 +484,7 @@ $r: 32;
 }
 
 /*btn-border top and bottom*/
-.#{btn_border} {
+.#{em-btn-border} {
   background: $background-linear-base;
   color: rgba(255, 255, 255, 0.7);
   width: 70/$r+rem;
@@ -539,7 +538,7 @@ $r: 32;
   -webkit-box-shadow: 0 0 7px rgba(255, 255,255, 0.5);
   box-shadow: 0 0 7px rgba(255, 255,255,0.5);
   color: rgba(255,255,255,0.8);
-  padding: 5/$r+rem 10/$r+rem;
+  //padding: 5/$r+rem 10/$r+rem;
   -webkit-transition: all 0.15s ease-out;
   transition: all 0.15s ease-out;
   &:active,&:hover,&:focus{

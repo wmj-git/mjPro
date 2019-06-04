@@ -1,5 +1,10 @@
 @import "../../../../styles/index/variable";
 .em-bottom-container{
-  background: rgba(20, 31, 55, 0.8);;
+  background: rgba(20, 31, 55, 0.8);
 }
 
+@media screen and (min-width:1921px){
+  .panel.window.#{em-bottom-window}.panel-htop.easyui-fluid {
+    top:95.5% !important;
+  }
+}

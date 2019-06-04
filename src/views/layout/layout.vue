@@ -18,11 +18,13 @@
     </template>
     <!--对话框-->
     <!--<template v-for="dialog in dialogGroup" v-if="dialog.show">-->
-      <!--<em_dialog :data="dialog"></em_dialog>-->
+    <!--<em_dialog :data="dialog"></em_dialog>-->
     <!--</template>-->
     <!--<em_chart_window></em_chart_window>-->
+    <!--对话框-->
+    <em_dialogs></em_dialogs>
     <!--场景-->
-    <router-view name="scene"/>
+   <router-view name="scene"/>
     <!-- 控制透明度的滑动条-->
     <em_slider></em_slider>
     <!--底部-->
@@ -31,8 +33,12 @@
 </template>
 
 <script>
+  import {refreshToken} from '@/api/login'
+  import {getNowFormatDate} from '@/utils/tools'
+  import {setToken, setTokenTime, getTokenTime, TokenName, RefreshTokenName,getExpires,setExpires} from '@/utils/auth'
 
   import win from "@/components/win/win"
+  import splitpane from "@/components/splitpane/splitpane"
   import sole_table from "@/components/sole_table/sole_table"
   import list_table from "@/components/list_table/list_table"
   import echart_table from "@/components/echart_table/echart_table"
@@ -46,17 +52,21 @@
   import em_warn from "./components/em_warn/em_warn"
   import em_venture from "./components/em_venture/em_venture"
   import em_chart_window from "./components/em_chart_window/em_chart_window"
-  import  em_tools from "./components/em_tools/em_tools"
-  import  em_slider from "./components/em_slider/em_slider"
+  import em_tools from "./components/em_tools/em_tools"
+  import em_slider from "./components/em_slider/em_slider"
+  import treeForm from "@/app_components/treeFrom/treeForm"
+  import em_dialogs from "@/components/em_dialogs/em_dialogs"
+
   export default {
     data() {
       return {
-        wins: [],
+        // wins: [],
         dialogGroup: []
       }
     },
     components: {
       win,
+      splitpane,
       em_dialog,
       button_group,
       em_menu,
@@ -71,13 +81,47 @@
       echart_table,
       em_chart_window,
       em_tools,
-      em_slider
+      em_slider,
+      treeForm,
+      em_dialogs
+    },
+    computed:{
+      wins: function () {
+        return this.$store.getters["win/win"];
+      }
     },
     methods: {
       init() {
-        this.wins = this.$store.state.win.win;
+        // this.wins = this.$store.state.win.win;
         this.dialogGroup = this.$store.state.win.dialog;
+      },
+      refreshTokenFn() {//刷新token
+        setInterval(() => {
+          let _time = getNowFormatDate().timestamp - getTokenTime();
+          let _expires=getExpires();
+          console.log(_time);
+          if (_time < _expires-200000) {
+            return
+          }
+          // alert(_time);
+         this.refreshToken();
+        }, 120000);
+      },
+      refreshToken() {//刷新token
 
+        let _RefreshToken = this.$store.getters["user/refreshToken"];
+        refreshToken({
+          [RefreshTokenName]: _RefreshToken
+        }).then(response => {
+          let data = response.data;
+          this.$store.commit("user/set_token", data[TokenName]);
+          setToken(data[TokenName]);
+          let _token_time = getNowFormatDate().timestamp;
+          this.$store.commit("user/set_token_time", _token_time);
+          setTokenTime(_token_time);
+
+          console.log(data);
+        })
       },
       fn() {
 
@@ -85,8 +129,10 @@
     },
     created() {
       this.init();
+      this.refreshTokenFn();//刷新token
     },
     mounted() {
+
 
     }
 

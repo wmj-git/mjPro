@@ -1,0 +1,76 @@
+<template>
+  <div class="em_selectUrl">
+    <el-select v-model="value" placeholder="请选择">
+      <el-option
+        v-for="item in options"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value">
+      </el-option>
+    </el-select>
+  </div>
+</template>
+
+<script>
+  import {selectUrl} from "@/api/table_operate";
+  export default {
+    props: {
+      operation:{
+        type:Object
+      }
+    },
+    mounted(){
+       console.log(this.operation.optionUrl);
+       this.setOption()
+    },
+    data(){
+      return{
+        options:[],
+        value: ''
+      }
+    },
+    methods:{
+      setOption(){
+        selectUrl({
+           url:this.operation.optionUrl
+        }).then(res=>{
+           res.data.forEach((val)=>{
+             let obj;
+             if(val.id&&val.enumCvalue){
+               obj={value:val.id,label:val.enumCvalue};
+             }
+             if(val.id&&val.fullName){
+                obj={value:val.id,label:val.fullName};
+             }
+             if(val.id&&val.personTypeName){
+               obj={value:val.id,label:val.personTypeName};
+             }
+             if(val.id&&val.entName){
+               obj={value:val.id,label:val.entName};
+             }
+             if(val.id&&val.districtName){
+               obj={value:val.id,label:val.districtName};
+             }
+             if(val.id&&val.plantCname){
+               obj={value:val.id,label:val.plantCname};
+             }
+             if(val.id&&val.gridName){
+               obj={value:val.id,label:val.gridName};
+             }
+             if(val.id&&val.roadName){
+               obj={value:val.id,label:val.roadName};
+             }
+             if(val.rankCode&&val.rankName){
+               obj={value:val.rankName,label:val.rankName};
+             }
+
+
+             this.options.push(obj);
+
+           });
+        });
+
+      }
+    }
+  };
+</script>

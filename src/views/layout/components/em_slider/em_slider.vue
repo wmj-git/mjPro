@@ -1,7 +1,7 @@
 <template>
   <div class="em_slider">
-    <win :id="win.id" :data="win">
-      <div class="block">
+    <win v-if="win.show" :id="win.id" :data="win">
+      <div class="em-block">
         <el-slider v-model="value" @change="fn"></el-slider>
       </div>
     </win>
@@ -23,7 +23,7 @@
           title: "",
           top: "86%",
           left: 10,
-          show: true,
+          show: false,
           resizable: false,
           width: 400,
           class: "em-slider-window"
@@ -35,8 +35,11 @@
       fn() {
         this.bus.$emit("scene", {
           fn: "alpha",
-          value: this.value/100
+          value: this.value / 100
         });
+      },
+      showFn(obj) {
+        this.win.show =obj.trigger;
       }
     },
     created() {
@@ -44,7 +47,9 @@
       /*this.win.top=bodyheight-150;*/
     },
     mounted() {
-
+      this.bus.$on(this.win.id, obj => {
+        this[obj.fn](obj);
+      });
     }
   };
 </script>

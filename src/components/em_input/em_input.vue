@@ -1,6 +1,6 @@
 <template>
     <div class="em_input">
-      <el-input v-model="input" :placeholder="operation.placeholder"></el-input>
+      <el-input v-model="input" :placeholder="operation.placeholder" :readonly="readonly"></el-input>
     </div>
 </template>
 
@@ -9,11 +9,11 @@
         props: {
           operation:{
             type:Object
+          },
+          readonly:{
+             type: Boolean
           }
         },
-      created(){
-          console.log(this.operation)
-      },
       data(){
            return {
                input:"",

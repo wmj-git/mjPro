@@ -1,10 +1,11 @@
 import {
-  SET_CODE, SET_TOKEN, SET_INTRODUCTION,
+  SET_CODE, SET_TOKEN,SET_TOKEN_TIME, SET_REFRESH_TOKEN, SET_INTRODUCTION,
   SET_SETTING, SET_STATUS, SET_NAME,
   SET_AVATAR,SET_ROLES
 } from '../../mutation-types';
-import { loginByUsername, logout, getUserInfo } from '@/api/login'
-import { getToken, setToken, removeToken ,TokenName} from '@/utils/auth'
+import { loginByUsername, logout, getUserInfo, refreshToken} from '@/api/login'
+import { getNowFormatDate} from '@/utils/tools'
+import { getToken, setToken,getTokenTime, setTokenTime, removeToken ,TokenName,setRefreshToken,getRefreshToken,RefreshTokenName,getExpires,setExpires} from '@/utils/auth'
 
 
 // 用户名登录
@@ -12,14 +13,22 @@ export function LoginByUsername({ commit }, userInfo) {
   const username = userInfo.username.trim()
   return new Promise((resolve, reject) => {
     loginByUsername(username, userInfo.password).then(response => {
-      const data = response.data;
-      console.log("data12123123");
+      let data = response.data;
       console.log(data[TokenName]);
       commit(SET_TOKEN, data[TokenName])
+      commit(SET_REFRESH_TOKEN, data[RefreshTokenName])
       setToken(data[TokenName])
+      setRefreshToken(data[RefreshTokenName])
+
+      let _token_time=getNowFormatDate().timestamp;
+      commit(SET_TOKEN_TIME, _token_time);
+      setTokenTime(_token_time)
+
+      setExpires(data["expires"]);
+
       resolve(response.data)
     }).catch(error => {
-      reject(error)
+       reject(error)
     })
   })
 }

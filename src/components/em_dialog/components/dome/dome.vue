@@ -5,11 +5,11 @@
       :visible.sync="show"
       width="30%"
       :before-close="fn">
-      <!--<span>这是表格操作内容</span>-->
-      <template v-for="item in this.data.data">
-        <span>{{item.name}}</span>
-        <component :is="item.type" :operation="item"></component>
-      </template>
+      <span>这是表格操作内容</span>
+      <!--<template v-for="item in this.data.data">-->
+        <!--<span>{{item.name}}</span>-->
+        <!--<component :is="item.type" :operation="item"></component>-->
+      <!--</template>-->
       <span slot="footer" class="dialog-footer">
         <el-button @click="fn">取 消</el-button>
         <el-button type="primary" @click="fn">确 定</el-button>

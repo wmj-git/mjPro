@@ -1,7 +1,6 @@
 $r:32;
 .operation.el-row{
-  height: 45/$r+rem;
-  line-height: 45/$r+rem;
+  line-height: 40/$r+rem;//设置高度后按钮所需宽度超过父级宽度时会被遮挡，应该换行显示
 }
 .#{table-classification}{
   overflow: auto;
@@ -44,9 +43,23 @@ $r:32;
   padding-left: 5/$r+rem;
   padding-right: 5/$r+rem;
 }
-
+.el-table--border{
+  border-color: transparent;
+  &::after{
+    background-color:rgba(255,255,255,0.4);//表格之外右边的边框线
+  }
+}
 .el-table{
   background: $background-linear-base;
+  &::before{
+    background-color:rgba(255,255,255,0.4);//表格之外下方的边框线
+  }
+}
+.el-table__fixed::before, .el-table__fixed-right::before{
+  height:0;//表格之外行号列下方的边框线
+}
+.el-table__body-wrapper{
+  overflow: auto;
 }
 .el-table th{
   background: $background-table-thead;
@@ -99,6 +112,9 @@ background:darken(nth($background-base,3),5%);
 }
 .el-checkbox__inner:hover,.el-checkbox__input.is-focus .el-checkbox__inner{
   border-color: darken($border-color-base,15%);
+}
+.el-table--border td{//表格调整列宽
+  border-right: none;
 }
 
 @media screen and (min-width:1921px) {

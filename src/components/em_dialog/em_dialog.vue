@@ -1,6 +1,7 @@
 <template>
   <div class="em_dialog">
-    <component :is="type" :data="dialog"></component>
+    <!--<component :is="type" :data="dialog"></component>-->
+    <component></component>
   </div>
 
 </template>
@@ -16,7 +17,7 @@
         dialog: {}
       }
     },
-    props: ["data"],
+    // props: ["data"],
     components: {
       dome
     },
@@ -27,6 +28,7 @@
         this.type = this.data.type;
         this.dialog = this.data;
       }
+
     },
     created() {
       this.init();

@@ -1,5 +1,5 @@
 import {
-  SET_CODE, SET_TOKEN, SET_INTRODUCTION,
+  SET_CODE, SET_TOKEN,SET_TOKEN_TIME, SET_REFRESH_TOKEN,SET_INTRODUCTION,SET_PERMISSIONS,
   SET_SETTING, SET_STATUS, SET_NAME,
   SET_AVATAR,SET_ROLES
 } from '../../mutation-types';
@@ -11,8 +11,17 @@ export default {
   [SET_TOKEN]: (state, token) => {
     state.token = token
   },
+  [SET_TOKEN_TIME]: (state, token) => {
+    state.token = token
+  },
+  [SET_REFRESH_TOKEN]: (state, refreshToken) => {
+    state.refreshToken = refreshToken
+  },
   [SET_INTRODUCTION]: (state, introduction) => {
     state.introduction = introduction
+  },
+  [SET_PERMISSIONS]: (state, permissions) => {
+    state.permissions = permissions
   },
   [SET_SETTING]: (state, setting) => {
     state.setting = setting

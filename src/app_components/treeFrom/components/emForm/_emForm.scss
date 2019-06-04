@@ -1,0 +1,9 @@
+$r:32;
+.emForm /deep/{
+  .el-input__inner{
+    height: 30/$r+rem !important;//tree-from-input
+  }
+  .el-form--label-left .el-form-item__label{
+    text-align: right;
+  }
+}

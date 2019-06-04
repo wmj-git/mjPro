@@ -18,13 +18,18 @@ import "@/styles/easyUI/_index.scss"
 
 import ElementUI from 'element-ui'
 import "@/styles/elementUI/_index.scss"
+import 'element-ui/lib/theme-chalk/display.css';
 Vue.use(ElementUI);
+
+
 
 import "@/styles/index/_index.scss"
 import "@/icons/icon/iconfont.css"
 
 import echarts from 'echarts'    //引入echarts
 Vue.prototype.$echarts = echarts
+
+import './directive/drag'
 
 Vue.config.productionTip = false
 Vue.prototype.bus= new Vue(); //vue-bus

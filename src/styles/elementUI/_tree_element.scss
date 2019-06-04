@@ -1,0 +1,37 @@
+.el-tree-node__content{
+  &:hover {
+    background-color:transparent;
+  }
+  &:focus{
+    border-color: rgba(255,255,255,0.1);
+  }
+}
+
+.el-tree-node:focus > .el-tree-node__content {
+  background-color:rgba(255,255,255,0.2) !important;
+}
+
+.splitter-pane.splitter-paneL.vertical{
+  //background :rgba(20, 31, 55, 0.8);
+}
+
+.#{em-btn-special}{
+  background: $background-linear-base;
+  color: rgba(255,255,255,0.7);
+  width:60/$r+rem;
+  height: 30/$r+rem;
+  border-color: darken($border-color-base,30%);
+  border-radius: 5/$r+rem;
+  padding: 5/$r+rem 10/$r+rem;
+  float: right;
+  margin-left: 15/$r+rem;
+  &:hover{
+    color: rgba(255,255,255,0.9);
+    background: linear-gradient(rgba(216, 187, 55, 0.6), rgba(20, 31, 55, 0.5));
+    border-color: #635413;
+    cursor: pointer;
+  }
+}
+.el-form-item__label{
+  color: rgba(255,255,255,0.6);
+}

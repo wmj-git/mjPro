@@ -86,7 +86,7 @@ export default {
     },
     xAxis: {
       type: 'category',
-      data: ['1/3', '2/3', '3/3','4/3','5/3'],
+      // data: ['1/3', '2/3', '3/3','4/3','5/3'],
       axisLine: {
         lineStyle: {
           color: '#fff'
@@ -114,7 +114,6 @@ export default {
     trigger: 'item',
     formatter: "{a}:{c}"
   },
-  color:['#FE2EF7','#00FFFF','#FACC2E'],   //修改颜色
   legend:{
     orient: 'vertical',
     icon: "roundRect",
@@ -139,42 +138,7 @@ export default {
       containLabel: true
   },
   series: [
-    {
-      name:'永川',
-      data: [11, 20, 8,30,25],
-      type: 'line',
-      itemStyle: {       //线的样式
-        normal: {
-          lineStyle: {
-            width:1
-          }
-        }
-      },
-     },
-      {
-        name:'江津',
-        data: [21, 10,18,25,30],
-        type: 'line',
-        itemStyle: {
-          normal: {
-            lineStyle: {
-              width:1
-            }
-          }
-        },
-      },
-      {
-        name:'重庆',
-          data: [8, 25, 28,10,29],
-        type: 'line',
-        itemStyle: {
-          normal: {
-            lineStyle: {
-              width:1
-            }
-          }
-        },
-      }
+
     ]
   },
   circle: {

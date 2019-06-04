@@ -1,21 +1,49 @@
 <template>
   <div class="sole_table table-container" style="width: 100%;height: 100%">
+    <em_dialogs ref="dialog" :label="label_input"   @eventFromDialog="recieveObj"></em_dialogs>
+    <el-dialog title="导入" :visible.sync="dialogFormVisible" :modal-append-to-body="false"  v-dialogDrag="true">
+        <el-upload
+          class="upload-demo"
+          ref="upload"
+          :action="action"
+          :on-preview="handlePreview"
+          :on-remove="handleRemove"
+          :file-list="fileList"
+          :limit="1"
+          :headers="headers"
+          name="upfile"
+          accept=".xls,.docx,.xlsx,.csv "
+          :on-error="uploadFileErro"
+          :on-success="uploadFileSuccess"
+          :auto-upload="false">
+          <el-button slot="trigger" size="small" type="primary" class="em-btn-border">选取文件</el-button>
+          <el-button style="margin-left: 10px;" size="small" type="success" @click="downloadModel"  class="em-btn-border">下载模板</el-button>
+          <div slot="tip" class="el-upload__tip">只能上传csv文件</div>
+        </el-upload>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false" class="em-btn_shadow">取 消</el-button>
+        <el-button type="primary" @click="submitUpload" class="em-btn_shadow">确 定</el-button>
+      </div>
+    </el-dialog>
+
     <div class="table digital_table">
       <el-row class="operation">
         <template v-for="item in this.data.operation">
-          <component :is="item.type" :operation="item" ref="child"></component>
+          <component :is="item.type" :operation="item" :table_id="table_id" ref="child"></component>
         </template>
       </el-row>
       <el-table
+        class="my-table"
+        v-loading="listLoading"
+        borders
         height="calc(100% - 92px)"
         highlight-current-row
         @current-change="handleCurrentChange"
         ref="multipleTable"
         tooltip-effect="dark"
         :data="tableData"
-        @selection-change="handleSelectionChange">
         style="width: 100%"
-        >
+        @selection-change="handleSelectionChange">
         <el-table-column
           type="index"
           fixed="left"
@@ -33,6 +61,7 @@
                          :label="item.name"
                          :min-width="item.width"
                          align="center"
+                         :show-overflow-tooltip="true"
         >
         </el-table-column>
       </el-table>
@@ -47,7 +76,6 @@
           :total="totalSize">
         </el-pagination>
       </div>
-
     </div>
   </div>
 
@@ -55,26 +83,29 @@
 </template>
 
 <script>
-  import {add, dele, modify, find} from "@/api/table_operate"
+  import {add, dele, modify, find, downCsvmodel,upLoad} from "@/api/table_operate"
   import em_button from "@/components/em_button/em_button"
   import em_input from "@/components/em_input/em_input"
-  // import em_select from "@/components/em_select/em_select"
+  import em_dialogs from "@/components/em_dialogs/em_dialogs"
   import complex_em_input from "@/components/complex_em_input/complex_em_input"
   import em_date from "@/components/em_date/em_date"
-  import em_dialog from "@/components/em_dialog/em_dialog"
-
+  import { getToken} from '@/utils/auth'
   export default {
     name: "sole_table",
     components: {
       em_button,
       em_input,
       complex_em_input,
-      em_date
+      em_date,
+      em_dialogs
     },
     data() {
       return {
         label: [],
+        table_id:"",
+        label_input:[],
         tableData: [],
+        listLoading:false,
         currentRow: null,
         multipleSelection: [],
         ids: [],
@@ -83,29 +114,34 @@
         pageSize: 10,
         totalSize: null,
         table_list: [],
-        dialogFormVisible1: false,
-        dialogFormVisible2: false,
-        form: {
-          name: '',
-          region: '',
-          date1: '',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
-        },
         formLabelWidth: '120px',
-        dialogVisible: false
+        dialogVisible: false,
+        delever_obj:"",      //主要保存add,alter请求的url,table_id
+        alter_obj:"",
+        dialogFormVisible: false,
+        formLabelWidth: '120px',
+        fileList: [],
+        action:"",
+        operation_height:34,
+        // table_height:"calc(100% - 92px)",
+        headers:{
+          "Authorization":getToken()
+        }
       }
     },
     props: ["data"],
     mounted() {
-      this.label = this.data.table.label;
+      this.table_id=this.data.table.id;
+      this.label=this.data.table.label;
+      this.label_input=this.data.table.label.filter(val=>{
+          return val.add_show
+     });
+     console.log(this.label);
       this.init(); //初始化表格数据
 
       this.bus.$on(this.data.table.id, obj => {
-        this.control(obj)
+        this.control(obj);
+        console.log(obj)
       });
 
     },
@@ -118,7 +154,10 @@
       },
       handleCurrentChange(val) {     //单选行 （选中修改）
         this.currentRow = val;
-        // console.log(this.currentRow)
+        this.alter_obj=this.currentRow;
+        console.log(this.alter_obj);
+        this.bus.$emit("alter",this.alter_obj)
+
       },
       handleCurrentChangepage(val) {        //当前页
         console.log(`当前页: ${val}`);
@@ -131,7 +170,7 @@
         this.pageSize = val;
         this.init();  //重新请求表格数据
       },
-      init() {
+      init() {                               //表格加载数据
 
         let obj = {
           pageNum: this.currentPage,
@@ -162,10 +201,20 @@
           let commo_input = this.$refs.child[0].input;
           obj[comlex_input] = commo_input;
         }
-        if (this.$refs.child[0].input && this.$refs.child[0].params) {                              //input框是操作中第二个组件时
+        if (this.$refs.child[0].input && this.$refs.child[0].params) {                              //input框是操作中第一个组件时
           let role_manage_input = this.$refs.child[0].input;
           let params = this.$refs.child[0].params;
           obj[params] = role_manage_input;
+        }
+        if (this.$refs.child[2].input && this.$refs.child[2].params) {                              //input框是操作中第三个组件时
+          let operate_input = this.$refs.child[2].input;
+          let params = this.$refs.child[2].params;
+          obj[params] = operate_input;
+        }
+        if (this.$refs.child[3].input && this.$refs.child[3].params) {                              //input框是操作中第四个组件时
+          let url_input = this.$refs.child[3].input;
+          let params = this.$refs.child[3].params;
+          obj[params] = url_input;
         }
 
         find({                      //页面渲染时拿表格数据
@@ -182,19 +231,16 @@
 
       },
       add(obj) {
-        // this.$store.commit("win/dialog_open", {
-        //   obj: {
-        //     id: "people_manage_add_operation"
-        //   }
-        // });
-        console.log(this.label);
+        this.$refs.dialog.showdialog(obj);  //调用子组件em_dialogs的方法显示弹出框;
+        this.delever_obj=obj;
+        console.log(this.delever_obj)
       },
       dele(obj) {
         this.multipleSelection.forEach(val => {
           console.log(val);
           this.ids.push(val.id);   //提取出需要传给后台的参数ids
         });
-        if (this.ids.length != 0) {
+        if (this.ids.length!= 0) {
           dele({
             url: obj.url,
             params: this.ids
@@ -212,13 +258,11 @@
       search() {
         this.init();
       },
-      modify() {
-        this.$store.commit("win/dialog_open", {
-          obj: {
-            id: "edit_operation"
-          }
-        });
-        console.log("modify")
+      modify(obj) {
+        console.log(this.$refs.dialog);
+        this.$refs.dialog.showdialog(obj);  //调用子组件em_dialogs的方法显示弹出框;
+        this.delever_obj=obj;
+        console.log(this.delever_obj);
       },
       open3() {
         const h = this.$createElement;
@@ -234,11 +278,103 @@
             done();
           })
           .catch(_ => {});
-      }
+      },
+      import(obj){
+          this.dialogFormVisible=true;
+          this.delever_obj=obj;
+          this.action=process.env.BASE_API+obj.import_url;
+          console.log(this.action);
+      },
+      downloadModel(){                 //下载导出需要的模板
+         window.location.href=process.env.BASE_API+this.delever_obj.download_url
+      },
+      export(obj){                    //将数据以表格形式导出
+        window.location.href=process.env.BASE_API+obj.url
+      },
+      recieveObj(val){              //把dialog表单里的数据拿到
+         console.log(this.delever_obj.url);
+         console.log(this.delever_obj.id);
+         if(val.fn=="add"){
+           add({
+             url: this.delever_obj.url,
+             params:val.form,
+             id:this.delever_obj.table_id
+           }).then(res=>{
+             console.log(res);
+             if(res.statusCode==200){
+                 this.$message({
+                   message: '恭喜你，添加成功',
+                   type: 'success'
+                 });
+               this.init();
+             }
+
+           });
+         }
+         if(val.fn=="modify"){
+           modify({
+             url: this.delever_obj.url,
+             params:val.form
+           }).then(res=>{
+             console.log(res);
+             if(res.statusCode==200){
+               this.$message({
+                 message: '恭喜你，修改成功',
+                 type: 'success'
+               });
+               this.init();
+             }
+           });
+         }
+
+
+
+      },
+      submitUpload() {
+        this.$refs.upload.submit();
+      },
+      handleRemove(file, fileList) {
+        console.log(file, fileList);
+      },
+      handlePreview(file) {
+        console.log(file);
+
+      },
+      uploadFileErro(err, file, fileList){
+         console.log(err);
+         this.$message.error('错了哦，这是一条错误消息');
+
+      },
+      uploadFileSuccess(response, file, fileList){
+        console.log(response.data.jsonmsg.ERRORMSG);
+        if(response.data.jsonmsg.ERRORMSG==""){
+          this.$message({
+            message: '恭喜你，导入成功',
+            type: 'success'
+          });
+          this.init();
+        }
+        else{
+          this.$message({
+            message:response.data.jsonmsg.ERRORMSG.slice(response.data.jsonmsg.ERRORMSG.indexOf("=")+1),
+            type: 'error'
+          });
+        }
+
+      },
     }
   }
 </script>
 
 <style scoped lang="scss">
   @import "sole_table";
+  .table{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+
 </style>

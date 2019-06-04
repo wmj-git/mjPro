@@ -26,4 +26,11 @@ export function getUserInfo(token) {
     params: { token }
   })
 }
+export function refreshToken(params) {
+  return request({
+    url: '/login/refreshAuthorization',
+    method: 'get',
+    params
+  })
+}
 

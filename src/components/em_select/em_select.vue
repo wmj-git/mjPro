@@ -16,7 +16,8 @@
         props: {
           operation:{
             type:Object
-          }
+          },
+
         },
         created(){
            this.options=this.operation.options;

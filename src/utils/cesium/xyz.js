@@ -39,7 +39,7 @@ function formatDegree(pValue) {
 var xyzObj = [];
 var handler = null;
 
-function xyzFN(nm) {
+export function xyzFN(nm,viewer,scene) {
 
     if (nm) {
         handler = new Cesium.ScreenSpaceEventHandler(scene.canvas);
@@ -104,6 +104,7 @@ function xyzFN(nm) {
     }
 
     console.log(handler.isDestroyed());
+
 }
 
 // 经纬度获取end

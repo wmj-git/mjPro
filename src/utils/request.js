@@ -38,7 +38,7 @@ service.interceptors.response.use(
    */
 
     response => {
-      const res = response.data
+      const res = response.data;
       if (res.statusCode !== 200) {
         let message= res.message;
         if(message){
@@ -51,16 +51,17 @@ service.interceptors.response.use(
         console.log(message);
 
         // 50008:非法的token; 50012:其他客户端登录了;  50014:Token 过期了;
-        if (res.statusCode === 1007 || res.statusCode === 1006 || res.statusCode === 1005) {
+        if (res.statusCode === 1007 || res.statusCode === 1006 || res.statusCode === 1005 || res.statusCode === 401) {
           // 请自行在引入 MessageBox
           MessageBox.confirm('你已被登出，可以取消继续留在该页面，或者重新登录', '确定登出', {
             confirmButtonText: '重新登录',
-            cancelButtonText: '取消',
+            cancelButtonText: '取消操作',
             type: 'warning'
           }).then(() => {
-            store.dispatch('FedLogOut').then(() => {
+            /*store.dispatch('FedLogOut').then(() => {
               location.reload() // 为了重新实例化vue-router对象 避免bug
-            })
+            })*/
+             window.location.href="/login"
           })
         }
         else{

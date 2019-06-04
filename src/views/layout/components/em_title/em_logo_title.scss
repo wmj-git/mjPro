@@ -1,4 +1,4 @@
-.home_title{
+.#{em-home-title}{
   height:100px;
   img{
     position: absolute;
@@ -6,7 +6,7 @@
     top: 15px;
   }
 
-  .#{title-container}{
+  .#{em-title-container}{
     border-top: 2px solid #fff;
     border-bottom: 2px solid #fff;
     width: 255px;
