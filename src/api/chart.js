@@ -30,7 +30,7 @@ export function fetchChart(obj) {
   return request({
     url:obj.chart_url,
     method: 'get',
-    params:obj.params
+    params: obj.params
 
 
   })

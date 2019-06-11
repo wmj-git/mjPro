@@ -1,6 +1,6 @@
 <template>
     <div class="em_select">
-      <el-select v-model="value" placeholder="请选择">
+      <el-select v-model="value" placeholder="请选择" @change="change">
         <el-option
           v-for="item in options"
           :key="item.value"
@@ -17,16 +17,30 @@
           operation:{
             type:Object
           },
+          select:{
+            type:Array
+          }
 
         },
         created(){
-           this.options=this.operation.options;
+          if(this.opreration){
+            this.options=this.operation.options;
+          }
+          else{
+             this.options=this.select;
+          }
+
         },
         data(){
            return{
                options:"",
                value: ''
            }
+        },
+        methods:{
+            change(val){
+                this.bus.$emit("deliver_val",val)
+            }
         }
     };
 </script>

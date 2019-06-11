@@ -256,6 +256,7 @@
         }
       },
       search() {
+        this.currentPage=1;
         this.init();
       },
       modify(obj) {

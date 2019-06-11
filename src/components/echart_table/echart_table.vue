@@ -2,8 +2,7 @@
   <div class="echart_table" style="width: 100%;height: 100%">
     <em_dialogs ref="dialog" :label="label_input"   @eventFromDialog="recieveObj"></em_dialogs>
     <el-row style="height: 100%">
-          <el-col :span="28" style="height: 100%" class="table-container">
-            <div class="table digital_table" style="height: 100%">
+            <div class="table digital_table" style="height:50%">
               <el-row class="operation">
                 <template v-for="item in this.data.operation">
                   <component :is="item.type" :operation="item" :table_id="table_id" ref="child"></component>
@@ -52,10 +51,12 @@
               </div>
 
             </div>
-          </el-col>
-        <el-col :span="20" style="height: 100%;">
+            <div style="height: 50%;">
+               <em_select :select="select"></em_select>
+               <div style="height:90%;">
              <ehcarts :id="echart_id" :option="option" :data="data1" :series="series" :xAxis_data="xAxis_data"></ehcarts>
-        </el-col>
+               </div>
+            </div>
     </el-row>
 
   </div>
@@ -73,6 +74,7 @@
   import em_dialogs from "@/components/em_dialogs/em_dialogs"
   import complex_em_input from "@/components/complex_em_input/complex_em_input"
   import em_date from "@/components/em_date/em_date"
+  import em_select from "@/components/em_select/em_select"
   export default {
     name: "echart_table",
     data() {
@@ -93,7 +95,24 @@
         series:[],
         pageSize:10,
         label_input:[],
-        xAxis_data:[]
+        xAxis_data:[],
+        select:[{
+          value: "年",
+          label: "年"
+        },
+          {
+            value: "季",
+            label: "季"
+          },
+          {
+            value: "月",
+            label: "月"
+          },
+          {
+            value: "日",
+            label: "日"
+          }
+        ],
 
       }
     },
@@ -104,6 +123,7 @@
       em_dialogs,
       complex_em_input,
       em_date,
+      em_select
     },
     props:["data"],
     mounted() {
@@ -117,6 +137,10 @@
       this.option=options[this.data.chart.type];
       this.echart_id=this.data.chart.id;
        this.init();
+      this.bus.$on("deliver_val",(val)=>{
+             console.log(val);
+             this.drawChart(val)
+      })
     },
     methods: {
       resize() {
@@ -143,55 +167,40 @@
         this.pageSize = val;
         this.init();
       },
-      formatDate(date,format){
-         var paddNum = function(num){
-          num += "";
-          return num.replace(/^(\d)$/,"0$1");
-        };
-        //指定格式字符
-        var cfg = {
-          yyyy : date.getFullYear() ,//年 : 4位
-          yy : date.getFullYear().toString().substring(2),//年 : 2位
-          M  : date.getMonth() + 1 , //月 : 如果1位的时候不补0
-          MM : paddNum(date.getMonth() + 1), //月 : 如果1位的时候补0
-          d  : date.getDate() ,  //日 : 如果1位的时候不补0
-          dd : paddNum(date.getDate()),//日 : 如果1位的时候补0
-          hh : date.getHours(),  //时
-          mm : date.getMinutes() ,//分
-          ss : date.getSeconds() //秒
-        };
-          format || (format = "yyyy-MM-dd hh:mm:ss");
-          return format.replace(/([a-z])(\1)*/ig,function(m){return cfg[m];});
-  },
   init() {                               //表格加载数据
 
         let obj = {
           pageNum: this.currentPage,
           pageSize: this.pageSize
         };
-        let obj1={};
+        this.$nextTick(() => {
         if (this.$refs.child[0].time1) {
           let time1 = this.$refs.child[0].time1;    //时间范围查询参数
           if (time1) {
             obj.startTime = time1.getTime();
-            obj1.startTime = time1.getTime();
-            console.log( obj.startTime)
+              console.log(obj.startTime)
           }
         }
         if (this.$refs.child[0].time2) {
           let time2 = this.$refs.child[0].time2;
           if (time2) {
             obj.endTime = time2.getTime();
-            obj1.endTime = time2.getTime();
-            console.log( obj.endTime)
+              console.log(obj.endTime)
           }
         }
+        });
         find({                      //页面渲染时拿表格数据
           url: this.data.table.table_url,
           params: obj
         }).then(res => {
           console.log(res);
+          if(res.data.pageData){
           this.totalSize = res.data.pageData.total;
+          }
+          else{
+            this.totalSize=res.data.total;
+          }
+
           if(res.data.list){
             this.tableData =res.data.list;
           }
@@ -200,34 +209,57 @@
           }
 
         });
+        this.drawChart();
+      },
+      drawChart(_val){              //绘制echarts图的方法
+        console.log(_val);
+        let obj1={};
+        if (this.$refs.child[0].time1) {
+          let time1 = this.$refs.child[0].time1;    //时间范围查询参数
+          if (time1) {
+            obj1.startTime = time1.getTime();
+          }
+        }
+        if (this.$refs.child[0].time2) {
+          let time2 = this.$refs.child[0].time2;
+          if (time2) {
+            obj1.endTime = time2.getTime();
+          }
+        }
     fetchChart({
       option:this.data.chart.type,
       chart_url:this.data.chart.chart_url,
       params:obj1
-    }).then(res=>{
+        }).then(res=>
+        {
+          let data=[];
       console.log(res);
       if(this.data.chart.type=="pie"){
         // this.data1=res.data[this.data.chart.type];
         // console.log(this.data1)
       }
-      else{
+          else if(this.data.chart.type=="line"){
         let temObj = {};
+
+           if(res.data.listData.length!=0){
         res.data.listData.forEach((val)=>{
-          this.xAxis_data.push(val.createDate);
-          if(!temObj[val.pointsId])
-            temObj[val.pointsId] = [];
-          if(val.temValue){
-            temObj[val.pointsId].push(val.temValue)
+               if(_val=="年"){
+                 // var newDate=/\d{4}-\d{1,2}-\d{1,2}/g.exec(val.createDate)[0];
           }
-          if(val.humValue){
-            temObj[val.pointsId].push(val.humValue)
+               data.push(val.createDate);
+               this.xAxis_data=data;
+             });
           }
-        });
+           else{
+             this.xAxis_data=[];
+           }
+
 
         this.xAxis_data=Array.from(new Set(this.xAxis_data));
         this.xAxis_data.sort();
-
+            console.log( this.xAxis_data);
         for(let k in  res.data.grupData){
+              if(k=="S"||k=="A"){
           for(let n in res.data.grupData[k]){
             let _arr=[];
             this.xAxis_data.forEach(function (_time,_i) {
@@ -235,20 +267,36 @@
                 if(_val.createDate===_time){
                   _arr[_i]=_val.temValue||_val.humValue;
                 }else if(!_arr[_i]){
-                  _arr[_i]="-";
+                
+                        _arr[_i]="-";
                 }
               })
             });
             temObj[n]=_arr;
           }
+
         }
+              else{
+                let _arr=[];
+                this.xAxis_data.forEach(function (_time,_i) {
+                  res.data.grupData[k].forEach(function (_val) {
+                    if(_val.createDate===_time){
+                      _arr[_i]=_val.humanTrafficValue;
+                    }else if(!_arr[_i]){
+                      _arr[_i]="-";
+                    }
+                  })
+                });
+                temObj[k]=_arr;
 
+              }
 
-        console.log( this.xAxis_data);
+            }
         console.log(temObj);
         let attr;
+            let seriesArr=[];
         for(attr in temObj){
-          this.series.push({
+                seriesArr.push({
             name:attr,
             data: temObj[attr],
             type: 'line',
@@ -261,10 +309,47 @@
             },
           })
         }
+              this.series=seriesArr;
+             console.log(this.series)
+
+
+
       }
+          else{
+            let alarmDate=[];
+            res.data.list.forEach((val)=>{
+              alarmDate.push(val.createDate);
+              var newDate=/\d{4}-\d{1,2}-\d{1,2}/g.exec(val.createDate)[0];
+              data.push(newDate);
 
     });
-    console.log(this.series);
+            this.xAxis_data=data;
+            this.xAxis_data=Array.from(new Set(this.xAxis_data));
+            this.xAxis_data.sort();
+            console.log(this.xAxis_data);
+            console.log(alarmDate);
+            let num=[];
+            this.xAxis_data.forEach((_val,_i)=>{
+              num.push(0);
+              alarmDate.forEach((_time,)=>{
+                if(_val==/\d{4}-\d{1,2}-\d{1,2}/g.exec(_time)[0]){
+                  ++num[_i];
+                }
+              });
+            });
+
+            console.log(num);
+            this.series=[{
+              name:'火险报警次数',
+              type:'bar',
+              barWidth: '40',
+              data:num
+
+            }]
+
+          }
+
+        });
       },
       recieveObj(val){              //把dialog表单里的数据拿到
         console.log(this.delever_obj.url);
@@ -315,6 +400,7 @@
         console.log(this.delever_obj)
       },
       search() {
+        this.currentPage=1;
         this.init();
       }
     }

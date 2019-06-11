@@ -762,7 +762,7 @@ export default {
       top: 80,
       left: 400,
       width: 980,
-      height: 400,
+      height: 600,
       show: false,
       class: "em-table-window",
       component: "echart_table",
@@ -781,7 +781,7 @@ export default {
       top: 80,
       left: 400,
       width: 1100,
-      height: 400,
+      height: 800,
       show: false,
       class: "em-table-window",
       component: "echart_table",
@@ -879,7 +879,7 @@ export default {
       top: 80,
       left: 400,
       width: 1100,
-      height: 400,
+      height: 800,
       show: false,
       class: "em-table-window",
       component: "echart_table",
@@ -897,32 +897,6 @@ export default {
             operate: "查询",
             control_id: "soil_humidity_analysis_table",
             fn: "search"
-          },
-          {
-            id: "soil_humidity_analysis_button_add",
-            type: "em_button",
-            icon: "el-icon-plus",
-            operate: "添加",
-            control_id: "soil_humidity_analysis_table",
-            fn: "add",
-            url: "/user/dept/addDept"
-          },
-          {
-            id: "soil_humidity_analysis_button_modify",
-            type: "em_button",
-            icon: "el-icon-edit",
-            operate: "修改",
-            control_id: "soil_humidity_analysis_table",
-            fn: "modify",
-          },
-          {
-            id: "soil_humidity_analysis_button_dele",
-            type: "em_button",
-            icon: "el-icon-delete",
-            operate: "删除",
-            control_id: "soil_humidity_analysis_table",
-            fn: "dele",
-            url: "/user/dept/deleteDept"
           },
           {
             id: "soil_humidity_analysis_button_import",
@@ -998,18 +972,16 @@ export default {
       title: "人流量统计分析",
       top: 80,
       left: 400,
-      width: 980,
-      height: 400,
+      width: 1100,
+      height: 800,
       show: false,
       class: "em-table-window",
       component: "echart_table",
       component_data: {
         operation: [
           {
-            id: "population_analysis_input_shortName",
-            type: "em_input",
-            placeholder: "简称",
-            params: "shortName"
+            id:"population_analysis_date",
+            type: "em_date",
 
           },
           {
@@ -1019,32 +991,6 @@ export default {
             operate: "查询",
             control_id: "population_analysis_table",
             fn: "search"
-          },
-          {
-            id: "population_analysis_button_add",
-            type: "em_button",
-            icon: "el-icon-plus",
-            operate: "添加",
-            control_id: "population_analysis_table",
-            fn: "add",
-            url: "/user/dept/addDept"
-          },
-          {
-            id: "population_analysis_button_modify",
-            type: "em_button",
-            icon: "el-icon-edit",
-            operate: "修改",
-            control_id: "population_analysis_table",
-            fn: "modify",
-          },
-          {
-            id: "population_analysis_button_dele",
-            type: "em_button",
-            icon: "el-icon-delete",
-            operate: "删除",
-            control_id: "population_analysis_table",
-            fn: "dele",
-            url: "/user/dept/deleteDept"
           },
           {
             id: "population_analysis_button_import",
@@ -1111,7 +1057,7 @@ export default {
         chart: {
           type: "line",
           id: "line2",
-          chart_url: 'http://localhost:4000/chartdata'
+          chart_url: '/gardens/humantrafficinfo/queryAll'
         }
       }
     },
@@ -1120,18 +1066,16 @@ export default {
       title: "空气温度统计分析",
       top: 80,
       left: 400,
-      height: 400,
-      width: 980,
+      height: 800,
+      width: 1100,
       show: false,
       class: "em-table-window",
       component: "echart_table",
       component_data: {
         operation: [
           {
-            id: "air_temperature_analysis_input_shortName",
-            type: "em_input",
-            placeholder: "简称",
-            params: "shortName"
+            id:"soil_temperature_analysis_date",
+            type: "em_date",
 
           },
           {
@@ -1141,32 +1085,6 @@ export default {
             operate: "查询",
             control_id: "air_temperature_analysis_table",
             fn: "search"
-          },
-          {
-            id: "air_temperature_analysis_button_add",
-            type: "em_button",
-            icon: "el-icon-plus",
-            operate: "添加",
-            control_id: "air_temperature_analysis_table",
-            fn: "add",
-            url: "/user/dept/addDept"
-          },
-          {
-            id: "air_temperature_analysis_button_modify",
-            type: "em_button",
-            icon: "el-icon-edit",
-            operate: "修改",
-            control_id: "air_temperature_analysis_table",
-            fn: "modify",
-          },
-          {
-            id: "air_temperature_analysis_button_dele",
-            type: "em_button",
-            icon: "el-icon-delete",
-            operate: "删除",
-            control_id: "air_temperature_analysis_table",
-            fn: "dele",
-            url: "/user/dept/deleteDept"
           },
           {
             id: "air_temperature_analysis_button_import",
@@ -1242,18 +1160,16 @@ export default {
       title: "空气湿度统计分析",
       top: 80,
       left: 400,
-      height: 400,
-      width: 980,
+      height: 800,
+      width: 1100,
       show: false,
       class: "em-table-window",
       component: "echart_table",
       component_data: {
         operation: [
           {
-            id: "air_humidity_analysis_input_shortName",
-            type: "em_input",
-            placeholder: "简称",
-            params: "shortName"
+            id:"soil_temperature_analysis_date",
+            type: "em_date",
 
           },
           {
@@ -1263,32 +1179,6 @@ export default {
             operate: "查询",
             control_id: "air_humidity_analysis_table",
             fn: "search"
-          },
-          {
-            id: "air_humidity_analysis_button_add",
-            type: "em_button",
-            icon: "el-icon-plus",
-            operate: "添加",
-            control_id: "air_humidity_analysis_table",
-            fn: "add",
-            url: "/user/dept/addDept"
-          },
-          {
-            id: "air_humidity_analysis_button_modify",
-            type: "em_button",
-            icon: "el-icon-edit",
-            operate: "修改",
-            control_id: "air_humidity_analysis_table",
-            fn: "modify",
-          },
-          {
-            id: "air_humidity_analysis_button_dele",
-            type: "em_button",
-            icon: "el-icon-delete",
-            operate: "删除",
-            control_id: "air_humidity_analysis_table",
-            fn: "dele",
-            url: "/user/dept/deleteDept"
           },
           {
             id: "air_humidity_analysis_button_import",
@@ -1365,17 +1255,15 @@ export default {
       top: 80,
       left: 400,
       width: 1100,
-      height: 400,
+      height: 800,
       show: false,
       class: "em-table-window",
       component: "echart_table",
       component_data: {
         operation: [
           {
-            id: "fire_alert_anaysis_input_shortName",
-            type: "em_input",
-            placeholder: "简称",
-            params: "shortName"
+            id:"fire_alert_anaysis_date",
+            type: "em_date",
 
           },
           {
@@ -1385,32 +1273,6 @@ export default {
             operate: "查询",
             control_id: "fire_alert_anaysis_table",
             fn: "search"
-          },
-          {
-            id: "fire_alert_anaysis_button_add",
-            type: "em_button",
-            icon: "el-icon-plus",
-            operate: "添加",
-            control_id: "fire_alert_anaysis_table",
-            fn: "add",
-            url: "/user/dept/addDept"
-          },
-          {
-            id: "fire_alert_anaysis_button_modify",
-            type: "em_button",
-            icon: "el-icon-edit",
-            operate: "修改",
-            control_id: "fire_alert_anaysis_table",
-            fn: "modify",
-          },
-          {
-            id: "fire_alert_anaysis_button_dele",
-            type: "em_button",
-            icon: "el-icon-delete",
-            operate: "删除",
-            control_id: "fire_alert_anaysis_table",
-            fn: "dele",
-            url: "/user/dept/deleteDept"
           },
           {
             id: "fire_alert_anaysis_button_import",
@@ -1484,9 +1346,9 @@ export default {
           ]
         },
         chart: {
-          type: "line",
-          id: "line5",
-          chart_url: 'http://localhost:4000/chartdata'
+          type: "bar",
+          id: "bar1",
+          chart_url: '/gardens/firealarminfo/queryAllByPage'
         }
       }
     },
@@ -2066,26 +1928,35 @@ export default {
       top: 80,
       left: 400,
       height: 400,
+      width:900,
       show: false,
       class: "em-table-window",
       component: "sole_table",
       component_data: {
         operation: [
           {
-            id: "tree_material_manage_select",
-            type: "complex_em_input",
-            select: [
-              {
-                name: "植物编号",
-                params: "treeNo",
-
-              },
-              {
-                name: "植物名称",
-                params: "treeName"
-              }
-            ]
-
+            id:"tree_material_manage_input_treeNo",
+            type: "em_input",
+            placeholder: "植物编号",
+            params: "treeNo"
+          },
+          {
+            id:"tree_material_manage_input_treeName",
+            type: "em_input",
+            placeholder: "树种类型",
+            params: "treeName"
+          },
+          {
+            id:"tree_material_manage_input_treeName",
+            type: "em_input",
+            placeholder: "植物名称",
+            params: "treeName"
+          },
+          {
+            id:"tree_material_manage_input_position",
+            type: "em_input",
+            placeholder: "行政区划",
+            params: "position"
           },
           {
             id: "tree_material_manage_button_search",

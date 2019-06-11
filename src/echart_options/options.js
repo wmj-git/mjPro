@@ -1,15 +1,14 @@
 export default {
   bar:{
     title:{
-      text:'单位：吨',
-      left:'17%',
+      text:'单位：次',
+      left:'5%',
       top:'15%',
       textStyle:{
         fontSize:12,
         color:'#fff'
       }
     },
-    tooltip : {},
     grid: {
       left: '3%',
       right: '6%',
@@ -20,7 +19,7 @@ export default {
     xAxis : [
       {
         type : 'category',
-        data : ['永川', '江津', '重庆'],
+        // data : ['永川', '江津', '重庆'],
         axisTick: {
            show:false
         },
@@ -49,20 +48,13 @@ export default {
     ],
     barGap:'0',    //两个不同类型柱子之间的间距
     series : [
-      {
-        name:'收油',
-        type:'bar',
-        barWidth: '25%',
-        data:[100, 200,300]
-      },
-      {
-        name:'发油',
-        type:'bar',
-        barWidth: '25%',
-        data:[120, 180,280]
-      }
+      // {
+      //   name:'火险报警次数',
+      //   type:'bar',
+      //   barWidth: '25%',
+      //   data:[100, 200,300]
+      // }
     ],
-    color:['#00FFFF','#04B431'],
     legend:{
       orient: 'horizontal',
       top:'1%',
@@ -117,7 +109,7 @@ export default {
   legend:{
     orient: 'vertical',
     icon: "roundRect",
-    x: '76%',
+    x: '85%',
     y: '20%',
     itemWidth:15,
     itemHeight:10,
