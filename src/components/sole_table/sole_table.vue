@@ -119,7 +119,6 @@
         delever_obj:"",      //主要保存add,alter请求的url,table_id
         alter_obj:"",
         dialogFormVisible: false,
-        formLabelWidth: '120px',
         fileList: [],
         action:"",
         operation_height:34,

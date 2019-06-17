@@ -107,7 +107,7 @@
     },
     methods:{
        init(){
-         console.log("我被調用了")
+         console.log("我被調用了");
          let _width=$("#"+this.id).width();
          let _height=$("#"+this.id).height();
          this.chart=this.$echarts.init(document.getElementById(this.id));
